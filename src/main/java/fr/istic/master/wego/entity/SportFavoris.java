@@ -11,8 +11,8 @@ public class SportFavoris {
 
 	private long id;
 	private Sport sport;
-	private Personne personne;
-	private float ordre;
+	private Person person;
+	private float order;
 
 	@Id
 	@GeneratedValue
@@ -34,21 +34,21 @@ public class SportFavoris {
 	}
 
 	@ManyToOne
-	public Personne getPersonne() {
-		return personne;
+	public Person getPersonne() {
+		return person;
 	}
 
-	public void setPersonne(Personne personne) {
-		this.personne = personne;
+	public void setPersonne(Person personne) {
+		this.person = personne;
 	}
 
 	@Column(name="name")
 	public float getOrdre() {
-		return ordre;
+		return order;
 	}
 
 	public void setOrdre(float ordre) {
-		this.ordre = ordre;
+		this.order = ordre;
 	}
 
 }

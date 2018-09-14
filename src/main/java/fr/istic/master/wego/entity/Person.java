@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Personne {
+public class Person {
 
 	private long id;
 	private String name;

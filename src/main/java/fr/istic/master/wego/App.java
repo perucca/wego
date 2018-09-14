@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import fr.istic.master.wego.entity.Personne;
+import fr.istic.master.wego.entity.Person;
 
 /**
  * Hello world!
@@ -25,7 +25,7 @@ public class App
       tx.begin();
       try {
           
-        Personne personne = new Personne();
+        Person personne = new Person();
         personne.setName("titi");
         manager.persist(personne);
       } catch (Exception e) {
