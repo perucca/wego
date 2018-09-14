@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * @author amontuwy
+ * This class represents an entity of a place in the database
+ */
 @Entity
 public class Place {
 
