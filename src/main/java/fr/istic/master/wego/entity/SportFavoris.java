@@ -11,7 +11,7 @@ public class SportFavoris {
 
 	private long id;
 	private Sport sport;
-	private Person person;
+	private User person;
 	private float order;
 
 	@Id
@@ -34,11 +34,11 @@ public class SportFavoris {
 	}
 
 	@ManyToOne
-	public Person getPersonne() {
+	public User getPersonne() {
 		return person;
 	}
 
-	public void setPersonne(Person personne) {
+	public void setPersonne(User personne) {
 		this.person = personne;
 	}
 
