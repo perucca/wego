@@ -15,11 +15,11 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
-public class UserSport {
+public class UserSport implements Comparable<UserSport>{
 	private long id;
 	private long userId;
 	private long sportId;
-	private float preferenceOrder;
+	private long preferenceOrder;
 	private SortedSet<UserPlace> userPlaces;
 	
 	public UserSport() {
@@ -54,11 +54,11 @@ public class UserSport {
 		this.sportId = sportId;
 	}
 
-	public float getPreferenceOrder() {
+	public long getPreferenceOrder() {
 		return preferenceOrder;
 	}
 
-	public void setPreferenceOrder(float preferenceOrder) {
+	public void setPreferenceOrder(long preferenceOrder) {
 		this.preferenceOrder = preferenceOrder;
 	}
 
@@ -70,5 +70,47 @@ public class UserSport {
 	public void setUserPlaces(SortedSet<UserPlace> userPlaces) {
 		this.userPlaces = userPlaces;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (preferenceOrder ^ (preferenceOrder >>> 32));
+		result = prime * result + (int) (sportId ^ (sportId >>> 32));
+		result = prime * result + (int) (userId ^ (userId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserSport other = (UserSport) obj;
+		if (id != other.id)
+			return false;
+		if (preferenceOrder != other.preferenceOrder)
+			return false;
+		if (sportId != other.sportId)
+			return false;
+		if (userId != other.userId)
+			return false;
+		return true;
+	}
+
+	public int compareTo(UserSport o) {
+		if(this.preferenceOrder > o.preferenceOrder) {
+			return 1;
+		}else if(this.preferenceOrder < o.preferenceOrder) {
+			return -1;
+		}
+		return 0;
+	}
+		
+	
 
 }
