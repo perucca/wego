@@ -1,10 +1,11 @@
 package fr.istic.master.wego.entity;
 
+import java.util.SortedSet;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 
 /**
  * @author amontuwy
@@ -12,46 +13,60 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class UserPlace {
-
-	private Long id;
-	private Float preferenceOrder;
-	private User user;
-	private Place place;
+	private long id;
+	private long userId;
+	private long sportId;
+	private float preferenceOrder;
+	private SortedSet<UserSport> userSports;
+	
+	public UserPlace() {
+		
+	}
 
 	@Id
 	@GeneratedValue
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Float getPreferenceOrder() {
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public long getSportId() {
+		return sportId;
+	}
+
+	public void setSportId(long sportId) {
+		this.sportId = sportId;
+	}
+
+	public float getPreferenceOrder() {
 		return preferenceOrder;
 	}
 
-	public void setPreferenceOrder(Float preferenceOrder) {
+	public void setPreferenceOrder(float preferenceOrder) {
 		this.preferenceOrder = preferenceOrder;
 	}
 
-	@ManyToOne
-	public User getUser() {
-		return user;
+	@ManyToMany (mappedBy="userPlaces")
+	public SortedSet<UserSport> getUserSports() {
+		return userSports;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserSports(SortedSet<UserSport> userSports) {
+		this.userSports = userSports;
 	}
-
-	@OneToOne
-	public Place getPlace() {
-		return place;
-	}
-
-	public void setPlace(Place place) {
-		this.place = place;
-	}
-
+	
+	
+	
+	
 }

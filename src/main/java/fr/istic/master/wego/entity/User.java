@@ -2,6 +2,7 @@ package fr.istic.master.wego.entity;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.SortedSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ public class User {
 	private String lastName;
 	private String password;
 	private String mail;
-	private Collection<UserSport> sportFavoris = new HashSet<UserSport>();
+	private Collection<UserSport> mySports = new HashSet<UserSport>();
 
 	@Id
 	@GeneratedValue
@@ -40,11 +41,11 @@ public class User {
 
 	@OneToMany(mappedBy = "personne")
 	public Collection<UserSport> getUserSport() {
-		return userSport;
+		return mySports;
 	}
 
 	public void setSportFavoris(Collection<UserSport> userSport) {
-		this.userSport = userSport;
+		this.mySports = userSport;
 	}
 
 	public String getLastName() {

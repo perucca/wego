@@ -1,9 +1,12 @@
 package fr.istic.master.wego.entity;
 
+import java.util.SortedSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -59,7 +62,7 @@ public class UserSport {
 		this.preferenceOrder = preferenceOrder;
 	}
 
-	@ManyToMany
+	@ManyToMany 
 	public SortedSet<UserPlace> getUserPlaces() {
 		return userPlaces;
 	}
