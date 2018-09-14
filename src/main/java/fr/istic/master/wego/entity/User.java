@@ -10,10 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Person {
+public class User {
 
 	private long id;
-	private String name;
+	private String firstName;
+	private String lastName;
+	private String password;
+	private String mail;
 	private Collection<SportFavoris> sportFavoris = new HashSet<SportFavoris>();
 
 	@Id
@@ -28,11 +31,11 @@ public class Person {
 
 	@Column(name = "name")
 	public String getName() {
-		return name;
+		return firstName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.firstName = name;
 	}
 
 	@OneToMany(mappedBy = "personne")
@@ -42,6 +45,31 @@ public class Person {
 
 	public void setSportFavoris(Collection<SportFavoris> sportFavoris) {
 		this.sportFavoris = sportFavoris;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Column(name = "mail")
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 }
