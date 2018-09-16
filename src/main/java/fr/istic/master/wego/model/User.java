@@ -9,6 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ * Represents the user logged in the application.
+ * @author michel
+ *
+ */
 @Entity
 public class User {
 	
