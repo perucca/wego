@@ -1,4 +1,4 @@
-package fr.istic.master.wego.entity;
+package fr.istic.master.wego.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,21 +9,22 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+
 /**
- * @author amontuwy
- * This class represents a place chosen by a user with a preference order 
+ * @author dorian
+ *
  */
 @Entity
-public class UserPlace {
+public class UserSport {
 	
 	private Long id;
 	private User user;
-	private Place place;
-	private float preferenceOrder;
+	private Sport sport;
+	private long preferenceOrder;
 	
-	private Set<UserSport> mySportsAtThisPlace = new HashSet<UserSport>();
+	private Set<UserPlace> myPlacesForThisSport = new HashSet<UserPlace>();
 	
-	public UserPlace() {
+	public UserSport() {
 		
 	}
 	
@@ -47,29 +48,29 @@ public class UserPlace {
 	}
 
 	@ManyToOne
-	public Place getPlace() {
-		return place;
+	public Sport getSport() {
+		return sport;
 	}
 
-	public void setPlace(Place place) {
-		this.place = place;
+	public void setSport(Sport sport) {
+		this.sport = sport;
 	}
 
-	public float getPreferenceOrder() {
+	public long getPreferenceOrder() {
 		return preferenceOrder;
 	}
 
-	public void setPreferenceOrder(float preferenceOrder) {
+	public void setPreferenceOrder(long preferenceOrder) {
 		this.preferenceOrder = preferenceOrder;
 	}
 
-	@ManyToMany
-	public Set<UserSport> getMySportsAtThisPlace() {
-		return mySportsAtThisPlace;
+	@ManyToMany (mappedBy="mySportsAtThisPlace")
+	public Set<UserPlace> getMyPlacesForThisSport() {
+		return myPlacesForThisSport;
 	}
 
-	public void setMySportsAtThisPlace(Set<UserSport> mySportsAtThisPlace) {
-		this.mySportsAtThisPlace = mySportsAtThisPlace;
+	public void setMyPlacesForThisSport(Set<UserPlace> myPlacesForThisSport) {
+		this.myPlacesForThisSport = myPlacesForThisSport;
 	}
 
 	@Override
@@ -77,9 +78,9 @@ public class UserPlace {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((mySportsAtThisPlace == null) ? 0 : mySportsAtThisPlace.hashCode());
-		result = prime * result + ((place == null) ? 0 : place.hashCode());
+		result = prime * result + ((myPlacesForThisSport == null) ? 0 : myPlacesForThisSport.hashCode());
 		result = prime * result + Float.floatToIntBits(preferenceOrder);
+		result = prime * result + ((sport == null) ? 0 : sport.hashCode());
 		return result;
 	}
 
@@ -91,26 +92,24 @@ public class UserPlace {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserPlace other = (UserPlace) obj;
+		UserSport other = (UserSport) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (mySportsAtThisPlace == null) {
-			if (other.mySportsAtThisPlace != null)
+		if (myPlacesForThisSport == null) {
+			if (other.myPlacesForThisSport != null)
 				return false;
-		} else if (!mySportsAtThisPlace.equals(other.mySportsAtThisPlace))
-			return false;
-		if (place == null) {
-			if (other.place != null)
-				return false;
-		} else if (!place.equals(other.place))
+		} else if (!myPlacesForThisSport.equals(other.myPlacesForThisSport))
 			return false;
 		if (Float.floatToIntBits(preferenceOrder) != Float.floatToIntBits(other.preferenceOrder))
 			return false;
+		if (sport == null) {
+			if (other.sport != null)
+				return false;
+		} else if (!sport.equals(other.sport))
+			return false;
 		return true;
 	}
-
-	
 }

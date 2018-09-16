@@ -1,4 +1,4 @@
-package fr.istic.master.wego.entity;
+package fr.istic.master.wego.model;
 
 import java.util.HashSet;
 import java.util.Set;
