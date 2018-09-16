@@ -1,8 +1,7 @@
 package fr.istic.master.wego.entity;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.SortedSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,21 +11,25 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class User {
-
-	private long id;
+	
+	private Long id;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private String mail;
-	private Collection<UserSport> mySports = new HashSet<UserSport>();
+	
+
+	private Set<UserSport> mySports = new HashSet<UserSport>();
+	
+	private Set<UserPlace> myPlaces = new HashSet<UserPlace>();
 
 	@Id
 	@GeneratedValue
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -38,16 +41,7 @@ public class User {
 	public void setName(String name) {
 		this.firstName = name;
 	}
-
-	@OneToMany(mappedBy = "personne")
-	public Collection<UserSport> getUserSport() {
-		return mySports;
-	}
-
-	public void setSportFavoris(Collection<UserSport> userSport) {
-		this.mySports = userSport;
-	}
-
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -71,6 +65,24 @@ public class User {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	@OneToMany(mappedBy = "user")
+	public Set<UserSport> getMySports() {
+		return mySports;
+	}
+
+	public void setMySports(Set<UserSport> mySports) {
+		this.mySports = mySports;
+	}
+
+	@OneToMany(mappedBy = "place")
+	public Set<UserPlace> getMyPlaces() {
+		return myPlaces;
+	}
+
+	public void setMyPlaces(Set<UserPlace> myPlaces) {
+		this.myPlaces = myPlaces;
 	}
 
 }
