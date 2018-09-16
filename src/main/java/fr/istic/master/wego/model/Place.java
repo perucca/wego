@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ public class Place {
 	private Long id;
 	private String name;
 	private int postCode;
+	private ForeCast forecast;
 
 	private Set<UserPlace> userPlaces = new HashSet<UserPlace>();
 
@@ -68,6 +70,16 @@ public class Place {
 		this.userPlaces = userPlaces;
 	}
 
+	@Embedded
+	public ForeCast getForecast() {
+		return forecast;
+	}
+
+	public void setForecast(ForeCast forecast) {
+		this.forecast = forecast;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,5 +119,5 @@ public class Place {
 			return false;
 		return true;
 	}
-	
+
 }
