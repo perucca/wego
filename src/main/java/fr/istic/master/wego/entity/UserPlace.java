@@ -1,87 +1,85 @@
 package fr.istic.master.wego.entity;
 
-import java.util.SortedSet;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * @author amontuwy
  * This class represents a place chosen by a user with a preference order 
  */
 @Entity
-public class UserPlace implements Comparable <UserPlace>{
-	private long id;
-	private long userId;
-	private long sportId;
-	private Long preferenceOrder;
-	private SortedSet<UserSport> userSports;
+public class UserPlace {
+	
+	private Long id;
+	private User user;
+	private Place place;
+	private float preferenceOrder;
+	
+	private Set<UserSport> mySportsAtThisPlace = new HashSet<UserSport>();
 	
 	public UserPlace() {
 		
 	}
-
+	
 	@Id
 	@GeneratedValue
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public long getUserId() {
-		return userId;
+	
+	@ManyToOne
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public long getSportId() {
-		return sportId;
+	@ManyToOne
+	public Place getPlace() {
+		return place;
 	}
 
-	public void setSportId(long sportId) {
-		this.sportId = sportId;
+	public void setPlace(Place place) {
+		this.place = place;
 	}
 
-	public Long getPreferenceOrder() {
+	public float getPreferenceOrder() {
 		return preferenceOrder;
 	}
 
-	public void setPreferenceOrder(Long preferenceOrder) {
+	public void setPreferenceOrder(float preferenceOrder) {
 		this.preferenceOrder = preferenceOrder;
 	}
 
-	@ManyToMany (mappedBy="userPlaces")
-	public SortedSet<UserSport> getUserSports() {
-		return userSports;
+	@ManyToMany
+	public Set<UserSport> getMySportsAtThisPlace() {
+		return mySportsAtThisPlace;
 	}
 
-	public void setUserSports(SortedSet<UserSport> userSports) {
-		this.userSports = userSports;
-	}
-
-	public int compareTo(UserPlace o) {
-		if (o.preferenceOrder > this.preferenceOrder)
-			return 1;
-		else if (o.preferenceOrder<this.preferenceOrder)
-			return -1 ;
-		else return 0;
+	public void setMySportsAtThisPlace(Set<UserSport> mySportsAtThisPlace) {
+		this.mySportsAtThisPlace = mySportsAtThisPlace;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((preferenceOrder == null) ? 0 : preferenceOrder.hashCode());
-		result = prime * result + (int) (sportId ^ (sportId >>> 32));
-		result = prime * result + (int) (userId ^ (userId >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((mySportsAtThisPlace == null) ? 0 : mySportsAtThisPlace.hashCode());
+		result = prime * result + ((place == null) ? 0 : place.hashCode());
+		result = prime * result + Float.floatToIntBits(preferenceOrder);
 		return result;
 	}
 
@@ -94,23 +92,25 @@ public class UserPlace implements Comparable <UserPlace>{
 		if (getClass() != obj.getClass())
 			return false;
 		UserPlace other = (UserPlace) obj;
-		if (id != other.id)
-			return false;
-		if (preferenceOrder == null) {
-			if (other.preferenceOrder != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!preferenceOrder.equals(other.preferenceOrder))
+		} else if (!id.equals(other.id))
 			return false;
-		if (sportId != other.sportId)
+		if (mySportsAtThisPlace == null) {
+			if (other.mySportsAtThisPlace != null)
+				return false;
+		} else if (!mySportsAtThisPlace.equals(other.mySportsAtThisPlace))
 			return false;
-		if (userId != other.userId)
+		if (place == null) {
+			if (other.place != null)
+				return false;
+		} else if (!place.equals(other.place))
+			return false;
+		if (Float.floatToIntBits(preferenceOrder) != Float.floatToIntBits(other.preferenceOrder))
 			return false;
 		return true;
 	}
 
-	
-	
-	
-	
 	
 }
