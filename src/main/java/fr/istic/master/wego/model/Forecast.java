@@ -3,11 +3,20 @@ package fr.istic.master.wego.model;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class ForeCast {
+public class Forecast {
 	private Float wind;
 	private Float temperature;
 	private String weather;
 	
+	public Forecast() {
+	}
+	
+	public Forecast(Float wind, Float temperature, String weather) {
+		super();
+		this.wind = wind;
+		this.temperature = temperature;
+		this.weather = weather;
+	}
 	public Float getWind() {
 		return wind;
 	}
