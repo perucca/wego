@@ -8,22 +8,19 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import fr.istic.master.wego.tools.HsqlDBInMemoryDatabase;
 
-@RunWith(BlockJUnit4ClassRunner.class)
-public class TestModel {
+public class ModelTest {
 
 	private static HsqlDBInMemoryDatabase database = new HsqlDBInMemoryDatabase("jdbc:hsqldb:mem:wego", "sa", "");
 	private static EntityManager manager;
 	private static EntityManagerFactory factory;
 
-	@BeforeClass
+	@BeforeAll
 	public static void beforeclass() {
 		database.initialize();
 
@@ -31,11 +28,11 @@ public class TestModel {
 		manager = factory.createEntityManager();
 	}
 
-	@AfterClass()
+	@AfterAll
 	public static void afterclass() {
-		database.closeDatabase();
-		manager.close();
-		factory.close();
+		try{manager.close();} catch(Exception e) {System.out.println("Erreur: "+ e);};
+		try{factory.close();} catch(Exception e) {System.out.println("Erreur: "+ e);};
+		try{database.closeDatabase();} catch(Exception e) {System.out.println("Erreur: "+ e);};
 	}
 
 	@Test

@@ -2,26 +2,26 @@ package fr.istic.master.wego.domain;
 
 import com.google.common.collect.Range;
 
-import fr.istic.master.wego.model.ForeCast;
-import fr.istic.master.wego.model.Weather;
+import fr.istic.master.wego.model.Forecast;
+import fr.istic.master.wego.model.RequiredWeather;
 
 /**
  * @author michel
  *
  */
-public class WeatherValidator {
+public class RequiredWeatherValidator {
 
-	private Weather weather;
+	private RequiredWeather weather;
 
-	public WeatherValidator(Weather weather) {
+	public RequiredWeatherValidator(RequiredWeather weather) {
 		this.weather = weather;
 	}
 
-	public boolean validate(ForeCast forecast) {
+	public boolean validate(Forecast forecast) {
 		return validateTemperature(forecast) && validateWind(forecast) && validateWeather(forecast);
 	}
 
-	private boolean validateWeather(ForeCast forecast) {
+	private boolean validateWeather(Forecast forecast) {
 
 		switch (forecast.getWeather()) {
 		case "rain":
@@ -33,12 +33,12 @@ public class WeatherValidator {
 		}
 	}
 
-	private boolean validateWind(ForeCast forecast) {
+	private boolean validateWind(Forecast forecast) {
 		Range<Float> range = Range.closed(weather.getMinWind(), weather.getMaxWind());
 		return range.contains(forecast.getWind());
 	}
 
-	private boolean validateTemperature(ForeCast forecast) {
+	private boolean validateTemperature(Forecast forecast) {
 		Range<Float> range = Range.closed(weather.getMinTemperature(), weather.getMaxTemperature());
 		return range.contains(forecast.getTemperature());
 	}

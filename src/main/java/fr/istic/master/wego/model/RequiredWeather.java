@@ -10,7 +10,7 @@ import javax.persistence.Embeddable;
  *
  */
 @Embeddable
-public class Weather {
+public class RequiredWeather {
 
 	private Float minWind;
 	private Float maxWind;
@@ -19,7 +19,19 @@ public class Weather {
 	private boolean sunny;
 	private boolean rainy;
 	
-	
+	public RequiredWeather() {
+	}
+
+	public RequiredWeather(Float minWind, Float maxWind, Float minTemperature, Float maxTemperature, boolean sunny,
+			boolean rainy) {
+		this.minWind = minWind;
+		this.maxWind = maxWind;
+		this.minTemperature = minTemperature;
+		this.maxTemperature = maxTemperature;
+		this.sunny = sunny;
+		this.rainy = rainy;
+	}
+
 	public Float getMinWind() {
 		return minWind;
 	}

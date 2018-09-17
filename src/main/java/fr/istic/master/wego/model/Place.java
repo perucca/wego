@@ -21,7 +21,7 @@ public class Place {
 	private Long id;
 	private String name;
 	private int postCode;
-	private ForeCast forecast;
+	private Forecast forecast;
 
 	private Set<UserPlace> userPlaces = new HashSet<UserPlace>();
 
@@ -71,11 +71,11 @@ public class Place {
 	}
 
 	@Embedded
-	public ForeCast getForecast() {
+	public Forecast getForecast() {
 		return forecast;
 	}
 
-	public void setForecast(ForeCast forecast) {
+	public void setForecast(Forecast forecast) {
 		this.forecast = forecast;
 	}
 
