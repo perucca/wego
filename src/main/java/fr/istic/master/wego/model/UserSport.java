@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -22,7 +23,7 @@ public class UserSport {
 	private Sport sport;
 	private long preferenceOrder;
 	
-	private Set<UserPlace> myPlacesForThisSport = new HashSet<UserPlace>();
+	private Set<SportPlaceAssociation> myPlacesForThisSport = new HashSet<SportPlaceAssociation>();
 	
 	public UserSport() {
 		
@@ -64,15 +65,6 @@ public class UserSport {
 		this.preferenceOrder = preferenceOrder;
 	}
 
-	@ManyToMany (mappedBy="mySportsAtThisPlace")
-	public Set<UserPlace> getMyPlacesForThisSport() {
-		return myPlacesForThisSport;
-	}
-
-	public void setMyPlacesForThisSport(Set<UserPlace> myPlacesForThisSport) {
-		this.myPlacesForThisSport = myPlacesForThisSport;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +74,15 @@ public class UserSport {
 		result = prime * result + Float.floatToIntBits(preferenceOrder);
 		result = prime * result + ((sport == null) ? 0 : sport.hashCode());
 		return result;
+	}
+
+	@OneToMany(mappedBy = "usersport")
+	public Set<SportPlaceAssociation> getMyPlacesForThisSport() {
+		return myPlacesForThisSport;
+	}
+
+	public void setMyPlacesForThisSport(Set<SportPlaceAssociation> myPlacesForThisSport) {
+		this.myPlacesForThisSport = myPlacesForThisSport;
 	}
 
 	@Override

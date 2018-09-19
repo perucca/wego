@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author amontuwy
@@ -21,7 +22,7 @@ public class UserPlace {
 	private Place place;
 	private float preferenceOrder;
 	
-	private Set<UserSport> mySportsAtThisPlace = new HashSet<UserSport>();
+	private Set<SportPlaceAssociation> mySportsAtThisPlace = new HashSet<SportPlaceAssociation>();
 	
 	public UserPlace() {
 		
@@ -63,12 +64,12 @@ public class UserPlace {
 		this.preferenceOrder = preferenceOrder;
 	}
 
-	@ManyToMany
-	public Set<UserSport> getMySportsAtThisPlace() {
+	@OneToMany(mappedBy = "userplace")
+	public Set<SportPlaceAssociation> getMySportsAtThisPlace() {
 		return mySportsAtThisPlace;
 	}
 
-	public void setMySportsAtThisPlace(Set<UserSport> mySportsAtThisPlace) {
+	public void setMySportsAtThisPlace(Set<SportPlaceAssociation> mySportsAtThisPlace) {
 		this.mySportsAtThisPlace = mySportsAtThisPlace;
 	}
 
