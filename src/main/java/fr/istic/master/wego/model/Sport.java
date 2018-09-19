@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -17,7 +19,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Sport {
 
-	private Long id;
+  	private Long id;
+	private TypeSport type;
 	private String sportName;
 	private RequiredWeather idealWeather = new RequiredWeather();
 
@@ -31,6 +34,15 @@ public class Sport {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	@Enumerated(EnumType.STRING)
+	public TypeSport getType() {
+		return type;
+	}
+
+	public void setType(TypeSport type) {
+		this.type = type;
 	}
 
 	public String getSportName() {
@@ -58,6 +70,8 @@ public class Sport {
 	public void setUserSports(Set<UserSport> userSports) {
 		this.userSports = userSports;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
