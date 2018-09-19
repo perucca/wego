@@ -200,11 +200,8 @@ public class ModelTest {
 			up10.setPreferenceOrder(1);
 
 			// Association de lieux et sport pour 1 user
-			Set<UserSport> userSportsP1 = new HashSet<UserSport>();
-			userSportsP1.add(us1);
-			userSportsP1.add(us2);
-			up1.setMySportsAtThisPlace(userSportsP1);
-
+			SportPlaceAssociation spa1 = new SportPlaceAssociation(up2, us9);		
+			
 			// Mise en base de tous les objets
 			manager.persist(p1);
 			manager.persist(p2);

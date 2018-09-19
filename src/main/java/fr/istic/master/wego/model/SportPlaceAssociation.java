@@ -15,6 +15,14 @@ public class SportPlaceAssociation {
 	UserPlace userplace;
 	UserSport usersport;
 	
+	public SportPlaceAssociation() {
+		
+	}
+	
+	public SportPlaceAssociation(UserPlace userplace, UserSport usersport) {
+		this.userplace = userplace;
+		this.usersport = usersport;
+	}
 	@Id
 	@GeneratedValue
 	public Long getId() {

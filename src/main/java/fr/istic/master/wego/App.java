@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 
 import fr.istic.master.wego.model.Place;
 import fr.istic.master.wego.model.Sport;
+import fr.istic.master.wego.model.SportPlaceAssociation;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.model.UserPlace;
 import fr.istic.master.wego.model.UserSport;
@@ -187,10 +188,7 @@ public class App
 			up10.setPreferenceOrder(1);
 			
 			//Association de lieux et sport pour 1 user
-			Set<UserSport> userSportsP1 = new HashSet<UserSport>();
-			userSportsP1.add(us1);
-			userSportsP1.add(us2);
-			up1.setMySportsAtThisPlace(userSportsP1);
+			SportPlaceAssociation spa1 = new SportPlaceAssociation(up2, us9);		
 			
 			//Mise en base de tous les objets
 			manager.persist(p1);
@@ -236,6 +234,8 @@ public class App
 			manager.persist(us10);
 			manager.persist(us11);
 			manager.persist(us12);
+			
+			manager.persist(spa1);
 			
       } catch (Exception e) {
           e.printStackTrace();
