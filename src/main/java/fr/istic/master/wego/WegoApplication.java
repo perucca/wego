@@ -1,3 +1,5 @@
+package fr.istic.master.wego;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
