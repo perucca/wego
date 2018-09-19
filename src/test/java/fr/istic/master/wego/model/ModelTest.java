@@ -1,8 +1,5 @@
 package fr.istic.master.wego.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -199,9 +196,8 @@ public class ModelTest {
 			up10.setUser(p4);
 			up10.setPreferenceOrder(1);
 
-			// Association de lieux et sport pour 1 user
-			SportPlaceAssociation spa1 = new SportPlaceAssociation(up2, us9);		
-			
+			new SportPlaceAssociation(up2, us9);
+
 			// Mise en base de tous les objets
 			manager.persist(p1);
 			manager.persist(p2);

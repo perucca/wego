@@ -6,28 +6,27 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
- * @author amontuwy
- * This class represents a place chosen by a user with a preference order 
+ * @author amontuwy This class represents a place chosen by a user with a
+ *         preference order
  */
 @Entity
 public class UserPlace {
-	
+
 	private Long id;
 	private User user;
 	private Place place;
 	private float preferenceOrder;
-	
+
 	private Set<SportPlaceAssociation> mySportsAtThisPlace = new HashSet<SportPlaceAssociation>();
-	
+
 	public UserPlace() {
-		
+
 	}
-	
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -37,7 +36,7 @@ public class UserPlace {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@ManyToOne
 	public User getUser() {
 		return user;
@@ -113,5 +112,4 @@ public class UserPlace {
 		return true;
 	}
 
-	
 }

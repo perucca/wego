@@ -6,10 +6,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 
 /**
  * @author dorian
@@ -17,18 +15,18 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class UserSport {
-	
+
 	private Long id;
 	private User user;
 	private Sport sport;
 	private long preferenceOrder;
-	
+
 	private Set<SportPlaceAssociation> myPlacesForThisSport = new HashSet<SportPlaceAssociation>();
-	
+
 	public UserSport() {
-		
+
 	}
-	
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -38,7 +36,7 @@ public class UserSport {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@ManyToOne
 	public User getUser() {
 		return user;
