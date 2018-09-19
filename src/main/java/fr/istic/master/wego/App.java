@@ -1,8 +1,5 @@
 package fr.istic.master.wego;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -19,22 +16,20 @@ import fr.istic.master.wego.model.UserSport;
  * Hello world!
  *
  */
-public class App 
-{
-  /**
-   * @param args
-   */
-  public static void main(String[] args) {
-      EntityManagerFactory factory = Persistence
-              .createEntityManagerFactory("dev");
-      EntityManager manager = factory.createEntityManager();
+public class App {
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
+		EntityManager manager = factory.createEntityManager();
 
-      EntityTransaction tx = manager.getTransaction();
-      tx.begin();
-      try {
-          
-    	  // Declaration de plusieurs lieux de test
-    	  	Sport kayak = new Sport();
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		try {
+
+			// Declaration de plusieurs lieux de test
+			Sport kayak = new Sport();
 			kayak.setSportName("kayak");
 			Sport foot = new Sport();
 			foot.setSportName("football");
@@ -46,7 +41,6 @@ public class App
 			tennis.setSportName("tennis");
 			Sport ski = new Sport();
 			ski.setSportName("ski");
-			
 
 			// déclaration de plusieurs user de test
 			User p1 = new User();
@@ -60,7 +54,7 @@ public class App
 			User p3 = new User();
 			p3.setName("Monique");
 			p3.setLastName("Dupont");
-			
+
 			User p4 = new User();
 			p4.setName("Paul");
 			p4.setLastName("Delamarre");
@@ -99,7 +93,7 @@ public class App
 			UserSport us11 = new UserSport();
 			UserSport us12 = new UserSport();
 
-			//Remplissage des UserSport
+			// Remplissage des UserSport
 			us1.setUser(p1);
 			us1.setSport(kayak);
 			us1.setPreferenceOrder(2);
@@ -152,7 +146,7 @@ public class App
 			UserPlace up9 = new UserPlace();
 			UserPlace up10 = new UserPlace();
 
-			//remplissage des userplace
+			// remplissage des userplace
 			up1.setPlace(redon);
 			up1.setUser(p1);
 			up1.setPreferenceOrder(2);
@@ -186,23 +180,23 @@ public class App
 			up10.setPlace(dunkerque);
 			up10.setUser(p4);
 			up10.setPreferenceOrder(1);
-			
-			//Association de lieux et sport pour 1 user
-			SportPlaceAssociation spa1 = new SportPlaceAssociation(up2, us9);		
-			
-			//Mise en base de tous les objets
+
+			// Association de lieux et sport pour 1 user
+			SportPlaceAssociation spa1 = new SportPlaceAssociation(up2, us9);
+
+			// Mise en base de tous les objets
 			manager.persist(p1);
 			manager.persist(p2);
 			manager.persist(p3);
 			manager.persist(p4);
-			
+
 			manager.persist(kayak);
 			manager.persist(foot);
 			manager.persist(golf);
 			manager.persist(voile);
 			manager.persist(tennis);
 			manager.persist(ski);
-			
+
 			manager.persist(redon);
 			manager.persist(plerguer);
 			manager.persist(rennes);
@@ -210,7 +204,6 @@ public class App
 			manager.persist(dunkerque);
 			manager.persist(nantes);
 
-			
 			manager.persist(up1);
 			manager.persist(up2);
 			manager.persist(up3);
@@ -221,7 +214,7 @@ public class App
 			manager.persist(up8);
 			manager.persist(up9);
 			manager.persist(up10);
-			
+
 			manager.persist(us1);
 			manager.persist(us2);
 			manager.persist(us3);
@@ -234,16 +227,16 @@ public class App
 			manager.persist(us10);
 			manager.persist(us11);
 			manager.persist(us12);
-			
+
 			manager.persist(spa1);
-			
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      tx.commit();
-      
-      manager.close();
-      factory.close();
-  }
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		tx.commit();
+
+		manager.close();
+		factory.close();
+	}
 
 }
