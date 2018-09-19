@@ -1,4 +1,4 @@
-package fr.istic.master.wego;
+package fr.istic.master.wego.tools;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +16,7 @@ import fr.istic.master.wego.model.UserSport;
  * Hello world!
  *
  */
-public class App {
+public class ChargeurDonnees {
 	/**
 	 * @param args
 	 */
