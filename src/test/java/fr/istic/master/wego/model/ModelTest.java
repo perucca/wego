@@ -12,17 +12,13 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import fr.istic.master.wego.tools.HsqlDBInMemoryDatabase;
-
 public class ModelTest {
 
-	private static HsqlDBInMemoryDatabase database = new HsqlDBInMemoryDatabase("jdbc:hsqldb:mem:wego", "sa", "");
 	private static EntityManager manager;
 	private static EntityManagerFactory factory;
 
 	@BeforeAll
 	public static void beforeclass() {
-		database.initialize();
 
 		factory = Persistence.createEntityManagerFactory("test");
 		manager = factory.createEntityManager();
@@ -30,9 +26,18 @@ public class ModelTest {
 
 	@AfterAll
 	public static void afterclass() {
-		try{manager.close();} catch(Exception e) {System.out.println("Erreur: "+ e);};
-		try{factory.close();} catch(Exception e) {System.out.println("Erreur: "+ e);};
-		try{database.closeDatabase();} catch(Exception e) {System.out.println("Erreur: "+ e);};
+		try {
+			manager.close();
+		} catch (Exception e) {
+			System.out.println("Erreur: " + e);
+		}
+		;
+		try {
+			factory.close();
+		} catch (Exception e) {
+			System.out.println("Erreur: " + e);
+		}
+		;
 	}
 
 	@Test
