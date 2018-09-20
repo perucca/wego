@@ -82,17 +82,17 @@ public class ModelTest {
 			Place dunkerque = new Place();
 			Place nantes = new Place();
 			redon.setName("Redon");
-			redon.setPostCode(35600);
+			redon.setPostCode("35600");
 			plerguer.setName("Plerguer");
-			plerguer.setPostCode(35123);
+			plerguer.setPostCode("35123");
 			rennes.setName("Rennes");
-			rennes.setPostCode(35000);
+			rennes.setPostCode("35000");
 			brest.setName("Brest");
-			brest.setPostCode(29000);
+			brest.setPostCode("29000");
 			dunkerque.setName("Dunkerque");
-			dunkerque.setPostCode(59200);
+			dunkerque.setPostCode("59200");
 			nantes.setName("nantes");
-			nantes.setPostCode(44000);
+			nantes.setPostCode("44000");
 
 			// Creaation de plusieurs instances de UserSport
 			UserSport us1 = new UserSport();

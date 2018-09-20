@@ -6,9 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.istic.master.wego.model.User;
 
 /**
- * @author amontuwy
- * Interface for CRUD on UserEntity
- * To do done
+ * @author amontuwy Interface for CRUD on UserEntity To do done
  */
 @Transactional
 public interface UserDao extends JpaRepository<User, Long> {

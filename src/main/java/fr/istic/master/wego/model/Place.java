@@ -11,16 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- * @author amontuwy
- * This class represents an entity of a place in the database
+ * @author amontuwy This class represents an entity of a place in the database
  */
 @Entity
 public class Place {
 
-
 	private Long id;
 	private String name;
-	private int postCode;
+	private String postCode;
 	private Forecast forecast;
 
 	private Set<UserPlace> userPlaces = new HashSet<UserPlace>();
@@ -28,7 +26,7 @@ public class Place {
 	public Place() {
 	}
 
-	public Place(String name, int postCode) {
+	public Place(String name, String postCode) {
 		this.name = name;
 		this.postCode = postCode;
 	}
@@ -53,15 +51,15 @@ public class Place {
 	}
 
 	@Column(name = "post_code")
-	public int getPostCode() {
+	public String getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(int i) {
+	public void setPostCode(String i) {
 		this.postCode = i;
 	}
 
-	@OneToMany(mappedBy="place")
+	@OneToMany(mappedBy = "place")
 	public Set<UserPlace> getUserPlaces() {
 		return userPlaces;
 	}
@@ -79,14 +77,14 @@ public class Place {
 		this.forecast = forecast;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((forecast == null) ? 0 : forecast.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + postCode;
+		result = prime * result + ((postCode == null) ? 0 : postCode.hashCode());
 		result = prime * result + ((userPlaces == null) ? 0 : userPlaces.hashCode());
 		return result;
 	}
@@ -100,6 +98,11 @@ public class Place {
 		if (getClass() != obj.getClass())
 			return false;
 		Place other = (Place) obj;
+		if (forecast == null) {
+			if (other.forecast != null)
+				return false;
+		} else if (!forecast.equals(other.forecast))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -110,7 +113,10 @@ public class Place {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (postCode != other.postCode)
+		if (postCode == null) {
+			if (other.postCode != null)
+				return false;
+		} else if (!postCode.equals(other.postCode))
 			return false;
 		if (userPlaces == null) {
 			if (other.userPlaces != null)

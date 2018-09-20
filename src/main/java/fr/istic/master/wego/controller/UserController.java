@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.model.User;
-
 /**
  * @author amontuwy Provides REST services for the User To Be Done
  */
