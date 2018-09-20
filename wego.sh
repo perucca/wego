@@ -10,4 +10,4 @@ sudo docker run --network='wego-network' --name database \
         -v '/home/michel/mysql-data':'/var/lib/mysql' \
         -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=wego \
         --publish=3306:3306 -d mysql:5.7.23
-sudo docker run --publish 8080:8080 --network='wego-network' wego:latest
+sudo docker run --publish 8080:8080 --network='wego-network' -d wego:latest
