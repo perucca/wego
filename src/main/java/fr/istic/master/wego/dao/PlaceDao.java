@@ -22,4 +22,5 @@ public interface PlaceDao extends JpaRepository<Place, Long> {
 	@Query("select p from Place p where p.name =:name")
 	public Set<Place> findAllByName(@Param("name") String name);
 
+
 }

@@ -23,7 +23,6 @@ public class User {
 	private String password;
 	private String mail;
 	
-
 	private Set<UserSport> mySports = new HashSet<UserSport>();
 	
 	private Set<UserPlace> myPlaces = new HashSet<UserPlace>();
@@ -38,7 +37,7 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name = "name")
+	@Column(name = "firstname", nullable=false)
 	public String getName() {
 		return firstName;
 	}
@@ -47,6 +46,7 @@ public class User {
 		this.firstName = name;
 	}
 	
+	@Column(name = "lastname", nullable=false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -55,6 +55,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	@Column(name = "password", nullable=false)
 	public String getPassword() {
 		return password;
 	}
@@ -63,7 +64,7 @@ public class User {
 		this.password = password;
 	}
 
-	@Column(name = "mail")
+	@Column(name = "mail", nullable=false)
 	public String getMail() {
 		return mail;
 	}

@@ -1,8 +1,14 @@
 package fr.istic.master.wego.dao;
 
+import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.istic.master.wego.model.Place;
 import fr.istic.master.wego.model.User;
 
 /**
@@ -10,5 +16,8 @@ import fr.istic.master.wego.model.User;
  */
 @Transactional
 public interface UserDao extends JpaRepository<User, Long> {
-
+	
+	@Query("select u from User u where u.mail =:mail")
+	public Optional<User> findByEmail(@Param("mail") String mail);
+	
 }
