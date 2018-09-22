@@ -2,17 +2,19 @@ package fr.istic.master.wego.dto;
 
 import fr.istic.master.wego.model.Forecast;
 
+//Permet de travailler avec des JSON qui ne contiennent que l'ID, le nom et le postcode de chaque place
+
 public class PlaceDto {
 
 	private Long id;
 	private String name;
 	private String postCode;
-	private Forecast forecast;
 
 	public PlaceDto() {
 	}
 
-	public PlaceDto(String name, String postCode) {
+	public PlaceDto(Long id, String name, String postCode) {
+		this.id=id;
 		this.name = name;
 		this.postCode = postCode;
 	}

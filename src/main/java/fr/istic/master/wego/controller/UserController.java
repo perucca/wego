@@ -3,6 +3,7 @@ package fr.istic.master.wego.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.istic.master.wego.dao.UserDao;
@@ -29,8 +31,14 @@ public class UserController {
 	//Services to create a User
 	
 	@PostMapping("users/")
+	@ResponseStatus(HttpStatus.CREATED)
 	public void createUser(@RequestBody UserDto udto) {
-		System.out.println(udto.toString());
+		User u = new User();
+		u.setName(udto.getFirstName());
+		u.setLastName(udto.getLastName());
+		u.setMail(udto.getMail());
+		u.setPassword(udto.getPassword());
+		userDao.save(u);
 	}
 	
 	
@@ -41,7 +49,7 @@ public class UserController {
 		return userDao.findById(id);
 	}
 	
-	@GetMapping("/users/{email}")
+	@GetMapping("/users/by_email/{email}")
 	public Optional<User> getUserByEmail(@PathVariable("email") String email) {
 		return userDao.findByEmail(email);
 	}

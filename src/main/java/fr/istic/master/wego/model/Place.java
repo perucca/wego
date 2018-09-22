@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author amontuwy This class represents an entity of a place in the database
  */
@@ -20,7 +22,6 @@ public class Place {
 	private String name;
 	private String postCode;
 	private Forecast forecast;
-
 	private Set<UserPlace> userPlaces = new HashSet<UserPlace>();
 
 	public Place() {
