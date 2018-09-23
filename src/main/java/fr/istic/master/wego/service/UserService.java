@@ -38,6 +38,15 @@ public class UserService {
         }
     }
 
+    public User getFullUserById(long id){
+        User user = userDao.findById(id).orElse(null);
+        if (user.equals(null)){
+            return null;
+        }else{
+            return user;
+        }
+    }
+
     public UserDto getUserByEmail(String email){
         User user = userDao.findByEmail(email).orElse(null);
         if (user.equals(null)){
