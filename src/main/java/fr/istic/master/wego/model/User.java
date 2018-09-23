@@ -22,9 +22,9 @@ public class User {
 	private String lastName;
 	private String password;
 	private String mail;
+	//AJOUTER LE BOOLEEN "SORTED BY"
 	
 	private Set<UserSport> mySports = new HashSet<UserSport>();
-	
 	private Set<UserPlace> myPlaces = new HashSet<UserPlace>();
 
 	@Id
@@ -38,11 +38,11 @@ public class User {
 	}
 
 	@Column(name = "firstname", nullable=false)
-	public String getName() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setName(String name) {
+	public void setFirstName(String name) {
 		this.firstName = name;
 	}
 	

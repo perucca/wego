@@ -1,11 +1,22 @@
-package fr.istic.master.wego.dto;
+package fr.istic.master.wego.dto.user;
 
-public class UserDto {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+public class UserDtoCreate {
 	
+	@NotBlank
 	private String firstName;
+	@NotBlank
 	private String lastName;
+	@NotBlank
 	private String password;
+	@Email 	@NotBlank
 	private String mail;
+	
+	//AJOUTER BOOLEEN
+	
 	public String getFirstName() {
 		return firstName;
 	}

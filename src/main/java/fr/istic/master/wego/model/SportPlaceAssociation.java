@@ -9,7 +9,6 @@ import javax.persistence.ManyToOne;
 public class SportPlaceAssociation {
 
 	Long id;
-
 	UserPlace userplace;
 	UserSport usersport;
 

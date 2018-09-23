@@ -59,19 +59,19 @@ public class ModelTest {
 
 			// déclaration de plusieurs user de test
 			User p1 = new User();
-			p1.setName("toto");
+			p1.setFirstName("toto");
 			p1.setLastName("titi");
 
 			User p2 = new User();
-			p2.setName("Johnny");
+			p2.setFirstName("Johnny");
 			p2.setLastName("Hallyday");
 
 			User p3 = new User();
-			p3.setName("Monique");
+			p3.setFirstName("Monique");
 			p3.setLastName("Dupont");
 
 			User p4 = new User();
-			p4.setName("Paul");
+			p4.setFirstName("Paul");
 			p4.setLastName("Delamarre");
 
 			// Declaration de plusieurs lieux de test
