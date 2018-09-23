@@ -32,8 +32,12 @@ public class PlaceController {
 	@GetMapping("")
 	public Collection<PlaceDto> getAllPlaces() {
 		return placeService.getAllPlaces();
-
 	}
+
+    @GetMapping("/{id}")
+    public PlaceDto getPlaceById(@PathVariable("id") Long id) {
+        return placeService.getPlacesById(id);
+    }
 	
 	@GetMapping("/bypostcode/{postcode}")
 	public Collection<PlaceDto> getAllPlacesByPostCode(@PathVariable("postcode") String postcode) {
@@ -44,10 +48,4 @@ public class PlaceController {
 	public Collection<PlaceDto> getAllPlacesByName(@PathVariable("name") String name) {
 		return placeService.getAllPlacesByName(name);
 	}
-	
-	@GetMapping("/{id}")
-	public PlaceDto getPlaceById(@PathVariable("id") Long id) {
-		return placeService.getPlacesById(id);
-	}
-
 }
