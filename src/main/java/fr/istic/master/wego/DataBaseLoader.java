@@ -23,8 +23,8 @@ public class DataBaseLoader {
 
 	public void loadData() {
 
-		if (placedao.count() != 0)
-			return;
+//	if (placedao.count() != 0)
+//			return;
 
 		// Declaration de plusieurs lieux de test
 		Sport kayak = new Sport();

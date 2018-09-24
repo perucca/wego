@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -22,13 +23,12 @@ public class User {
 	private String lastName;
 	private String password;
 	private String mail;
-	//AJOUTER LE BOOLEEN "SORTED BY"
 	
 	private Set<UserSport> mySports = new HashSet<UserSport>();
 	private Set<UserPlace> myPlaces = new HashSet<UserPlace>();
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -64,7 +64,7 @@ public class User {
 		this.password = password;
 	}
 
-	@Column(name = "mail", nullable=false)
+	@Column(name = "mail", nullable=false, unique=true)
 	public String getMail() {
 		return mail;
 	}

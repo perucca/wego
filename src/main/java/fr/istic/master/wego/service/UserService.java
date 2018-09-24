@@ -12,6 +12,8 @@ import fr.istic.master.wego.dto.TransformDtoUser;
 import fr.istic.master.wego.dto.UserDto;
 import fr.istic.master.wego.model.User;
 
+import javax.validation.Valid;
+
 @Service
 public class UserService {
 
@@ -52,12 +54,14 @@ public class UserService {
         userDao.save(TransformDtoUser.transformFromDto(userDto));
     }
 
-    //Not very clean?
-    public void updateUser(long id, UserDto userDto){
-        userDao.save(TransformDtoUser.transformFromDtoWithId(id, userDto));
+    public void updateUser(Long id, UserDto userDto){
+    	User u = userDao.getOne(id);
+        userDao.save(TransformDtoUser.transformFromDto(userDto, u));
     }
 
     public void deleteUser(long id){
         userDao.deleteById(id);
     }
+
+
 }

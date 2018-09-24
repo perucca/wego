@@ -2,13 +2,23 @@ package fr.istic.master.wego.dto;
 
 public class UserPlaceDto {
 
+	private Long id;
     private PlaceDto placeDto;
     private float preferenceOrder;
 
     public UserPlaceDto() {
     }
 
-    public PlaceDto getPlaceDto() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public PlaceDto getPlaceDto() {
         return placeDto;
     }
 
