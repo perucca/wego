@@ -2,10 +2,6 @@ package fr.istic.master.wego.dto;
 
 import fr.istic.master.wego.model.RequiredWeather;
 import fr.istic.master.wego.model.TypeSport;
-import fr.istic.master.wego.model.UserSport;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class SportDto {
 

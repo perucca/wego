@@ -1,14 +1,9 @@
 package fr.istic.master.wego.controller;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 import javax.validation.Valid;
 
-import fr.istic.master.wego.dto.UserDto;
-import fr.istic.master.wego.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,11 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.istic.master.wego.dao.UserDao;
-import fr.istic.master.wego.dto.PlaceDto;
-import fr.istic.master.wego.model.User;
-import fr.istic.master.wego.model.UserPlace;
-import fr.istic.master.wego.model.UserSport;
+import fr.istic.master.wego.dto.UserDto;
+import fr.istic.master.wego.service.UserService;
 
 /**
  * @author amontuwy Provides REST services for the User To Be Done

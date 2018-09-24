@@ -1,8 +1,5 @@
 package fr.istic.master.wego.dto;
 
-import fr.istic.master.wego.model.Forecast;
-
-
 public class PlaceDto {
 
 	private String name;

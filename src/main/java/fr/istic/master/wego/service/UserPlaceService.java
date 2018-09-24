@@ -1,17 +1,16 @@
 package fr.istic.master.wego.service;
 
-import fr.istic.master.wego.dao.UserPlaceDao;
-import fr.istic.master.wego.dto.SportDto;
-import fr.istic.master.wego.dto.TransformDtoSport;
-import fr.istic.master.wego.dto.TransformDtoUserPlace;
-import fr.istic.master.wego.dto.UserPlaceDto;
-import fr.istic.master.wego.model.Sport;
-import fr.istic.master.wego.model.User;
-import fr.istic.master.wego.model.UserPlace;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import fr.istic.master.wego.dao.UserPlaceDao;
+import fr.istic.master.wego.dto.TransformDtoUserPlace;
+import fr.istic.master.wego.dto.UserPlaceDto;
+import fr.istic.master.wego.model.UserPlace;
 
 @Service
 public class UserPlaceService {
