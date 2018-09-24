@@ -8,7 +8,7 @@ public class TransformDtoPlace {
 
     public static PlaceDto transformToDto(Place place){
         PlaceDto placeDto = new PlaceDto();
-
+        placeDto.setId(place.getId());
         placeDto.setName(place.getName());
         placeDto.setPostCode(place.getPostCode());
 

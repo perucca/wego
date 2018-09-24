@@ -28,7 +28,7 @@ import fr.istic.master.wego.model.UserPlace;
 import fr.istic.master.wego.model.UserSport;
 
 /**
- * @author amontuwy Provides REST services for the User To Be Done
+ * @author amontuwy Provides REST services for the User
  */
 
 @RestController
@@ -61,7 +61,7 @@ public class UserController {
 
 	// Service to update a User
 	@PutMapping("/{id}")
-	public void updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserDto userDto) {
+	public void updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
 		userService.updateUser(id, userDto);
 	}
 
