@@ -29,14 +29,5 @@ public class UserPlaceService {
 
         return userPlaceDto;
     }
-
-    public UserPlaceDto getUserPlaceById(long id){
-        UserPlace userPlace = userPlaceDao.findById(id).orElse(null);
-        if (userPlace.equals(null)){
-            return null;
-        }else{
-            return TransformDtoUserPlace.transformToDto(userPlace);
-        }
-    }
 }
 
