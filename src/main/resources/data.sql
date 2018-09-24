@@ -24,3 +24,10 @@ insert into user_place(id,preference_order,place_id,user_id) values(3,1,3,2);
 insert into user_place(id,preference_order,place_id,user_id) values(4,1,2,3);
 insert into user_place(id,preference_order,place_id,user_id) values(5,2,4,3);
 insert into user_place(id,preference_order,place_id,user_id) values(6,3,1,3);
+
+--add sports to users
+insert into user_sport(id,preference_order,sport_id,user_id) values(1,1,1,1);
+insert into user_sport(id,preference_order,sport_id,user_id) values(2,2,4,1);
+insert into user_sport(id,preference_order,sport_id,user_id) values(3,1,3,2);
+insert into user_sport(id,preference_order,sport_id,user_id) values(4,1,1,3);
+insert into user_sport(id,preference_order,sport_id,user_id) values(5,2,2,3);
