@@ -1,16 +1,18 @@
 package fr.istic.master.wego.service;
 
-import fr.istic.master.wego.dao.PlaceDao;
-import fr.istic.master.wego.dto.PlaceDto;
-import fr.istic.master.wego.dto.TransformDtoPlace;
-import fr.istic.master.wego.dto.TransformDtoUser;
-import fr.istic.master.wego.dto.UserDto;
-import fr.istic.master.wego.model.Place;
-import fr.istic.master.wego.model.User;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import fr.istic.master.wego.dao.PlaceDao;
+import fr.istic.master.wego.dto.PlaceDto;
+import fr.istic.master.wego.dto.TransformDtoPlace;
+import fr.istic.master.wego.model.Place;
 
 @Service
 public class PlaceService {

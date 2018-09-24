@@ -1,16 +1,16 @@
 package fr.istic.master.wego.service;
 
-import fr.istic.master.wego.dao.PlaceDao;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import fr.istic.master.wego.dao.SportDao;
 import fr.istic.master.wego.dto.SportDto;
 import fr.istic.master.wego.dto.TransformDtoSport;
 import fr.istic.master.wego.model.Sport;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Service
 public class SportService {

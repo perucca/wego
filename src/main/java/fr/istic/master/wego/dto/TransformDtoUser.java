@@ -1,10 +1,10 @@
 package fr.istic.master.wego.dto;
 
+import java.util.HashSet;
+
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.model.UserPlace;
 import fr.istic.master.wego.model.UserSport;
-
-import java.util.HashSet;
 
 public class TransformDtoUser {
 

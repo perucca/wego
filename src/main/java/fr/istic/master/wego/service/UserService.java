@@ -1,15 +1,16 @@
 package fr.istic.master.wego.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.dto.TransformDtoUser;
 import fr.istic.master.wego.dto.UserDto;
 import fr.istic.master.wego.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Service
 public class UserService {
