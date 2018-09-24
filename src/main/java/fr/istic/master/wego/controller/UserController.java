@@ -7,9 +7,10 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import fr.istic.master.wego.dto.UserDto;
+import fr.istic.master.wego.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.dto.PlaceDto;
-import fr.istic.master.wego.dto.user.UserDtoCreate;
-import fr.istic.master.wego.dto.user.UserDtoDisplay;
-import fr.istic.master.wego.dto.user.UserPlaceDtoDisplay;
-import fr.istic.master.wego.dto.user.UserSportDto;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.model.UserPlace;
 import fr.istic.master.wego.model.UserSport;
@@ -39,75 +36,39 @@ import fr.istic.master.wego.model.UserSport;
 public class UserController {
 
 	@Autowired
-	private UserDao userDao;
+	private UserService userService;
 
-	// Services to create a User
+    @GetMapping("")
+    public Collection<UserDto> getAllUsers() {
+        return userService.getAllUsers();
+    }
 
-	@PostMapping("")
-	@ResponseStatus(HttpStatus.CREATED)
-	public void createUser(@RequestBody @Valid UserDtoCreate udto) {
-		User u = new User();
-		u.setFirstName(udto.getFirstName());
-		u.setLastName(udto.getLastName());
-		u.setMail(udto.getMail());
-		u.setPassword(udto.getPassword());
-		userDao.save(u);
-	}
-
-	// Services to read a User
 	@GetMapping("/{id}")
-	public UserDtoDisplay getUserById(@PathVariable("id") Long id) {
-		User u = userDao.getOne(id);
-		UserDtoDisplay udtod = new UserDtoDisplay();
-		udtod.setFirstName(u.getFirstName());
-		udtod.setLastName(u.getLastName());
-		udtod.setId(u.getId());
-		udtod.setMail(u.getMail());
-		Set<UserPlaceDtoDisplay> upd = new HashSet<UserPlaceDtoDisplay>();
-		Set<UserPlace> uplist = u.getMyPlaces();
-		for (UserPlace p : uplist) {
-			UserPlaceDtoDisplay tmp = new UserPlaceDtoDisplay();
-			PlaceDto pdto = new PlaceDto(p.getPlace().getId(), p.getPlace().getName(), p.getPlace().getPostCode());
-			tmp.setPlace(pdto);
-			tmp.setPreferenceOrder(p.getPreferenceOrder());
-			upd.add(tmp);
-		}
-		udtod.setMyPlaces(upd);
-		// A modifier en fonction du UserSportDTO que fera Dorian
-		Set<UserSportDto> usd = new HashSet<UserSportDto>();
-		for (UserSport s : u.getMySports()) {
-			UserSportDto tmp = new UserSportDto(s.getSport().getSportName(), s.getPreferenceOrder());
-			usd.add(tmp);
-		}
-		udtod.setMySports(usd);
-		return udtod;
+	public UserDto getUserById(@PathVariable("id") Long id) {
+        return userService.getUserById(id);
 	}
 
 	@GetMapping("/by_email/{email}")
-	public Optional<User> getUserByEmail(@PathVariable("email") String email) {
-		return userDao.findByEmail(email);
+	public UserDto getUserByEmail(@PathVariable("email") String email) {
+        return userService.getUserByEmail(email);
 	}
 
-	@GetMapping("")
-	public Collection<User> getAllUsers() {
-		return userDao.findAll();
+	@PostMapping("")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void createUser(@RequestBody @Valid UserDto userDto) {
+        userService.createUser(userDto);
 	}
 
-	// Services to update a User
+	// Service to update a User
 	@PutMapping("/{id}")
-	public void updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserDtoCreate udto) {
-		User u = userDao.getOne(id);
-		u.setFirstName(udto.getFirstName());
-		u.setLastName(udto.getLastName());
-		u.setMail(udto.getMail());
-		u.setPassword(udto.getPassword());
-		userDao.save(u);
+	public void updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserDto userDto) {
+		userService.updateUser(id, userDto);
 	}
 
-	// Services to delete a User
+	// Service to delete a User
 	@DeleteMapping("/{id}")
 	public void deleteUser(@PathVariable("id") Long id) {
-		userDao.deleteById(id);
+		userService.deleteUser(id);
 		System.err.println("Le compte utilisateur a été supprimé");
 	}
 

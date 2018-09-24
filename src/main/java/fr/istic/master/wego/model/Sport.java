@@ -23,7 +23,6 @@ public class Sport {
 	private TypeSport type;
 	private String sportName;
 	private RequiredWeather idealWeather = new RequiredWeather();
-
 	private Set<UserSport> userSports = new HashSet<UserSport>();
 
 	@Id
@@ -70,8 +69,7 @@ public class Sport {
 	public void setUserSports(Set<UserSport> userSports) {
 		this.userSports = userSports;
 	}
-	
-	
+
 
 	@Override
 	public int hashCode() {
