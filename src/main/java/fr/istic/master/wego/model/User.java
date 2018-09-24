@@ -22,10 +22,9 @@ public class User {
 	private String lastName;
 	private String password;
 	private String mail;
+	//AJOUTER LE BOOLEEN "SORTED BY"
 	
-
 	private Set<UserSport> mySports = new HashSet<UserSport>();
-	
 	private Set<UserPlace> myPlaces = new HashSet<UserPlace>();
 
 	@Id
@@ -38,15 +37,16 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name = "name")
-	public String getName() {
+	@Column(name = "firstname", nullable=false)
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setName(String name) {
+	public void setFirstName(String name) {
 		this.firstName = name;
 	}
 	
+	@Column(name = "lastname", nullable=false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -55,6 +55,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	@Column(name = "password", nullable=false)
 	public String getPassword() {
 		return password;
 	}
@@ -63,7 +64,7 @@ public class User {
 		this.password = password;
 	}
 
-	@Column(name = "mail")
+	@Column(name = "mail", nullable=false)
 	public String getMail() {
 		return mail;
 	}
