@@ -34,8 +34,6 @@ public class PlaceController {
 
 	@Autowired
 	private PlaceService placeService;
-	@Autowired
-    private UserPlaceService userPlaceService;
 
 	@GetMapping("")
 	public Collection<PlaceDto> getAllPlaces() {
@@ -56,10 +54,5 @@ public class PlaceController {
 	public Collection<PlaceDto> getAllPlacesByName(@PathVariable("name") String name) {
 		return placeService.getAllPlacesByName(name);
 	}
-
-    @GetMapping("/byuser/{id}")
-    public Collection<UserPlaceDto> getAllPlacesByUserId(@PathVariable("id") long id) {
-        return userPlaceService.getAllUserPlacesByUserId(id);
-    }
 
 }
