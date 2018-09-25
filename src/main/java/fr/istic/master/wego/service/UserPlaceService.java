@@ -66,4 +66,10 @@ public class UserPlaceService {
 		} else 
 			System.err.println("Le userPlace existe déjà");
 			}
+
+	public void updateUserPlace(Long id, UserPlaceDtoCreate userplaceDto) {
+		UserPlace u = userPlaceDao.getOne(id);
+        userPlaceDao.save(TransformDtoUserPlace.transformFromDto(userplaceDto, u));
+	}
+	
 }

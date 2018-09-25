@@ -46,7 +46,6 @@ public class TransformDtoUser {
         u.setPassword(userDto.getPassword());
         u.setMyPlaces(new HashSet<UserPlace>());
         u.setMySports(new HashSet<UserSport>());
-
         return u;
     }
     
