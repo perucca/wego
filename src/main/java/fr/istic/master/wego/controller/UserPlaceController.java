@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.istic.master.wego.dao.UserDao;
-import fr.istic.master.wego.dto.UserPlaceDto;
+import fr.istic.master.wego.dto.UserPlaceDtoCreate;
+import fr.istic.master.wego.dto.UserPlaceDtoRead;
 import fr.istic.master.wego.service.UserPlaceService;
 
 @RestController
@@ -23,26 +23,26 @@ public class UserPlaceController {
 
 	@Autowired
 	private UserPlaceService userplaceService;
-	private UserDao userdao;
+	
 
 	// Services de Get de User Places
 
 		// celle-ci est juste pour tester
 	@GetMapping("")
-	public Collection<UserPlaceDto> getAllUserPlacesinBase() {
+	public Collection<UserPlaceDtoRead> getAllUserPlacesinBase() {
 		return userplaceService.getAllUserPlace();
 	}
 
 	@GetMapping("/{id}")
-	public Collection<UserPlaceDto> getAllUserPlacesForId(@PathVariable("id") Long id) {
+	public Collection<UserPlaceDtoRead> getAllUserPlacesForUserId(@PathVariable("id") Long id) {
 		return userplaceService.getAllUserPlacesByUserId(id);
 	}
 	
 	// service de create d'un userplace pour un user
-	@PostMapping("/{id}")
+	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createUserPlace(@PathVariable ("id") Long userid, @RequestBody UserPlaceDto userplaceDto) {
-        userplaceService.createUserPlace(userplaceDto, userdao.getOne(userid));
+	public void createUserPlace(@RequestBody UserPlaceDtoCreate userplaceDto){
+        userplaceService.createUserPlace(userplaceDto);
 	}
 
 	

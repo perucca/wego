@@ -1,30 +1,21 @@
 package fr.istic.master.wego.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
-@ApiModel
-public class UserDto {
+public class UserDtoRead {
 
 	private Long id;
     private String firstName;
     private String lastName;
-    private String password;
     private String mail;
+    private boolean isMySportsEmpty = true;
+    private boolean isMyPlacesEmpty = true;
 
-    public UserDto() {
+    public UserDtoRead() {
     }
     
-    @JsonProperty
-    @ApiModelProperty(readOnly = true)
     public Long getId() {
 		return id;
 		}
 
-    @JsonIgnore
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -45,14 +36,6 @@ public class UserDto {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getMail() {
         return mail;
     }
@@ -60,4 +43,20 @@ public class UserDto {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+	public boolean isMySportsEmpty() {
+		return isMySportsEmpty;
+	}
+	
+	public void setMySportsEmpty(boolean isMySportsEmpty) {
+		this.isMySportsEmpty = isMySportsEmpty;
+	}
+
+	public boolean isMyPlacesEmpty() {
+		return isMyPlacesEmpty;
+	}
+
+	public void setMyPlacesEmpty(boolean isMyPlacesEmpty) {
+		this.isMyPlacesEmpty = isMyPlacesEmpty;
+	}
 }

@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.istic.master.wego.dto.UserDto;
+import fr.istic.master.wego.dto.UserDtoCreate;
+import fr.istic.master.wego.dto.UserDtoRead;
 import fr.istic.master.wego.service.UserService;
 
 /**
@@ -31,29 +32,29 @@ public class UserController {
 	private UserService userService;
 
     @GetMapping("")
-    public Collection<UserDto> getAllUsers() {
+    public Collection<UserDtoRead> getAllUsers() {
         return userService.getAllUsers();
     }
 
 	@GetMapping("/{id}")
-	public UserDto getUserById(@PathVariable("id") Long id) {
+	public UserDtoRead getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
 	}
 
 	@GetMapping("/by_email/{email}")
-	public UserDto getUserByEmail(@PathVariable("email") String email) {
+	public UserDtoRead getUserByEmail(@PathVariable("email") String email) {
         return userService.getUserByEmail(email);
 	}
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createUser(@RequestBody @Valid UserDto userDto) {
+	public void createUser(@RequestBody @Valid UserDtoCreate userDto) {
         userService.createUser(userDto);
 	}
 
 	// Service to update a User
 	@PutMapping("/{id}")
-	public void updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+	public void updateUser(@PathVariable("id") Long id, @RequestBody UserDtoCreate userDto) {
 		userService.updateUser(id, userDto);
 	}
 

@@ -1,21 +1,23 @@
 package fr.istic.master.wego.dto;
 
-public class UserPlaceDto {
+public class UserPlaceDtoRead {
 
-	private Long id;
+	// on a pas besoin de passer des éléments sur le user car on appelle depuis le user courant
+	private Long idUserplace;
     private PlaceDto placeDto;
     private float preferenceOrder;
 
-    public UserPlaceDto() {
+    public UserPlaceDtoRead() {
     }
 
-    public Long getId() {
-		return id;
+	public Long getIdUserplace() {
+		return idUserplace;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdUserplace(Long idUserplace) {
+		this.idUserplace = idUserplace;
 	}
+
 
 
 	public PlaceDto getPlaceDto() {
