@@ -1,13 +1,13 @@
 package fr.istic.master.wego.dto;
 
-import fr.istic.master.wego.model.RequiredWeather;
+//import fr.istic.master.wego.model.RequiredWeather;
 import fr.istic.master.wego.model.TypeSport;
 
 public class SportDto {
 
     private TypeSport type;
     private String sportName;
-    private RequiredWeather idealWeather = new RequiredWeather();
+    //private RequiredWeather idealWeather = new RequiredWeather();
 
     public SportDto() {
     }
@@ -28,11 +28,11 @@ public class SportDto {
         this.sportName = sportName;
     }
 
-    public RequiredWeather getIdealWeather() {
-        return idealWeather;
-    }
-
-    public void setIdealWeather(RequiredWeather idealWeather) {
-        this.idealWeather = idealWeather;
-    }
+//    public RequiredWeather getIdealWeather() {
+//        return idealWeather;
+//    }
+//
+//    public void setIdealWeather(RequiredWeather idealWeather) {
+//        this.idealWeather = idealWeather;
+//    }
 }
