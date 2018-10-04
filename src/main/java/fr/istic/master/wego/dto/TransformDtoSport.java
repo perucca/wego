@@ -12,7 +12,7 @@ public class TransformDtoSport {
 
         sportDto.setSportName(sport.getSportName());
         sportDto.setType(sport.getType());
-        sportDto.setIdealWeather(sport.getIdealWeather());
+ //       sportDto.setIdealWeather(sport.getIdealWeather());
 
         return sportDto;
     }
@@ -22,7 +22,7 @@ public class TransformDtoSport {
 
         sport.setSportName(sportDto.getSportName());
         sport.setType(sportDto.getType());
-        sport.setIdealWeather(sportDto.getIdealWeather());
+ //       sport.setIdealWeather(sportDto.getIdealWeather());
 
         sport.setUserSports(new HashSet<UserSport>());
 

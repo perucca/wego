@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -28,7 +29,7 @@ public class UserPlace {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -78,7 +79,7 @@ public class UserPlace {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((mySportsAtThisPlace == null) ? 0 : mySportsAtThisPlace.hashCode());
-		result = prime * result + ((place == null) ? 0 : place.hashCode());
+		result = prime * result + ((place  == null) ? 0 : place.hashCode());
 		result = prime * result + Float.floatToIntBits(preferenceOrder);
 		return result;
 	}

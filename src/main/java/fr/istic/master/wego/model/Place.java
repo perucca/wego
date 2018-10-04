@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -31,7 +32,7 @@ public class Place {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -84,7 +85,6 @@ public class Place {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((postCode == null) ? 0 : postCode.hashCode());
-		result = prime * result + ((userPlaces == null) ? 0 : userPlaces.hashCode());
 		return result;
 	}
 
@@ -116,11 +116,6 @@ public class Place {
 			if (other.postCode != null)
 				return false;
 		} else if (!postCode.equals(other.postCode))
-			return false;
-		if (userPlaces == null) {
-			if (other.userPlaces != null)
-				return false;
-		} else if (!userPlaces.equals(other.userPlaces))
 			return false;
 		return true;
 	}

@@ -1,19 +1,18 @@
 package fr.istic.master.wego.dto;
 
-public class UserPlaceDto {
-
-    private PlaceDto placeDto;
+public class UserSportDto {
+    private SportDto sportDto;
     private float preferenceOrder;
 
-    public UserPlaceDto() {
+    public UserSportDto() {
     }
 
-    public PlaceDto getPlaceDto() {
-        return placeDto;
+    public SportDto getSportDto() {
+        return sportDto;
     }
 
-    public void setPlaceDto(PlaceDto placeDto) {
-        this.placeDto = placeDto;
+    public void setSportDto(SportDto sportDto) {
+        this.sportDto = sportDto;
     }
 
     public float getPreferenceOrder() {
