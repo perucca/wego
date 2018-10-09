@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 /**
  * Represents the user logged in the application.
  * @author michel
@@ -26,6 +30,8 @@ public class User {
 	
 	private Set<UserSport> mySports = new HashSet<UserSport>();
 	private Set<UserPlace> myPlaces = new HashSet<UserPlace>();
+	
+	public static final PasswordEncoder PASSWORD_ENCODER = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

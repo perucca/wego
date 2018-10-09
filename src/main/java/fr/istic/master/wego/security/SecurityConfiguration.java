@@ -1,42 +1,50 @@
 package fr.istic.master.wego.security;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
+import fr.istic.master.wego.model.User;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private JpaUserDetailsService userDetailsService;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
-		.inMemoryAuthentication()
-		.withUser("user")
-		.password(passwordEncoder().encode("password")).roles("USER");
+//		.inMemoryAuthentication().withUser("toto@toto.fr").password(passwordEncoder().encode("pss")).authorities(AuthorityUtils.createAuthorityList("USER"));
+		.userDetailsService(this.userDetailsService).passwordEncoder(User.PASSWORD_ENCODER);
 	}
 	
 	@Override
+	/**
+	 * Autoriser les requêtes sur les objets statics du site et la page de login.
+	 * Tout le reste des accès doit être authentifié 
+	 */
     protected void configure(HttpSecurity http) throws Exception {
 		http
-			.httpBasic()
-        .and()
         	.authorizeRequests()
-		        //Autoriser les requêtes sur les objets statics du site et la page de login.
-		        .antMatchers("/index.html","/static/*", "/", "/api/authenticate", "/api/subscribe").permitAll()
-		        //Tout le reste des accès doit être authentifié
-		        .anyRequest().authenticated();
+		        .antMatchers("/","/login", "/subscribe", "/logout").permitAll()
+		        .anyRequest().authenticated()
+			.and()
+				.formLogin()
+					.defaultSuccessUrl("/", true)
+					.failureUrl("/")
+					.permitAll()
+			.and()
+				.httpBasic()
+			.and()
+				.csrf().disable()
+			.logout()
+				.logoutSuccessUrl("/");	
 	}
-	
-	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 	
    
 }

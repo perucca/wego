@@ -23,9 +23,6 @@ public class DataBaseLoader {
 
 	public void loadData() {
 
-//	if (placedao.count() != 0)
-//			return;
-
 		// Declaration de plusieurs lieux de test
 		Sport kayak = new Sport();
 		kayak.setSportName("kayak");
@@ -45,25 +42,25 @@ public class DataBaseLoader {
 		p1.setFirstName("toto");
 		p1.setLastName("titi");
 		p1.setMail("toto@toto.fr");
-		p1.setPassword("pss");
+		p1.setPassword(User.PASSWORD_ENCODER.encode("pss"));
 
 		User p2 = new User();
 		p2.setFirstName("Johnny");
 		p2.setLastName("Hallyday");
 		p2.setMail("john.hallyday@toto.fr");
-		p2.setPassword("ahque");
+		p2.setPassword(User.PASSWORD_ENCODER.encode("ahque"));
 
 		User p3 = new User();
 		p3.setFirstName("Monique");
 		p3.setLastName("Dupont");
 		p3.setMail("monique@toto.fr");
-		p3.setPassword("password");
+		p3.setPassword(User.PASSWORD_ENCODER.encode("password"));
 
 		User p4 = new User();
 		p4.setFirstName("Paul");
 		p4.setLastName("Delamarre");
 		p4.setMail("polo@tamer.fr");
-		p4.setPassword("yolo");
+		p4.setPassword(User.PASSWORD_ENCODER.encode("yolo"));
 
 		// Declaration de plusieurs lieux de test
 		Place redon = new Place();
