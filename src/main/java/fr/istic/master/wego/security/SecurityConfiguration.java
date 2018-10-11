@@ -29,21 +29,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
     protected void configure(HttpSecurity http) throws Exception {
 		http
+			.cors()
+		.and()
+			.httpBasic()
+		.and()
         	.authorizeRequests()
-		        .antMatchers("/","/login", "/subscribe", "/logout").permitAll()
+		        .antMatchers("/", "/signin", "/logout").permitAll()
 		        .anyRequest().authenticated()
-			.and()
-				.formLogin()
-					.defaultSuccessUrl("/", true)
-					.failureUrl("/")
-					.permitAll()
-			.and()
-				.httpBasic()
-			.and()
-				.csrf().disable()
-			.logout()
-				.logoutSuccessUrl("/");	
+		.and()
+			.csrf().disable();
 	}
-	
-   
 }
