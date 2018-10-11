@@ -8,10 +8,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './pages/App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
-import configureStore from './_helpers/configureStore';
+import { Router } from 'react-router-dom';
+import { history } from './_helpers';
 import {Provider} from 'react-redux';
 import Data from './_helpers/mockdata'
+import {configureStore } from './_helpers';
+
 
 const store = configureStore({
     users: Data.users,
@@ -20,15 +22,16 @@ const store = configureStore({
     userplaces : Data.userplaces,
     usersports : Data.usersports,
     sportplaceassociation : Data.sportplaceassociation,
-    currentuser : {}
+    currentuser : {},
+    isAuthenticated: false
 });
 
 ReactDOM.render((
-    <BrowserRouter>
+    <Router history={history}>
         <Provider store={store}>
         <App />
         </Provider>
-    </BrowserRouter>
+    </Router>
 
 ), document.getElementById('root'));
 
