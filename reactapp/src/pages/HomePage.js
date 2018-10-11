@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import sun from '../_img/sun.png';
 import LoginLayout from '../_hoc/LoginLayout';
-import { ButtonProfile } from '../_components';
+import { ButtonLinked } from '../_components';
 
 const Home = () => (
     <div className="dark">
         <h3> Welcome USER!</h3>   
         <div>
-        <ButtonProfile name="My Places" type="myplaces"></ButtonProfile>
-        <ButtonProfile name="My Sports" type="mysports"></ButtonProfile>
+        <ButtonLinked name="My Places" type="button" to="/myplaces"></ButtonLinked>
+        <ButtonLinked name="My Sports" type="button" to="/myplaces"></ButtonLinked>
         </div>
         <div className="jumbotron mw-100">
             {/* <div className="row"> */}
