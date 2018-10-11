@@ -9,9 +9,9 @@ import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import configureStore from './configureStore';
+import configureStore from './_helpers/configureStore';
 import {Provider} from 'react-redux';
-import Data from './mockdata'
+import Data from './_helpers/mockdata'
 
 const store = configureStore({
     users: Data.users,

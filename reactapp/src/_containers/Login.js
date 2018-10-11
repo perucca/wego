@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LoginLayout from '../hoc/LoginLayout';
-import TextField from '../components/TextField';
-import ButtonForm from '../components/ButtonForm';
-import Checkbox from '../components/Checkbox';
+import { TextField, ButtonForm, Checkbox } from '../_components';
+
 
 const Login = () => (
     <form>
