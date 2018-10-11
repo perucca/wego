@@ -19,7 +19,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
-//		.inMemoryAuthentication().withUser("toto@toto.fr").password(passwordEncoder().encode("pss")).authorities(AuthorityUtils.createAuthorityList("USER"));
 		.userDetailsService(this.userDetailsService).passwordEncoder(User.PASSWORD_ENCODER);
 	}
 	
