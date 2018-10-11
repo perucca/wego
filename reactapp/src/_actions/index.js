@@ -1,1 +1,2 @@
-export * from './AlertActions';
+export * from './alert-actions';
+export * from './user-actions';
