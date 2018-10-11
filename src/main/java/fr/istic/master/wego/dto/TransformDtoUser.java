@@ -32,7 +32,7 @@ public class TransformDtoUser {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setMail(userDto.getMail());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(User.PASSWORD_ENCODER.encode(userDto.getPassword()));
         user.setMyPlaces(new HashSet<UserPlace>());
         user.setMySports(new HashSet<UserSport>());
 
@@ -43,7 +43,7 @@ public class TransformDtoUser {
         u.setFirstName(userDto.getFirstName());
         u.setLastName(userDto.getLastName());
         // on ne peut pas changer le mail de connexion
-        u.setPassword(userDto.getPassword());
+        u.setPassword(User.PASSWORD_ENCODER.encode(userDto.getPassword()));
         u.setMyPlaces(new HashSet<UserPlace>());
         u.setMySports(new HashSet<UserSport>());
         return u;
