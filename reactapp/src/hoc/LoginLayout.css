@@ -1,0 +1,56 @@
+.custom-background-color {
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.45), 
+        rgba(0, 0, 0, 0.45)
+      ), url("../img/Bretagne.jpg");
+    background-color: orange;
+    background-position: 50% 30%;
+    background-size: cover;
+    color : white;
+  }
+  
+  /* unvisited link */
+  .custom-background-color a:link {
+    color: white;
+  }
+  
+  /* visited link */
+  .custom-background-color a:visited {
+    color: white;
+  }
+  
+  /* mouse over link */
+  .custom-background-color a:hover {
+    color: orange;
+  }
+  
+  /* selected link */
+  .custom-background-color a:active {
+    color: white;
+  }
+
+  .custom-background-color .btn {
+      background-color: orange;
+      color: white;
+    border-color: orange;
+  }
+
+  .custom-background-color .textfield {
+      /* background-color: rgba(255, 255, 255, 0.397);
+      border-color: rgba(255, 255, 255, 0.397); */
+
+      background-color: rgba(255, 255, 255, 0.0);
+      border-color: white;
+      color: white;
+  }
+
+
+.custom-background-color  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white !important;
+    opacity: 0.7; /* Firefox */
+}
+
+.logo {
+    max-width:300px;
+    height: auto;
+}
