@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LoginLayout from '../hoc/LoginLayout';
+import LoginLayout from '../_hoc/LoginLayout';
 import { TextField, ButtonForm, Checkbox } from '../_components';
 
 
@@ -19,6 +19,4 @@ const Login = () => (
     </form>
 )
 
-const LoginInLayout = LoginLayout(Login);
-
-export default LoginInLayout;
+export const LoginPage = LoginLayout(Login);

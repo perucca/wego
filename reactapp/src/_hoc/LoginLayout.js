@@ -1,6 +1,6 @@
 import React from 'react';
 import './LoginLayout.css';
-import logo from '../img/WeGo-Logo-03.png';
+import logo from '../_img/WeGo-Logo-03.png';
 
 const LoginLayout = (WrappedComponent) => {
     class HOC extends React.Component {

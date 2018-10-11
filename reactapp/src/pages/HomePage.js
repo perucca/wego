@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import sun from '../img/sun.png';
-import LoginLayout from '../hoc/LoginLayout'
-import ButtonProfile from '../components/ButtonProfile';
+import sun from '../_img/sun.png';
+import LoginLayout from '../_hoc/LoginLayout';
+import { ButtonProfile } from '../_components';
 
 const Home = () => (
     <div className="dark">
@@ -28,6 +28,4 @@ const Home = () => (
 
 )
 
-const HomeInLayout = LoginLayout(Home);
-
-export default HomeInLayout;
+export const HomePage = LoginLayout(Home);

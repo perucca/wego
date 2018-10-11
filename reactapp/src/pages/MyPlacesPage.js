@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import LoginLayout from '../hoc/LoginLayout';
+import LoginLayout from '../_hoc/LoginLayout';
 
 const MyPlaces = () => (
     <div>
@@ -11,4 +11,5 @@ const MyPlaces = () => (
 
 const MyPlacesInLayout = LoginLayout(MyPlaces);
 
-export default MyPlacesInLayout;
+export const MyPlacesPage = MyPlaces;
+

@@ -2,7 +2,7 @@
     background-image: linear-gradient(
         rgba(0, 0, 0, 0.45), 
         rgba(0, 0, 0, 0.45)
-      ), url("../img/Bretagne.jpg");
+      ), url("../_img/Bretagne.jpg");
     background-color: orange;
     background-position: 50% 30%;
     background-size: cover;

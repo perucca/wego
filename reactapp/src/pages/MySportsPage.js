@@ -6,4 +6,4 @@ const MySports = () => (
     </div>
 )
 
-export default MySports;
+export const MySportsPage = MySports;
