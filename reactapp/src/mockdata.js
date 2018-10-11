@@ -77,3 +77,4 @@ const sportplaceassociation=[
     {userplaceid:7, usersportid:8},
     {userplaceid:8, usersportid:9}
 ]
+export default {users, sports, places, userplaces, usersports, sportplaceassociation}

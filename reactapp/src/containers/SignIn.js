@@ -17,6 +17,6 @@ const SignIn = () => (
     </form>
 )
 
-const LoginInLayout = LoginLayout(SignIn);
+const SigninInLayout = LoginLayout(SignIn);
 
-export default LoginInLayout;
+export default SigninInLayout;

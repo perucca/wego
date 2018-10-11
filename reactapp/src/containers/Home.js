@@ -1,23 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
+import sun from '../img/sun.png';
 import LoginLayout from '../hoc/LoginLayout'
 import ButtonProfile from '../components/ButtonProfile';
 
 const Home = () => (
     <div className="dark">
-        <h3> Welcome User !</h3>   
+        <h3> Welcome USER!</h3>   
         <div>
         <ButtonProfile name="My Places" type="myplaces"></ButtonProfile>
         <ButtonProfile name="My Sports" type="mysports"></ButtonProfile>
         </div>
         <div className="jumbotron mw-100">
-            <h4>Conseil du Week-End</h4>
-            <p>Cette semaine, la météo sera idéale à place.name pour pratiquer le/la place.sport</p>
+            {/* <div className="row"> */}
+                {/* <div className="col-sm-3 col-md-2">
+                    <img src={sun}></img>
+                </div>
+                <div className="col-sm-9 col-md-10 col-xs-12"> */}
+                    <h4>Tips for the week-end</h4>
+                {/* </div> */}
+            {/* </div> */}
+            <p>The weather will be perfect to go to PLACE and practice SPORT</p>
         </div>
-    </div>
+
+</div>
+
 )
 
-const LoginInLayout = LoginLayout(Home);
+const HomeInLayout = LoginLayout(Home);
 
-export default LoginInLayout;
+export default HomeInLayout;

@@ -1,9 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './App.css';
+import LoginLayout from '../hoc/LoginLayout';
 
 const MyPlaces = () => (
     <div>
-        MyPlaces
+        MyPlaces tititi
     </div>
 )
 
-export default MyPlaces;
+const MyPlacesInLayout = LoginLayout(MyPlaces);
+
+export default MyPlacesInLayout;

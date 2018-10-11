@@ -5,6 +5,7 @@ import MySports from './MySports';
 import Profile from './Profile';
 import Login from './Login';
 import SignIn from './SignIn';
+import MyPlaces from './MyPlaces';
 
 const Main = () => (
     <main className="h-100">
@@ -15,6 +16,7 @@ const Main = () => (
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/mysports" component={MySports} />
             <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/myplaces" component={MyPlaces} />
         </Switch>
     </main>
 )

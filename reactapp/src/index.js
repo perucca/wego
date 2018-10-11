@@ -9,10 +9,25 @@ import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import configureStore from './configureStore';
+import {Provider} from 'react-redux';
+import Data from './mockdata'
+
+const store = configureStore({
+    users: Data.users,
+    places: Data.places,
+    sports: Data.sports,
+    userplaces : Data.userplaces,
+    usersports : Data.usersports,
+    sportplaceassociation : Data.sportplaceassociation,
+    currentuser : {}
+});
 
 ReactDOM.render((
     <BrowserRouter>
+        <Provider store={store}>
         <App />
+        </Provider>
     </BrowserRouter>
 
 ), document.getElementById('root'));
