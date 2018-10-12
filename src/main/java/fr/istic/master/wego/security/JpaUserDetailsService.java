@@ -23,7 +23,6 @@ public class JpaUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = this.repository.findByEmail(email).get();
-		System.out.println("User:" + user.getMail() + "Password" + user.getPassword());
 		return org.springframework.security.core.userdetails.User
 				.withUsername(email)
 				.password(user.getPassword())
