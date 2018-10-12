@@ -1,9 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { UserActions } from '../_actions';
 import logo from '../_img/WeGo-Logo-01.png';
 import './Header.css';
 
-export class Header extends React.Component {
+class HeaderBase extends React.Component {
+
+    handleLogout = (event) => {
+        event.preventDefault();
+        this.props.logout();
+
+    }
 
     render() {
         return (
@@ -24,11 +32,30 @@ export class Header extends React.Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/profile">Profile</Link>
                             </li>
+                            </ul>
+                            <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <a className="nav-link" onClick={this.handleLogout} href="#" >Logout</a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
             </header>
         )
     }
-
 }
+
+const mapStateToProps = state => ({
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => {
+            dispatch(UserActions.logout())
+        }
+    }
+}
+
+export const Header = connect(
+    mapStateToProps,
+    mapDispatchToProps)(HeaderBase);

@@ -5,6 +5,7 @@ import { userService } from '../_services';
 
 export const UserActions = {
     login,
+    logout,
     add
 }
 function add(user) {
@@ -38,4 +39,11 @@ function login(username, password) {
     function request() { return { type: UserConstants.LOGIN_PROGRESS } }
     function success() { return { type: UserConstants.LOGIN_SUCCESS, isAuthenticated: true } }
     function failure() { return { type: UserConstants.LOGIN_ERROR,  isAuthenticated: false } }
+}
+
+
+function logout() {
+    //userService.logout();
+    history.push('/');
+    return { type: UserConstants.LOGOUT, isAuthenticated: false};
 }

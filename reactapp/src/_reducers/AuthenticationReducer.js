@@ -8,7 +8,7 @@ function AuthenticationReducer(state = [], action) {
         case UserConstants.LOGIN_SUCCESS:
             return action.isAuthenticated;
         case UserConstants.LOGOUT:
-            return false;
+            return action.isAuthenticated;
         default:
             return state;
     }
