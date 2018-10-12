@@ -5,4 +5,5 @@
 /.idea
 wego.iml
 /.metadata/
+/reactapp/node_modules/*
 *.springBeans

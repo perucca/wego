@@ -4,9 +4,35 @@ import { connect } from 'react-redux';
 import LoginLayout from '../_hoc/LoginLayout';
 import { TextField, ButtonForm, Checkbox } from '../_components';
 import { UserActions } from '../_actions';
+import Axios from 'axios';
 
+class Login extends React.Component {
 
-class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {username:  '', password: ''};
+    }
+
+    onClick = (event) => {
+        event.preventDefault();
+        Axios.post('/login',{}, {auth: { username: this.state.username,
+                                         password: this.state.password }}
+        )
+        .then(function (response) {
+            //Trace de la réponse
+            console.log(response);
+
+            //On code ici le routing sur HOME
+
+        })
+        .catch(function (error) {
+            //on trace l'erreur au maximum
+            this.logError(error);
+
+            //Gérer le code 401 ici pour retourner un message d'erreur
+        });
+    }
+
 
     handleSubmit = (e) => {
         e.preventDefault();

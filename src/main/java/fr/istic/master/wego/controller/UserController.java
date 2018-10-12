@@ -31,25 +31,25 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-    @GetMapping("")
-    public Collection<UserDtoRead> getAllUsers() {
-        return userService.getAllUsers();
-    }
+	@GetMapping("")
+	public Collection<UserDtoRead> getAllUsers() {
+		return userService.getAllUsers();
+	}
 
 	@GetMapping("/{id}")
 	public UserDtoRead getUserById(@PathVariable("id") Long id) {
-        return userService.getUserById(id);
+		return userService.getUserById(id);
 	}
 
 	@GetMapping("/by_email/{email}")
 	public UserDtoRead getUserByEmail(@PathVariable("email") String email) {
-        return userService.getUserByEmail(email);
+		return userService.getUserByEmail(email);
 	}
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void createUser(@RequestBody @Valid UserDtoCreate userDto) {
-        userService.createUser(userDto);
+		userService.createUser(userDto);
 	}
 
 	// Service to update a User
