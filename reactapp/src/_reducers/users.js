@@ -1,9 +1,11 @@
+import Axios from 'axios';
+import {UserConstants} from '../_constants/UserConstants';
+
 function users (state=[], action){
     switch(action.type){
-        // case 'ADD_USER':
-        //     return [...state, action.user]
-        // case 'ADD_USER_ERROR' :
-        //     return state
+        case UserConstants.ADD_USER_PROGRESS:
+        case UserConstants.ADD_USER_ERROR :
+        case UserConstants.ADD_USER_SUCCESS :
         default :
             return state   
     }

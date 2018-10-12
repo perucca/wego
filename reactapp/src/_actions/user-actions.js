@@ -1,17 +1,27 @@
 import { UserConstants } from '../_constants';
-import { history } from '../_helpers';
 import Axios from 'axios';
+import { history } from '../_helpers';
 
 export const UserActions = {
     login,
+    add
 }
-
-export const authenticate = (isAuthenticated) => {
-    return { type: UserConstants.LOGIN_SUCCESS, isAuthenticated: isAuthenticated };
+function add(user) {
+    return dispatch => {
+        dispatch({type: UserConstants.ADD_USER_PROGRESS})
+        Axios.post('/signin', user)
+        .then(function(response) {
+            dispatch({type:UserConstants.ADD_USER_SUCCESS})
+            history.push('/')
+        })
+        .catch(function(error) {
+            dispatch({type: UserConstants.ADD_USER_ERROR})
+        })
+    }
 }
-
 function login(username, password) {
     return dispatch => {
+        dispatch({ type: UserConstants.LOGIN_PROGRESS})
         Axios.post('/login', {}, {
             auth: {
                 username: username,
@@ -19,18 +29,21 @@ function login(username, password) {
             }
         })
             .then(function (response) {
-                console.log(response);
                 if (response.status === 202) {
-                    dispatch(authenticate(true));
-                    history.push('/home');
-                    console.log('authenticated');
+                    dispatch({ type: UserConstants.LOGIN_SUCCESS });
+                    history.push('/home'); 
                 }
                 else {
                     console.log("authentication failed");
                 }
-
             })
             .catch(function (error) {
+                if(error.response) {
+                    console.log(error.response)
+                }
+
+                dispatch({ type: UserConstants.LOGIN_ERROR });
+                history.push('/'); 
                 //on trace l'erreur au maximum
                 //this.logError(error);
                 console.log("error");
