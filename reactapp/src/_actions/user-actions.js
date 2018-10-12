@@ -1,6 +1,7 @@
 import { UserConstants } from '../_constants';
 import Axios from 'axios';
 import { history } from '../_helpers';
+import { userService } from '../_services';
 
 export const UserActions = {
     login,
@@ -8,46 +9,33 @@ export const UserActions = {
 }
 function add(user) {
     return dispatch => {
-        dispatch({type: UserConstants.ADD_USER_PROGRESS})
+        dispatch({ type: UserConstants.ADD_USER_PROGRESS })
         Axios.post('/signin', user)
-        .then(function(response) {
-            dispatch({type:UserConstants.ADD_USER_SUCCESS})
-            history.push('/')
-        })
-        .catch(function(error) {
-            dispatch({type: UserConstants.ADD_USER_ERROR})
-        })
-    }
-}
-function login(username, password) {
-    return dispatch => {
-        dispatch({ type: UserConstants.LOGIN_PROGRESS})
-        Axios.post('/login', {}, {
-            auth: {
-                username: username,
-                password: password
-            }
-        })
             .then(function (response) {
-                if (response.status === 202) {
-                    dispatch({ type: UserConstants.LOGIN_SUCCESS });
-                    history.push('/home'); 
-                }
-                else {
-                    console.log("authentication failed");
-                }
+                dispatch({ type: UserConstants.ADD_USER_SUCCESS })
+                history.push('/')
             })
             .catch(function (error) {
-                if(error.response) {
-                    console.log(error.response)
-                }
-
-                dispatch({ type: UserConstants.LOGIN_ERROR });
-                history.push('/'); 
-                //on trace l'erreur au maximum
-                //this.logError(error);
-                console.log("error");
-                //Gérer le code 401 ici pour retourner un message d'erreur
-            });
+                dispatch({ type: UserConstants.ADD_USER_ERROR })
+            })
     }
+}
+
+function login(username, password) {
+    return dispatch => {
+        dispatch(request())
+        userService.login(username, password)
+            .then(function (response) {
+                dispatch(success());
+                history.push('/home');
+            })
+            .catch(function (error) {
+                dispatch(failure());
+                history.push('/');
+            });
+    };
+
+    function request() { return { type: UserConstants.LOGIN_PROGRESS } }
+    function success() { return { type: UserConstants.LOGIN_SUCCESS, isAuthenticated: true } }
+    function failure() { return { type: UserConstants.LOGIN_ERROR,  isAuthenticated: false } }
 }

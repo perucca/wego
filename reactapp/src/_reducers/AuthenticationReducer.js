@@ -4,9 +4,9 @@ import { UserConstants } from '../_constants';
 function AuthenticationReducer(state = [], action) {
     switch (action.type) {
         case UserConstants.LOGIN_ERROR:
-            return false;
+            return action.isAuthenticated;
         case UserConstants.LOGIN_SUCCESS:
-            return true;
+            return action.isAuthenticated;
         case UserConstants.LOGOUT:
             return false;
         default:
