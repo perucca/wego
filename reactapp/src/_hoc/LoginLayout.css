@@ -1,4 +1,4 @@
-.custom-background-color {
+.login-layout {
     background-image: linear-gradient(
         rgba(0, 0, 0, 0.45), 
         rgba(0, 0, 0, 0.45)
@@ -10,32 +10,32 @@
   }
   
   /* unvisited link */
-  .custom-background-color a:link {
+  .login-layout a:link {
     color: white;
   }
   
   /* visited link */
-  .custom-background-color a:visited {
+  .login-layout a:visited {
     color: white;
   }
   
   /* mouse over link */
-  .custom-background-color a:hover {
+  .login-layout a:hover {
     color: orange;
   }
   
   /* selected link */
-  .custom-background-color a:active {
+  .login-layout a:active {
     color: white;
   }
 
-  .custom-background-color .btn {
+  .login-layout .btn {
       background-color: orange;
       color: white;
     border-color: orange;
   }
 
-  .custom-background-color .textfield {
+  .login-layout .textfield {
       /* background-color: rgba(255, 255, 255, 0.397);
       border-color: rgba(255, 255, 255, 0.397); */
 
@@ -45,7 +45,7 @@
   }
 
 
-.custom-background-color  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.login-layout  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white !important;
     opacity: 0.7; /* Firefox */
 }

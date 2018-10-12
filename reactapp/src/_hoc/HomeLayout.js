@@ -1,13 +1,13 @@
 import React from 'react';
-import './LoginLayout.css';
+import './HomeLayout.css';
 import logo from '../_img/WeGo-Logo-03.png';
 
-const LoginLayout = (WrappedComponent) => {
+const HomeLayout = (WrappedComponent) => {
     class HOC extends React.Component {
         render() {
             return (
 
-                <div className="container-fluid h-100 login-layout">
+                <div className="container-fluid h-100 home-layout">
                     <div className="row align-items-center justify-content-center h-25">
                         <div className="col">
                             <img className="logo" src={logo} alt="WeGo logo" />
@@ -28,4 +28,4 @@ const LoginLayout = (WrappedComponent) => {
 }
 
 
-export default LoginLayout;
+export default HomeLayout;
