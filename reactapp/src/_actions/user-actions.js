@@ -1,40 +1,40 @@
 import { UserConstants } from '../_constants';
 import { history } from '../_helpers';
+import Axios from 'axios';
 
 export const UserActions = {
     login,
 }
 
 export const authenticate = (isAuthenticated) => {
-    return {type: UserConstants.LOGIN_SUCCESS, isAuthenticated: isAuthenticated};
+    return { type: UserConstants.LOGIN_SUCCESS, isAuthenticated: isAuthenticated };
 }
 
-function login(){
+function login(username, password) {
     return dispatch => {
-        delay(500)
-        .then((res) => {
-            dispatch(authenticate(true));
-            history.push('/home');
-            console.log('authenticate');
-        }, (error) => {
-            console.log('error' + error);
-        }
-        )
+        Axios.post('/login', {}, {
+            auth: {
+                username: username,
+                password: password
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                if (response.status === 202) {
+                    dispatch(authenticate(true));
+                    history.push('/home');
+                    console.log('authenticated');
+                }
+                else {
+                    console.log("authentication failed");
+                }
+
+            })
+            .catch(function (error) {
+                //on trace l'erreur au maximum
+                //this.logError(error);
+                console.log("error");
+                //Gérer le code 401 ici pour retourner un message d'erreur
+            });
     }
 }
-
-function delay(t) {
-    return new Promise(function(resolve){
-        setTimeout(resolve.bind(null, true),t);
-    });
-        
-        
- }
- 
-
-
-function signout(callback){
-    this.isAuthenticated = false;
-    setTimeout(callback, 100);
-}
-

@@ -11,7 +11,7 @@ const Home = () => (
         <h3> Welcome USER!</h3>
         <div>
             <ButtonLinked name="My Places" type="button" to="/myplaces"></ButtonLinked>
-            <ButtonLinked name="My Sports" type="button" to="/myplaces"></ButtonLinked>
+            <ButtonLinked name="My Sports" type="button" to="/mysports"></ButtonLinked>
         </div>
         <div className="card">
             <div className="card-body">

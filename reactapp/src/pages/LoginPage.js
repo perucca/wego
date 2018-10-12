@@ -4,47 +4,32 @@ import { connect } from 'react-redux';
 import LoginLayout from '../_hoc/LoginLayout';
 import { TextField, ButtonForm, Checkbox } from '../_components';
 import { UserActions } from '../_actions';
-import Axios from 'axios';
+
 
 class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username:  '', password: ''};
+        this.state = { username: '', password: '' };
     }
 
-    onClick = (event) => {
+    handleSubmit = (event) => {
         event.preventDefault();
-        Axios.post('/login',{}, {auth: { username: this.state.username,
-                                         password: this.state.password }}
-        )
-        .then(function (response) {
-            //Trace de la réponse
-            console.log(response);
+        this.props.login(this.state.username, this.state.password);
 
-            //On code ici le routing sur HOME
-
-        })
-        .catch(function (error) {
-            //on trace l'erreur au maximum
-            this.logError(error);
-
-            //Gérer le code 401 ici pour retourner un message d'erreur
-        });
     }
 
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('clic')
-        this.props.login();
-      };
+    handleChange = (e) => {
+        const change = {};
+        change[e.target.name] = e.target.value;
+        this.setState(change);
+    }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <TextField id="login-email" placeholder="Email" type="email" />
-                <TextField id="login-password" placeholder="Password" type="password" />
+                <TextField id="login-email" placeholder="Email" type="email" name="username" value={this.state.username} onChange={this.handleChange} />
+                <TextField id="login-password" placeholder="Password" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                 <Checkbox id="login-rememberme" value="Remember me" />
                 <ButtonForm name="Log In" type="submit" />
                 <div className="form-group">
@@ -59,18 +44,18 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  });
-  
-  const mapDispatchToProps = dispatch => {
+});
+
+const mapDispatchToProps = dispatch => {
     return {
-      login: () => {
-        dispatch(UserActions.login())
-      }
+        login: (username, password) => {
+            dispatch(UserActions.login(username, password))
+        }
     }
-  }
-  
-  export const LoginConnected = connect(
+}
+
+export const LoginConnected = connect(
     mapStateToProps,
     mapDispatchToProps)(Login)
-  
+
 export const LoginPage = LoginLayout(LoginConnected);
