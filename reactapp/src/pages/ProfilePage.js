@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LoginLayout from '../_hoc/LoginLayout';
+import HomeLayout from '../_hoc/HomeLayout';
 import { TextField, ButtonForm } from '../_components';
 
 const Profile = () => (
@@ -16,4 +16,4 @@ const Profile = () => (
     </form>
 )
 
-export const ProfilePage = LoginLayout(Profile);
+export const ProfilePage = HomeLayout(Profile);

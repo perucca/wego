@@ -4,29 +4,29 @@
 }
 
 /* unvisited link */
-.home-layout a:link {
+/* .home-layout a:link {
   color: orange;
-}
+} */
 
 /* visited link */
-.home-layout a:visited {
+/* .home-layout a:visited {
   color: orange;
-}
+} */
 
 /* mouse over link */
-.home-layout a:hover {
+/* .home-layout a:hover {
   color: orange;
-}
+} */
 
 /* selected link */
-.home-layout a:active {
+/* .home-layout a:active {
   color: orange;
-}
+} */
 
 .home-layout .btn {
-    background-color: white;
-    color : dimgray;
-    border-color: white;
+    background-color: gray;
+    color : white;
+    border-color: gray;
 }
 .home-layout .card {
   background-color: orange;
