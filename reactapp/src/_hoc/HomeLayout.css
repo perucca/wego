@@ -1,47 +1,46 @@
 .home-layout {
-    background-color: orange;
-    color : white;
-  }
-  
-  /* unvisited link */
-  .home-layout a:link {
-    color: orange;
-  }
-  
-  /* visited link */
-  .home-layout a:visited {
-    color: orange;
-  }
-  
-  /* mouse over link */
-  .home-layout a:hover {
-    color: orange;
-  }
-  
-  /* selected link */
-  .home-layout a:active {
-    color: orange;
-  }
-
-  .home-layout .btn {
-      background-color: white;
-      color: orange;
-      border-color: orange;
-  }
-  .home-layout .card {
-    background-color: orange;
-    border-color: white;
-    border-width: 2px;
+  background-color: whitesmoke;
+  color : dimgray;
 }
 
-  .home-layout .card-title {
+/* unvisited link */
+.home-layout a:link {
+  color: orange;
+}
+
+/* visited link */
+.home-layout a:visited {
+  color: orange;
+}
+
+/* mouse over link */
+.home-layout a:hover {
+  color: orange;
+}
+
+/* selected link */
+.home-layout a:active {
+  color: orange;
+}
+
+.home-layout .btn {
+    background-color: white;
+    color : dimgray;
+    border-color: white;
+}
+.home-layout .card {
+  background-color: orange;
+  border-color: white;
+  border-width: 2px;
+}
+
+.home-layout .card-title {
+  color: white;
+}
+
+.home-layout .card-text {
     color: white;
 }
-
-  .home-layout .card-text {
-      color: white;
-  }
-
 
 .logo {
     max-width:300px;

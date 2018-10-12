@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import sun from '../_img/sun.png';
 import HomeLayout from '../_hoc/HomeLayout';
-import { ButtonLinked } from '../_components';
-
+import { LinkedButton } from '../_components';
 
 const Home = () => (
     <div className="dark">
         <h3> Welcome USER!</h3>
         <div>
-            <ButtonLinked name="My Places" type="button" to="/myplaces"></ButtonLinked>
-            <ButtonLinked name="My Sports" type="button" to="/mysports"></ButtonLinked>
+            <LinkedButton name="My Places" type="button" to="/myplaces"></LinkedButton>
+            <LinkedButton name="My Sports" type="button" to="/mysports"></LinkedButton>
         </div>
         <div className="card">
             <div className="card-body">

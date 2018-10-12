@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import LoginLayout from '../_hoc/LoginLayout';
+import HomeLayout from '../_hoc/HomeLayout';
 
 const MyPlaces = () => (
     <div>
@@ -9,7 +9,4 @@ const MyPlaces = () => (
     </div>
 )
 
-const MyPlacesInLayout = LoginLayout(MyPlaces);
-
-export const MyPlacesPage = MyPlaces;
-
+export const MyPlacesPage = HomeLayout(MyPlaces);
