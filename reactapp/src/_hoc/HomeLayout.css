@@ -24,9 +24,9 @@
 } */
 
 .home-layout .btn {
-    background-color: gray;
-    color : white;
-    border-color: gray;
+    background-color: white;
+    color : grey;
+    border-color: lightgray;
 }
 .home-layout .card {
   background-color: orange;
