@@ -19,10 +19,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JpaUserDetailsService userDetailsService;
 	
+	@Autowired
+	private AuthenticationEntryPoint authEntryPoint;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
-		.userDetailsService(this.userDetailsService).passwordEncoder(User.PASSWORD_ENCODER);
+		.userDetailsService(this.userDetailsService)
+		.passwordEncoder(User.PASSWORD_ENCODER);
 	}
 	
 	@Override
@@ -34,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.cors()
 		.and()
-			.httpBasic()
+			.httpBasic().authenticationEntryPoint(authEntryPoint)
 		.and()
         	.authorizeRequests()
 		        .antMatchers("/", "/signin", "/logout").permitAll()
