@@ -10,27 +10,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Represents the user logged in the application.
+ * 
  * @author michel
  *
  */
 @Entity
 public class User {
-	
+
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private String mail;
-	
+
 	private Set<UserSport> mySports = new HashSet<UserSport>();
 	private Set<UserPlace> myPlaces = new HashSet<UserPlace>();
-	
+
 	public static final PasswordEncoder PASSWORD_ENCODER = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
 	@Id
@@ -43,7 +43,7 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name = "firstname", nullable=false)
+	@Column(name = "firstname", nullable = false)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -51,8 +51,8 @@ public class User {
 	public void setFirstName(String name) {
 		this.firstName = name;
 	}
-	
-	@Column(name = "lastname", nullable=false)
+
+	@Column(name = "lastname", nullable = false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -61,7 +61,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	@Column(name = "password", nullable=false)
+	@Column(name = "password", nullable = false)
 	public String getPassword() {
 		return password;
 	}
@@ -70,7 +70,7 @@ public class User {
 		this.password = password;
 	}
 
-	@Column(name = "mail", nullable=false, unique=true)
+	@Column(name = "mail", nullable = false, unique = true)
 	public String getMail() {
 		return mail;
 	}
