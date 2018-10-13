@@ -6,20 +6,24 @@ import { userService } from '../_services';
 export const UserActions = {
     login,
     logout,
-    add
+    register
 }
-function add(user) {
+function register(user) {
     return dispatch => {
-        dispatch({ type: UserConstants.ADD_USER_PROGRESS })
-        Axios.post('/signin', user)
+        dispatch(request())
+        userService.register(user)
             .then(function (response) {
-                dispatch({ type: UserConstants.ADD_USER_SUCCESS })
+                dispatch(success())
                 history.push('/')
             })
             .catch(function (error) {
-                dispatch({ type: UserConstants.ADD_USER_ERROR })
+                dispatch(failure())
             })
     }
+
+    function request() { return { type: UserConstants.LOGIN_PROGRESS } }
+    function success() { return { type: UserConstants.LOGIN_SUCCESS } }
+    function failure() { return { type: UserConstants.LOGIN_ERROR } }
 }
 
 function login(username, password) {

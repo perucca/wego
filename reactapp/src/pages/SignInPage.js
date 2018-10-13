@@ -14,7 +14,7 @@ constructor(props) {
 
 handleSubmit = (event) => {
     event.preventDefault();
-    this.props.add(this.state.firstName, this.state.lastName, this.state.mail, this.state.password);
+    this.props.register(this.state.firstName, this.state.lastName, this.state.mail, this.state.password);
 
 }
 
@@ -43,8 +43,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        add: (firstName, lastName, mail, password) => {
-            dispatch(UserActions.add({firstName: firstName, lastName: lastName, mail: mail, password: password}))
+        register: (firstName, lastName, mail, password) => {
+            dispatch(UserActions.register({firstName: firstName, lastName: lastName, mail: mail, password: password}))
         }
     }
 }

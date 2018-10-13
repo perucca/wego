@@ -1,7 +1,8 @@
 import Axios from 'axios';
 
 export const userService = {
-    login
+    login,
+    register
 }
 
 function login(username, password) {
@@ -29,4 +30,16 @@ function login(username, password) {
             }
             return Promise.reject(error);
         });
+}
+
+function register(user) {
+    return Axios.post('/signin', user)
+        .then(function (response) {
+            console.log("signin succeeded");
+            return response;
+        })
+        .catch(function (error) {
+            console.log("signin failed");
+            return Promise.reject(error);
+        })
 }
