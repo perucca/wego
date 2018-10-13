@@ -16,50 +16,47 @@ import fr.istic.master.wego.model.User;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserDao userDao;
+	@Autowired
+	private UserDao userDao;
 
-    public Collection<UserDtoRead> getAllUsers(){
-        List<UserDtoRead> listDto = new ArrayList<>();
-        List<User> listDao = userDao.findAll();
+	public Collection<UserDtoRead> getAllUsers() {
+		List<UserDtoRead> listDto = new ArrayList<>();
+		List<User> listDao = userDao.findAll();
 
-        for(User user: listDao){
-            listDto.add(TransformDtoUser.transformToDto(user));
-        }
+		for (User user : listDao) {
+			listDto.add(TransformDtoUser.transformToDto(user));
+		}
 
-        return listDto;
-    }
+		return listDto;
+	}
 
-    public UserDtoRead getUserById(long id){
-        User user = userDao.findById(id).orElse(null);
-        if (user.equals(null)){
-            return null;
-        }else{
-            return TransformDtoUser.transformToDto(user);
-        }
-    }
+	public UserDtoRead getUserById(long id) {
+		User user = userDao.findById(id).orElse(null);
+		if (user == null)
+			return null;
+		else
+			return TransformDtoUser.transformToDto(user);
+	}
 
-    public UserDtoRead getUserByEmail(String email){
-        User user = userDao.findByEmail(email).orElse(null);
-        if (user.equals(null)){
-            return null;
-        }else{
-            return TransformDtoUser.transformToDto(user);
-        }
-    }
+	public UserDtoRead getUserByEmail(String email) {
+		User user = userDao.findByEmail(email).orElse(null);
+		if (user == null)
+			return null;
+		else
+			return TransformDtoUser.transformToDto(user);
+	}
 
-    public void createUser(UserDtoCreate userDto){
-        userDao.save(TransformDtoUser.transformFromDto(userDto));
-    }
+	public void createUser(UserDtoCreate userDto) {
+		userDao.save(TransformDtoUser.transformFromDto(userDto));
+	}
 
-    public void updateUser(Long id, UserDtoCreate userDto){
-    	User u = userDao.getOne(id);
-        userDao.save(TransformDtoUser.transformFromDto(userDto, u));
-    }
+	public void updateUser(Long id, UserDtoCreate userDto) {
+		User u = userDao.getOne(id);
+		userDao.save(TransformDtoUser.transformFromDto(userDto, u));
+	}
 
-    public void deleteUser(long id){
-        userDao.deleteById(id);
-    }
-
+	public void deleteUser(long id) {
+		userDao.deleteById(id);
+	}
 
 }

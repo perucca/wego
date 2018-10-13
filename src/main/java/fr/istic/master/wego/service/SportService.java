@@ -15,27 +15,26 @@ import fr.istic.master.wego.model.Sport;
 @Service
 public class SportService {
 
-    @Autowired
-    private SportDao sportDao;
+	@Autowired
+	private SportDao sportDao;
 
-    public Collection<SportDto> getAllSports(){
-        List<SportDto> listDto = new ArrayList<>();
-        List<Sport> listDao = sportDao.findAll();
+	public Collection<SportDto> getAllSports() {
+		List<SportDto> listDto = new ArrayList<>();
+		List<Sport> listDao = sportDao.findAll();
 
-        for(Sport sport: listDao){
-            listDto.add(TransformDtoSport.transformToDto(sport));
-        }
+		for (Sport sport : listDao) {
+			listDto.add(TransformDtoSport.transformToDto(sport));
+		}
 
-        return listDto;
-    }
+		return listDto;
+	}
 
-    public SportDto getSportById(long id){
-        Sport sport = sportDao.findById(id).orElse(null);
-        if (sport.equals(null)){
-            return null;
-        }else{
-            return TransformDtoSport.transformToDto(sport);
-        }
-    }
+	public SportDto getSportById(long id) {
+		Sport sport = sportDao.findById(id).orElse(null);
+		if (sport == null)
+			return null;
+		else
+			return TransformDtoSport.transformToDto(sport);
+	}
 
 }

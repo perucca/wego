@@ -37,8 +37,8 @@ public class UserPlaceService {
 		return listDto;
 	}
 
-	public Collection<UserPlaceDtoRead> getAllUserPlacesByUserId(long id) {
-		List<UserPlace> userPlaces = userPlaceDao.findByUserId(id);
+	public Collection<UserPlaceDtoRead> getAllUserPlacesByUser(User user) {
+		List<UserPlace> userPlaces = userPlaceDao.findByUser(user);
 		List<UserPlaceDtoRead> userPlaceDto = new ArrayList<>();
 
 		for (UserPlace userPlace : userPlaces) {
@@ -50,26 +50,29 @@ public class UserPlaceService {
 
 	public void deleteUserPlace(Long id) {
 		userPlaceDao.deleteById(id);
-		;
 	}
 
-	public void createUserPlace(UserPlaceDtoCreate userplaceDto){
-		if (!userPlaceDao.existsByUserIdAndPlaceId(userplaceDto.getIdUser(), userplaceDto.getIdPlace())) {
-			User u = new User();
-			u = userDao.findById(userplaceDto.getIdUser()).get();
-			Place p = placeDao.getOne(userplaceDto.getIdPlace());
+	public void createUserPlace(UserPlaceDtoCreate userplaceDto) {
+		User user = userDao.findById(userplaceDto.getIdUser())
+				.orElseThrow(() -> new RuntimeException("User: " + userplaceDto.getIdUser() + " not found!"));
+
+		Place place = placeDao.findById(userplaceDto.getIdPlace())
+				.orElseThrow(() -> new RuntimeException("Place: " + userplaceDto.getIdPlace() + " not found!"));
+
+		if (!userPlaceDao.existsByUserAndPlace(user, place)) {
 			UserPlace up = new UserPlace();
-			up.setUser(u);
-			up.setPlace(p);
+			up.setUser(user);
+			up.setPlace(place);
 			up.setPreferenceOrder(userplaceDto.getPreferenceOrder());
 			userPlaceDao.save(up);
-		} else 
+		} else {
 			System.err.println("Le userPlace existe déjà");
-			}
+		}
+	}
 
 	public void updateUserPlace(Long id, UserPlaceDtoCreate userplaceDto) {
 		UserPlace u = userPlaceDao.getOne(id);
-        userPlaceDao.save(TransformDtoUserPlace.transformFromDto(userplaceDto, u));
+		userPlaceDao.save(TransformDtoUserPlace.transformFromDto(userplaceDto, u));
 	}
-	
+
 }
