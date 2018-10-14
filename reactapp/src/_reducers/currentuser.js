@@ -1,9 +1,9 @@
+import { UserConstants } from '../_constants';
+
 function currentuser (state={}, action){
     switch(action.type){
-        // case 'ADD_USER':
-        //     return [...state, action.user]
-        // case 'ADD_USER_ERROR' :
-        //     return state
+        case UserConstants.LOGIN_SUCCESS:
+            return action.user;
         default :
             return state   
     }

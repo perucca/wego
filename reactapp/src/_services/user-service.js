@@ -15,7 +15,12 @@ function login(username, password) {
         .then(function (response) {
             if (response.status === 202) {
                 console.log("authentication succeeded");
-                return response;
+                console.log(response.config.headers.Authorization);
+             
+                //add the user to local storage
+                
+                //add the user to the store
+                return {firstName:'User logged', lastName:'Yolo', mail:'test@test.fr', authorization:response.config.headers.Authorization};
             }
             else {
                 console.log("authentication failed");

@@ -1,5 +1,4 @@
 import { UserConstants } from '../_constants';
-import Axios from 'axios';
 import { history } from '../_helpers';
 import { userService } from '../_services';
 
@@ -8,6 +7,7 @@ export const UserActions = {
     logout,
     register
 }
+
 function register(user) {
     return dispatch => {
         dispatch(request())
@@ -21,9 +21,9 @@ function register(user) {
             })
     }
 
-    function request() { return { type: UserConstants.LOGIN_PROGRESS } }
-    function success() { return { type: UserConstants.LOGIN_SUCCESS } }
-    function failure() { return { type: UserConstants.LOGIN_ERROR } }
+    function request() { return { type: UserConstants.REGISTER_PROGRESS } }
+    function success() { return { type: UserConstants.REGISTER_SUCCESS } }
+    function failure() { return { type: UserConstants.REGISTER_ERROR } }
 }
 
 function login(username, password) {
@@ -31,7 +31,9 @@ function login(username, password) {
         dispatch(request())
         userService.login(username, password)
             .then(function (response) {
-                dispatch(success());
+                console.log('logged user')
+                console.log(response)
+                dispatch(success(response));
                 history.push('/home');
             })
             .catch(function (error) {
@@ -41,7 +43,7 @@ function login(username, password) {
     };
 
     function request() { return { type: UserConstants.LOGIN_PROGRESS } }
-    function success() { return { type: UserConstants.LOGIN_SUCCESS, isAuthenticated: true } }
+    function success(lUser) { return { type: UserConstants.LOGIN_SUCCESS, isAuthenticated: true, user: lUser } }
     function failure() { return { type: UserConstants.LOGIN_ERROR,  isAuthenticated: false } }
 }
 
