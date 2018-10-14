@@ -10,11 +10,11 @@ const HomeLayout = (WrappedComponent) => {
                     <Header />
                 <div className="container-fluid h-100">
                     <div className="row align-items-center h-50">
-                        <div className="col-sm-2 col-md-4"></div>
-                        <div className="col-sm-8 col-md-4 col-xs-12">
+                        <div className="col-sm-1 col-md-2 col-lg-3"></div>
+                        <div className="col-xs-12 col-sm-10 col-md-8 col-lg-6">
                             <WrappedComponent />
                         </div>
-                        <div className="col-sm-2 col-md-4"></div>
+                        <div className="col-sm-1 col-md-2  col-lg-3" ></div>
                     </div>
                 </div>
                 </div>

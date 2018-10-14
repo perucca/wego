@@ -8,8 +8,9 @@ import { AddPlace } from '../_components/AddPlace';
 
 const MyPlaces = () => (
     <div>
+        <h2>My Places: </h2>
         <PlaceList places={Data.userplaces} />
-        <AddPlace></AddPlace>
+        <AddPlace/>
     </div>
 )
 

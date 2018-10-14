@@ -3,14 +3,15 @@ import { ButtonForm } from './ButtonForm';
 import { TextField } from './TextField';
 
 export const AddPlace= () => (
-<form className="fixed-bottom">
-  <div class="form-row align-items-center">
-
-    <div className="form-group">
+<form>
+  <div className="form-row my-2">
+  <div className="col-9 float-left">
     <TextField type="text" placeholder="New Place" name="addPlace" id="inlineFormInputName"></TextField>
-    <ButtonForm type="submit">Add</ButtonForm>
-    </div>
-
+  </div>
+  <div className="col-2 float-right">
+    <ButtonForm type="submit" name="Add"></ButtonForm>
+  </div>
+  <div className="col-1"></div>
   </div>
 </form>
 )
