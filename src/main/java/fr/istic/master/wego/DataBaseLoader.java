@@ -1,5 +1,6 @@
 package fr.istic.master.wego;
 
+import fr.istic.master.wego.dao.SportDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,8 @@ public class DataBaseLoader {
 
 	@Autowired
 	PlaceDao placedao;
+	@Autowired
+	SportDao sportdao;
 	@Autowired
 	UserDao userdao;
 	@Autowired
@@ -197,6 +200,13 @@ public class DataBaseLoader {
 		placedao.save(dunkerque);
 		placedao.save(nantes);
 		placedao.save(brest);
+
+		sportdao.save(kayak);
+		sportdao.save(foot);
+		sportdao.save(golf);
+		sportdao.save(voile);
+		sportdao.save(tennis);
+		sportdao.save(ski);
 
 		upd.save(up1);
 		upd.save(up2);

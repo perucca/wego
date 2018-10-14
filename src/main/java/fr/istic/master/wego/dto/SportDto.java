@@ -5,6 +5,7 @@ import fr.istic.master.wego.model.TypeSport;
 
 public class SportDto {
 
+    private long id;
     private TypeSport type;
     private String sportName;
     //private RequiredWeather idealWeather = new RequiredWeather();
@@ -28,7 +29,15 @@ public class SportDto {
         this.sportName = sportName;
     }
 
-//    public RequiredWeather getIdealWeather() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    //    public RequiredWeather getIdealWeather() {
 //        return idealWeather;
 //    }
 //

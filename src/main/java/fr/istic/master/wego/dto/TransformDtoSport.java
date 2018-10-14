@@ -10,6 +10,7 @@ public class TransformDtoSport {
     public static SportDto transformToDto(Sport sport){
         SportDto sportDto = new SportDto();
 
+        sportDto.setId(sport.getId());
         sportDto.setSportName(sport.getSportName());
         sportDto.setType(sport.getType());
  //       sportDto.setIdealWeather(sport.getIdealWeather());
