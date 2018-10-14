@@ -7,26 +7,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.dao.UserSportDao;
 import fr.istic.master.wego.dto.TransformDtoUserSport;
 import fr.istic.master.wego.dto.UserSportDto;
+import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.model.UserSport;
 
 @Service
 public class UserSportService {
 
-    @Autowired
-    private UserSportDao userSportDao;
+	@Autowired
+	private UserSportDao userSportDao;
 
-    public Collection<UserSportDto> getAllUserSportByUserId(long id){
-        List<UserSport> userSports = userSportDao.findByUserId(id);
-        List<UserSportDto> userSportDto = new ArrayList<>();
+	@Autowired
+	private UserDao userDao;
 
-        for(UserSport userSport: userSports){
-            userSportDto.add(TransformDtoUserSport.toDto(userSport));
-        }
+	public Collection<UserSportDto> getAllUserSportByUserId(long id) {
+		User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User: " + id + " not found!"));
 
-        return userSportDto;
-    }
+		List<UserSport> userSports = userSportDao.findByUser(user);
+		List<UserSportDto> userSportDto = new ArrayList<>();
+
+		for (UserSport userSport : userSports) {
+			userSportDto.add(TransformDtoUserSport.toDto(userSport));
+		}
+
+		return userSportDto;
+	}
 
 }
