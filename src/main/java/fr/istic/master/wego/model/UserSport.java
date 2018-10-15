@@ -64,6 +64,15 @@ public class UserSport {
 		this.preferenceOrder = preferenceOrder;
 	}
 
+	@OneToMany(mappedBy = "usersport")
+	public Set<SportPlaceAssociation> getMyPlacesForThisSport() {
+		return myPlacesForThisSport;
+	}
+
+	public void setMyPlacesForThisSport(Set<SportPlaceAssociation> myPlacesForThisSport) {
+		this.myPlacesForThisSport = myPlacesForThisSport;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,15 +82,6 @@ public class UserSport {
 		result = prime * result + Float.floatToIntBits(preferenceOrder);
 		result = prime * result + ((sport == null) ? 0 : sport.hashCode());
 		return result;
-	}
-
-	@OneToMany(mappedBy = "usersport")
-	public Set<SportPlaceAssociation> getMyPlacesForThisSport() {
-		return myPlacesForThisSport;
-	}
-
-	public void setMyPlacesForThisSport(Set<SportPlaceAssociation> myPlacesForThisSport) {
-		this.myPlacesForThisSport = myPlacesForThisSport;
 	}
 
 	@Override

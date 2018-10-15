@@ -71,42 +71,25 @@ public class Sport {
 		this.userSports = userSports;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Sport sport = (Sport) o;
+
+		if (!id.equals(sport.id)) return false;
+		if (type != sport.type) return false;
+		if (!sportName.equals(sport.sportName)) return false;
+		return idealWeather.equals(sport.idealWeather);
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((sportName == null) ? 0 : sportName.hashCode());
-		result = prime * result + ((userSports == null) ? 0 : userSports.hashCode());
+		int result = id.hashCode();
+		result = 31 * result + type.hashCode();
+		result = 31 * result + sportName.hashCode();
+		result = 31 * result + idealWeather.hashCode();
 		return result;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Sport other = (Sport) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (sportName == null) {
-			if (other.sportName != null)
-				return false;
-		} else if (!sportName.equals(other.sportName))
-			return false;
-		if (userSports == null) {
-			if (other.userSports != null)
-				return false;
-		} else if (!userSports.equals(other.userSports))
-			return false;
-		return true;
-	}
-
 }

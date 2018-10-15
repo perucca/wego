@@ -79,7 +79,7 @@ public class User {
 		this.mail = mail;
 	}
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "sport")
 	public Set<UserSport> getMySports() {
 		return mySports;
 	}
