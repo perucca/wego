@@ -20,7 +20,7 @@ const store = configureStore({
     places: Data.places,
     sports: Data.sports,
     userplaces : Data.userplaces,
-    usersports : Data.usersports,
+    usersports : [],
     sportplaceassociation : Data.sportplaceassociation,
     currentuser : {},
     isAuthenticated: false

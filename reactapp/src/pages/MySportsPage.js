@@ -17,10 +17,10 @@ class MySports extends Component {
 
                 <div>All Sports</div>
 
-        {this.props.sports.map(sport => <div>sport={sport.sportName}</div>)}
+        <div>{this.props.sports.map(sport => <div>sport={sport.sportName}</div>)}</div>
         <div>My Sports</div>
 
-        {this.props.usersports.map(sport => <div>sport={sport.sportName}</div>)}
+        <div>{this.props.usersports.map(sport => <div>sport={sport.sportDto.sportName}</div>)}</div>
             </div>
         )
     }
