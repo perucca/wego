@@ -1,9 +1,9 @@
+import { SportConstants } from '../_constants';
+
 function usersports (state=[], action){
     switch(action.type){
-        // case 'ADD_USER':
-        //     return [...state, action.user]
-        // case 'ADD_USER_ERROR' :
-        //     return state
+        case SportConstants.GETUSERSPORTS_SUCCESS:
+            return action.sports;
         default :
             return state   
     }

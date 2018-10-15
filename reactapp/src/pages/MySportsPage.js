@@ -7,16 +7,20 @@ class MySports extends Component {
 
     componentDidMount() {
         console.log('my sport page');
-        console.log(this.props.currentuser);
         this.props.getSports(this.props.currentuser);
-        console.log(this.props.sports);
+        this.props.getUserSports(this.props.currentuser);
     }
     render() {
         return (
             <div>
-                MySports tototo
+                <div>MySports {this.props.currentuser.firstName}</div>
+
+                <div>All Sports</div>
 
         {this.props.sports.map(sport => <div>sport={sport.sportName}</div>)}
+        <div>My Sports</div>
+
+        {this.props.usersports.map(sport => <div>sport={sport.sportName}</div>)}
             </div>
         )
     }
@@ -26,13 +30,17 @@ class MySports extends Component {
 const mapStateToProps = state => ({
     currentuser: state.currentuser,
     sports: state.sports,
+    usersports: state.usersports
 });
 
 const mapDispatchToProps = dispatch => {
     return {
         getSports: (user) => {
             dispatch(SportActions.getSports(user))
-        }
+        },
+        getUserSports: (user) => {
+            dispatch(SportActions.getUserSports(user))
+        },
     }
 }
 

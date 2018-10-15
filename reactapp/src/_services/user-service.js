@@ -16,11 +16,23 @@ function login(username, password) {
             if (response.status === 202) {
                 console.log("authentication succeeded");
                 console.log(response.config.headers.Authorization);
+                console.log(username);
              
                 //add the user to local storage
                 
                 //add the user to the store
-                return {firstName:'User logged', lastName:'Yolo', mail:'test@test.fr', authorization:response.config.headers.Authorization};
+                return Axios.get('/users/by_email/' + username, {
+                    auth: {
+                        username: username,
+                        password: password
+                    }
+                }).then(function (response) {
+                    let user = response.data;
+                    user.authorization = response.config.headers.Authorization;
+                    console.log("user fetched" + user);
+                    return user;
+                })
+                
             }
             else {
                 console.log("authentication failed");
