@@ -10,6 +10,7 @@ class MySports extends Component {
         this.props.getSports(this.props.currentuser);
         this.props.getUserSports(this.props.currentuser);
     }
+    
     render() {
         return (
             <div>

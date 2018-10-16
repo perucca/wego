@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 import sun from '../_img/sun.png';
 import HomeLayout from '../_hoc/HomeLayout';
 import { LinkedButton } from '../_components';
+import { connect } from 'react-redux';
 
-const Home = () => (
-    <div className="dark">
-        <h3> Welcome USER!</h3>
+class Home extends Component {
+
+    componentDidMount() {
+        console.log('my home page');
+    }
+
+    render(){ 
+    return(
+      <div className="dark">
+        <h3> Welcome {this.props.currentuser.firstName} !</h3>
         <div>
             <LinkedButton name="My Places" type="button" to="/myplaces"></LinkedButton>
             <LinkedButton name="My Sports" type="button" to="/mysports"></LinkedButton>
@@ -20,7 +28,18 @@ const Home = () => (
         </div>
 
     </div>
+    );
+    }
+}
 
-)
+const mapStateToProps = state => ({
+    currentuser: state.currentuser,
+});
 
-export const HomePage = HomeLayout(Home);
+const mapDispatchToProps = dispatch => ({});
+
+export const HomeConnected = connect(
+    mapStateToProps,
+    mapDispatchToProps)(Home)
+
+export const HomePage = HomeLayout(HomeConnected);
