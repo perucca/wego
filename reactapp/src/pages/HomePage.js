@@ -18,6 +18,8 @@ class Home extends Component {
         <h3> Welcome {this.props.currentuser.firstName} !</h3>
         <div>
             <LinkedButton name="My Places" type="button" to="/myplaces"></LinkedButton>
+        </div>    
+        <div>
             <LinkedButton name="My Sports" type="button" to="/mysports"></LinkedButton>
         </div>
         <div className="card">

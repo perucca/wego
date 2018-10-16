@@ -19,7 +19,7 @@ class MyPlaces extends Component {
         return (
         <div>
         <h2>My Places: </h2>
-        <PlaceList places={this.props.userplaces} />
+        <PlaceList places={this.props.userplaces.sort((a,b)=>a.preferenceOrder>b.preferenceOrder)} />
         <AddPlace/>
         </div> );        
     }
