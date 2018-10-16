@@ -1,12 +1,12 @@
+import { PlaceConstants } from '../_constants';
+
 function places (state=[], action){
     switch(action.type){
-        // case 'ADD_USER':
-        //     return [...state, action.user]
-        // case 'ADD_USER_ERROR' :
-        //     return state
+        case PlaceConstants.GETPLACES_SUCCESS:
+            return action.places;
         default :
-            return state   
+            return state;
     }
 }
 
-export default places
+export default places;

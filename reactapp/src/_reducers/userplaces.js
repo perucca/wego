@@ -1,9 +1,9 @@
+import { PlaceConstants } from '../_constants';
+
 function userplaces (state=[], action){
     switch(action.type){
-        // case 'ADD_USER':
-        //     return [...state, action.user]
-        // case 'ADD_USER_ERROR' :
-        //     return state
+        case PlaceConstants.GETUSERPLACES_SUCCESS:
+            return action.places;
         default :
             return state   
     }

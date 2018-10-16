@@ -19,7 +19,7 @@ const store = configureStore({
     users: Data.users,
     places: Data.places,
     sports: Data.sports,
-    userplaces : Data.userplaces,
+    userplaces : [],
     usersports : [],
     sportplaceassociation : Data.sportplaceassociation,
     currentuser : {},

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.dto.UserPlaceDtoCreate;
 import fr.istic.master.wego.dto.UserPlaceDtoRead;
+import fr.istic.master.wego.dto.UserSportDto;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.service.UserPlaceService;
 
@@ -37,8 +38,8 @@ public class UserPlaceController {
 	public Collection<UserPlaceDtoRead> getAllUserPlacesinBase() {
 		return userplaceService.getAllUserPlace();
 	}
-
-	@GetMapping("/{id}")
+	
+	@GetMapping("/byuser/{id}")
 	public Collection<UserPlaceDtoRead> getAllUserPlacesForUserId(@PathVariable("id") Long id) {
 		User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User: " + id + " not found!"));
 

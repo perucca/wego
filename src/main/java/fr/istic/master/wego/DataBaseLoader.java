@@ -86,61 +86,6 @@ public class DataBaseLoader {
 		nantes.setName("nantes");
 		nantes.setPostCode("44000");
 
-		// Creaation de plusieurs instances de UserSport
-//					UserSport us1 = new UserSport();
-//					UserSport us2 = new UserSport();
-//					UserSport us3 = new UserSport();
-//					UserSport us4 = new UserSport();
-//					UserSport us5 = new UserSport();
-//					UserSport us6 = new UserSport();
-//					UserSport us7 = new UserSport();
-//					UserSport us8 = new UserSport();
-//					UserSport us9 = new UserSport();
-//					UserSport us10 = new UserSport();
-//					UserSport us11 = new UserSport();
-//					UserSport us12 = new UserSport();
-
-		// Remplissage des UserSport
-//					us1.setUser(p1);
-//					us1.setSport(kayak);
-//					us1.setPreferenceOrder(2);
-//					us2.setUser(p1);
-//					us2.setSport(foot);
-//					us2.setPreferenceOrder(1);
-//
-//					us3.setUser(p2);
-//					us3.setSport(voile);
-//					us3.setPreferenceOrder(1);
-//					us4.setUser(p2);
-//					us4.setSport(foot);
-//					us4.setPreferenceOrder(3);
-//					us5.setUser(p2);
-//					us5.setSport(ski);
-//					us5.setPreferenceOrder(2);
-//
-//					us6.setUser(p3);
-//					us6.setSport(tennis);
-//					us6.setPreferenceOrder(3);
-//					us7.setUser(p3);
-//					us7.setSport(voile);
-//					us7.setPreferenceOrder(1);
-//					us8.setUser(p3);
-//					us8.setSport(ski);
-//					us8.setPreferenceOrder(2);
-//
-//					us9.setUser(p4);
-//					us9.setSport(tennis);
-//					us9.setPreferenceOrder(3);
-//					us10.setUser(p4);
-//					us10.setSport(voile);
-//					us10.setPreferenceOrder(1);
-//					us11.setUser(p4);
-//					us11.setSport(ski);
-//					us11.setPreferenceOrder(2);
-//					us12.setUser(p4);
-//					us12.setSport(kayak);
-//					us12.setPreferenceOrder(4);
-
 		// Déclaration de plusieurs UserPlace
 		UserPlace up1 = new UserPlace();
 		UserPlace up2 = new UserPlace();
