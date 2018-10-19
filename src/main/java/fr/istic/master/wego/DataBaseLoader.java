@@ -1,9 +1,19 @@
 package fr.istic.master.wego;
 
-import fr.istic.master.wego.dao.*;
-import fr.istic.master.wego.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import fr.istic.master.wego.dao.PlaceDao;
+import fr.istic.master.wego.dao.SportDao;
+import fr.istic.master.wego.dao.UserDao;
+import fr.istic.master.wego.dao.UserPlaceDao;
+import fr.istic.master.wego.dao.UserSportDao;
+import fr.istic.master.wego.model.Place;
+import fr.istic.master.wego.model.Sport;
+import fr.istic.master.wego.model.TypeSport;
+import fr.istic.master.wego.model.User;
+import fr.istic.master.wego.model.UserPlace;
+import fr.istic.master.wego.model.UserSport;
 
 @Component
 public class DataBaseLoader {
@@ -76,7 +86,7 @@ public class DataBaseLoader {
 		redon.setName("Redon");
 		redon.setPostCode("35600");
 		plerguer.setName("Plerguer");
-		plerguer.setPostCode("35123");
+		plerguer.setPostCode("35000");
 		rennes.setName("Rennes");
 		rennes.setPostCode("35000");
 		brest.setName("Brest");
@@ -163,7 +173,6 @@ public class DataBaseLoader {
 		us6.setSport(tennis);
 		us6.setUser(p4);
 		us6.setPreferenceOrder(1);
-
 
 		// new SportPlaceAssociation(up2, us9);
 

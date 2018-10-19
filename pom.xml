@@ -129,11 +129,18 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- for java 1.9 		--> 
+		<!-- for java 1.9 -->
 		<dependency>
-		    <groupId>javax.xml.bind</groupId>
-		     <artifactId>jaxb-api</artifactId>
-		 </dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+		
+		<!-- For Security test -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+		<scope>test</scope>
+</dependency>
 	</dependencies>
 
 	<build>
