@@ -1,10 +1,19 @@
 package fr.istic.master.wego.dto;
 
-public class UserSportDto {
+public class UserSportDtoRead {
+    private Long idUserSport;
     private SportDto sportDto;
     private float preferenceOrder;
 
-    public UserSportDto() {
+    public UserSportDtoRead() {
+    }
+
+    public Long getIdUserSport() {
+        return idUserSport;
+    }
+
+    public void setIdUserSport(Long idUserSport) {
+        this.idUserSport = idUserSport;
     }
 
     public SportDto getSportDto() {

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.dto.UserPlaceDtoCreate;
 import fr.istic.master.wego.dto.UserPlaceDtoRead;
-import fr.istic.master.wego.dto.UserSportDto;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.service.UserPlaceService;
 

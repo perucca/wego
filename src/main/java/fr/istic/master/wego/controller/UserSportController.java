@@ -3,13 +3,12 @@ package fr.istic.master.wego.controller;
 
 import java.util.Collection;
 
+import fr.istic.master.wego.dto.UserSportDtoCreate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-import fr.istic.master.wego.dto.UserSportDto;
+import fr.istic.master.wego.dto.UserSportDtoRead;
 import fr.istic.master.wego.service.UserSportService;
 
 @RestController
@@ -19,7 +18,13 @@ public class UserSportController {
     private UserSportService userSportService;
 
     @GetMapping("/byuser/{id}")
-    public Collection<UserSportDto> getUserSportsByUserId(@PathVariable("id") Long id) {
+    public Collection<UserSportDtoRead> getUserSportsByUserId(@PathVariable("id") Long id) {
         return userSportService.getAllUserSportByUserId(id);
+    }
+
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createUserSport(@RequestBody UserSportDtoCreate userSportDto) {
+        userSportService.createUserSport(userSportDto);
     }
 }
