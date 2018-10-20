@@ -30,9 +30,6 @@ public class UserPlaceController {
 	@Autowired
 	private UserDao userDao;
 
-	// Services de Get de User Places
-
-	// celle-ci est juste pour tester
 	@GetMapping("")
 	public Collection<UserPlaceDtoRead> getAllUserPlacesinBase() {
 		return userplaceService.getAllUserPlace();

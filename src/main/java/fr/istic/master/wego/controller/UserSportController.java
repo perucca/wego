@@ -17,14 +17,28 @@ public class UserSportController {
     @Autowired
     private UserSportService userSportService;
 
+    //CREATE
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createUserSport(@RequestBody UserSportDtoCreate userSportDto) {
+        userSportService.createUserSport(userSportDto);
+    }
+
+    //RETRIEVE
     @GetMapping("/byuser/{id}")
     public Collection<UserSportDtoRead> getUserSportsByUserId(@PathVariable("id") Long id) {
         return userSportService.getAllUserSportByUserId(id);
     }
 
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createUserSport(@RequestBody UserSportDtoCreate userSportDto) {
-        userSportService.createUserSport(userSportDto);
+    //UPDATE
+    @PutMapping("/{id}")
+    public void updateUserSport(@PathVariable("id") Long id, @RequestBody UserSportDtoCreate userSportDtoCreate) {
+        userSportService.updateUserSport(id, userSportDtoCreate);
+    }
+
+    //DELETE
+    @DeleteMapping("/{id}")
+    public void deleteUserSport(@PathVariable("id") Long id) {
+        userSportService.deleteUserSport(id);
     }
 }
