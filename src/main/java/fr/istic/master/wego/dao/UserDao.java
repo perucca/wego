@@ -14,8 +14,8 @@ import fr.istic.master.wego.model.User;
  */
 @Transactional
 public interface UserDao extends JpaRepository<User, Long> {
-	
+
 	@Query("select u from User u where u.mail =:mail")
 	public Optional<User> findByEmail(@Param("mail") String mail);
-	
+
 }

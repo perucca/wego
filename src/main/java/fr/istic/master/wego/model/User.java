@@ -9,13 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Represents the user logged in the application.
- * 
+ *
  * @author michel
  *
  */
@@ -30,6 +31,7 @@ public class User {
 
 	private Set<UserSport> mySports = new HashSet<UserSport>();
 	private Set<UserPlace> myPlaces = new HashSet<UserPlace>();
+	private SportPlaceAssociation weekendAdvice;
 
 	public static final PasswordEncoder PASSWORD_ENCODER = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
@@ -95,6 +97,15 @@ public class User {
 
 	public void setMyPlaces(Set<UserPlace> myPlaces) {
 		this.myPlaces = myPlaces;
+	}
+
+	@OneToOne
+	public SportPlaceAssociation getWeekendAdvice() {
+		return weekendAdvice;
+	}
+
+	public void setWeekendAdvice(SportPlaceAssociation weekendAdvice) {
+		this.weekendAdvice = weekendAdvice;
 	}
 
 }
