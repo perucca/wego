@@ -31,7 +31,7 @@ public class SportPlaceAssociationController {
         sportPlaceAssociationService.createSportPlaceAssociation(sportPlaceAssociationDtoCreate);
     }
 
-    //RETRIEVE
+    //READ
     @GetMapping("/byuser/{id}")
     public Collection<SportPlaceAssociationDtoRead> getSportPlaceAssociationsByUserId(@PathVariable("id") Long id) {
         User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User: " + id + " not found!"));

@@ -24,7 +24,7 @@ public class UserSportController {
         userSportService.createUserSport(userSportDto);
     }
 
-    //RETRIEVE
+    //READ
     @GetMapping("/byuser/{id}")
     public Collection<UserSportDtoRead> getUserSportsByUserId(@PathVariable("id") Long id) {
         return userSportService.getAllUserSportByUserId(id);

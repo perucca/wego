@@ -47,7 +47,7 @@ public class UserSportService {
 		}
 	}
 
-	//RETRIEVE
+	//READ
 	public Collection<UserSportDtoRead> getAllUserSportByUserId(long id) {
 		User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User: " + id + " not found!"));
 
@@ -60,7 +60,6 @@ public class UserSportService {
 
 		return userSportDtoRead;
 	}
-
 
 	//UPDATE
 	public void updateUserSport(Long id, UserSportDtoCreate userSportDto) {

@@ -40,7 +40,7 @@ public class SportPlaceAssociationService {
         }
     }
 
-    //RETRIEVE
+    //READ
     public Collection<SportPlaceAssociationDtoRead> getAllSportPlaceAssociationByUserId(long id) {
         User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User: " + id + " not found!"));
 
