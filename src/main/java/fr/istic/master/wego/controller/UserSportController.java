@@ -1,15 +1,19 @@
 package fr.istic.master.wego.controller;
 
 
+import java.net.URI;
 import java.util.Collection;
 
 import fr.istic.master.wego.dto.UserSportDtoCreate;
+import fr.istic.master.wego.model.UserSport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import fr.istic.master.wego.dto.UserSportDtoRead;
 import fr.istic.master.wego.service.UserSportService;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/usersports")
@@ -20,8 +24,15 @@ public class UserSportController {
     //CREATE
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createUserSport(@RequestBody UserSportDtoCreate userSportDto) {
-        userSportService.createUserSport(userSportDto);
+    public ResponseEntity<?> createUserSport(@RequestBody UserSportDtoCreate userSportDto) {
+        UserSport userSport = userSportService.createUserSport(userSportDto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(userSport.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     //READ

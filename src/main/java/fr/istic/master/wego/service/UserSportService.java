@@ -29,7 +29,7 @@ public class UserSportService {
 	private SportDao sportDao;
 
 	//CREATE
-	public void createUserSport(UserSportDtoCreate userSportDto) {
+	public UserSport createUserSport(UserSportDtoCreate userSportDto) {
 		User user = userDao.findById(userSportDto.getIdUser())
 				.orElseThrow(() -> new RuntimeException("User: " + userSportDto.getIdUser() + " not found!"));
 
@@ -41,9 +41,10 @@ public class UserSportService {
 			us.setUser(user);
 			us.setSport(sport);
 			us.setPreferenceOrder(userSportDto.getPreferenceOrder());
-			userSportDao.save(us);
+			return userSportDao.save(us);
 		} else {
 			System.err.println("this userSport already exists");
+			return null;
 		}
 	}
 

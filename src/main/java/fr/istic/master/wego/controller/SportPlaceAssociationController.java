@@ -1,11 +1,8 @@
 package fr.istic.master.wego.controller;
 
-import fr.istic.master.wego.dao.SportPlaceAssociationDao;
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.dto.SportPlaceAssociationDtoCreate;
 import fr.istic.master.wego.dto.SportPlaceAssociationDtoRead;
-import fr.istic.master.wego.dto.UserPlaceDtoCreate;
-import fr.istic.master.wego.dto.UserPlaceDtoRead;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.service.SportPlaceAssociationService;
 import org.springframework.beans.factory.annotation.Autowired;

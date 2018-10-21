@@ -23,7 +23,7 @@ public class SportPlaceAssociationService {
     UserDao userDao;
 
     //CREATE
-    public void createSportPlaceAssociation(SportPlaceAssociationDtoCreate sportPlaceAssociationDto) {
+    public SportPlaceAssociation createSportPlaceAssociation(SportPlaceAssociationDtoCreate sportPlaceAssociationDto) {
         UserSport userSport = userSportDao.findById(sportPlaceAssociationDto.getIdUserSport())
                 .orElseThrow(() -> new RuntimeException("User: " + sportPlaceAssociationDto.getIdUserSport() + " not found!"));
 
@@ -34,9 +34,10 @@ public class SportPlaceAssociationService {
             SportPlaceAssociation spa = new SportPlaceAssociation();
             spa.setUsersport(userSport);
             spa.setUserplace(userPlace);
-            sportPlaceAssociationDao.save(spa);
+            return sportPlaceAssociationDao.save(spa);
         } else {
             System.err.println("The SportPlaceAssocitation already exists");
+            return null;
         }
     }
 
