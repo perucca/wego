@@ -2,9 +2,11 @@ import Axios from 'axios';
 
 export const sportService = {
     getSports,
-    getUserSports
+    getUserSports,
+    createUserSport,
 }
 
+//RETRIEVE ALL SPORTS
 function getSports(user) {
     console.log(user.authorization)
     return Axios.get('/sports', {
@@ -31,6 +33,7 @@ function getSports(user) {
         });
 }
 
+//RETRIEVE USERSPORTS
 function getUserSports(user) {
     console.log(user.authorization)
     return Axios.get('/usersports/byuser/' + user.id, {
@@ -50,6 +53,33 @@ function getUserSports(user) {
         })
         .catch(function (error) {
             console.log("fetch error");
+            if (error.response) {
+                console.log(error.response);
+            }
+            return Promise.reject(error);
+        });
+}
+
+//CREATE USERSPORT
+function createUserSport(user, userSport) {
+    
+    return Axios.post('/usersports/',userSport, {
+        headers : {'Authorization': '' + user.authorization}
+    })
+        .then(function (response) {
+            if (response.status === 201) {
+                console.log("Successfully created userSport");
+                console.log(response)
+                return response;
+            }
+            else {
+                console.log("Failed to create userSport");
+                console.log(response.status + " " + response.statusText);
+                return Promise.reject(response);
+            }
+        })
+        .catch(function (error) {
+            console.log("Error creating userSport");
             if (error.response) {
                 console.log(error.response);
             }

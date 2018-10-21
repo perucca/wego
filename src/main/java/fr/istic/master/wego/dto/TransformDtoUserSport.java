@@ -4,12 +4,12 @@ import fr.istic.master.wego.model.UserSport;
 
 public class TransformDtoUserSport {
 
-    public static UserSportDto toDto(UserSport userSport){
-        UserSportDto userSportDto = new UserSportDto();
+    public static UserSportDtoRead toDto(UserSport userSport){
+        UserSportDtoRead userSportDtoRead = new UserSportDtoRead();
+        userSportDtoRead.setIdUserSport(userSport.getId());
+        userSportDtoRead.setSportDto(TransformDtoSport.transformToDto(userSport.getSport()));
+        userSportDtoRead.setPreferenceOrder(userSport.getPreferenceOrder());
 
-        userSportDto.setSportDto(TransformDtoSport.transformToDto(userSport.getSport()));
-        userSportDto.setPreferenceOrder(userSport.getPreferenceOrder());
-
-        return userSportDto;
+        return userSportDtoRead;
     }
 }

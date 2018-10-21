@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.dto.UserPlaceDtoCreate;
 import fr.istic.master.wego.dto.UserPlaceDtoRead;
-import fr.istic.master.wego.dto.UserSportDto;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.service.UserPlaceService;
 
@@ -31,9 +30,6 @@ public class UserPlaceController {
 	@Autowired
 	private UserDao userDao;
 
-	// Services de Get de User Places
-
-	// celle-ci est juste pour tester
 	@GetMapping("")
 	public Collection<UserPlaceDtoRead> getAllUserPlacesinBase() {
 		return userplaceService.getAllUserPlace();

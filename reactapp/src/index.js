@@ -21,7 +21,7 @@ const store = configureStore({
     sports: Data.sports,
     userplaces : [],
     usersports : [],
-    sportplaceassociation : Data.sportplaceassociation,
+    sportplaceassociations : [],
     currentuser : {},
     isAuthenticated: false
 });

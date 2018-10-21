@@ -20,7 +20,7 @@ public class UserSport {
 	private Long id;
 	private User user;
 	private Sport sport;
-	private long preferenceOrder;
+	private float preferenceOrder;
 
 	private Set<SportPlaceAssociation> myPlacesForThisSport = new HashSet<SportPlaceAssociation>();
 
@@ -56,11 +56,11 @@ public class UserSport {
 		this.sport = sport;
 	}
 
-	public long getPreferenceOrder() {
+	public float getPreferenceOrder() {
 		return preferenceOrder;
 	}
 
-	public void setPreferenceOrder(long preferenceOrder) {
+	public void setPreferenceOrder(float preferenceOrder) {
 		this.preferenceOrder = preferenceOrder;
 	}
 

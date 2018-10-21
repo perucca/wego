@@ -5,6 +5,7 @@ export const userService = {
     register
 }
 
+//LOG THE USER
 function login(username, password) {
     return Axios.post('/login', {}, {
         auth: {
@@ -17,9 +18,9 @@ function login(username, password) {
                 console.log("authentication succeeded");
                 console.log(response.config.headers.Authorization);
                 console.log(username);
-             
+
                 //add the user to local storage
-                
+
                 //add the user to the store
                 return Axios.get('/users/by_email/' + username, {
                     auth: {
@@ -32,7 +33,7 @@ function login(username, password) {
                     console.log("user fetched" + user);
                     return user;
                 })
-                
+
             }
             else {
                 console.log("authentication failed");
@@ -49,6 +50,7 @@ function login(username, password) {
         });
 }
 
+//REGISTER THE USER
 function register(user) {
     return Axios.post('/signin', user)
         .then(function (response) {
