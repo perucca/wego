@@ -17,7 +17,7 @@ public class OpenWeatherService {
 	public OpenWeatherForecast callAPI(String zip_code, String country_code) {
 
 		return this.restTemplate.getForObject(
-				"http://api.openweathermap.org/data/2.5/forecast?zip={zip code},{country code}&appid={API_KEY}",
+				"http://api.openweathermap.org/data/2.5/forecast?zip={zip code},{country code}&units=metric&appid={API_KEY}",
 				OpenWeatherForecast.class, zip_code, country_code, API_KEY);
 	}
 

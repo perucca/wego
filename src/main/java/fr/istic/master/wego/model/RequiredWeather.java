@@ -1,11 +1,15 @@
 package fr.istic.master.wego.model;
 
+import java.util.EnumSet;
+
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * Represents the rules for allowing a sport practice.<br>
  * Stored by Sport class.
- * 
+ *
  * @author michel
  *
  */
@@ -16,20 +20,18 @@ public class RequiredWeather {
 	private Float maxWind;
 	private Float minTemperature;
 	private Float maxTemperature;
-	private boolean sunny; // opposed to cloudy
-	private boolean rainy; // opposed to dry
+	private EnumSet<EnumWeather> allowedWeather;
 
 	public RequiredWeather() {
 	}
 
-	public RequiredWeather(Float minWind, Float maxWind, Float minTemperature, Float maxTemperature, boolean sunny,
-			boolean rainy) {
+	public RequiredWeather(Float minWind, Float maxWind, Float minTemperature, Float maxTemperature,
+			EnumSet<EnumWeather> allowedWeather) {
 		this.minWind = minWind;
 		this.maxWind = maxWind;
 		this.minTemperature = minTemperature;
 		this.maxTemperature = maxTemperature;
-		this.sunny = sunny;
-		this.rainy = rainy;
+		this.allowedWeather = allowedWeather;
 	}
 
 	public Float getMinWind() {
@@ -64,19 +66,13 @@ public class RequiredWeather {
 		this.maxTemperature = maxTemperature;
 	}
 
-	public boolean isSunny() {
-		return sunny;
+	// TODO Collection of elements
+	@Enumerated(EnumType.STRING)
+	public EnumSet<EnumWeather> getAllowedWeather() {
+		return allowedWeather;
 	}
 
-	public void setSunny(boolean sunny) {
-		this.sunny = sunny;
-	}
-
-	public boolean isRainy() {
-		return rainy;
-	}
-
-	public void setRainy(boolean rainy) {
-		this.rainy = rainy;
+	public void setAllowedWeather(EnumSet<EnumWeather> allowedWeather) {
+		this.allowedWeather = allowedWeather;
 	}
 }

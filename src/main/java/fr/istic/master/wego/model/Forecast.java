@@ -6,12 +6,12 @@ import javax.persistence.Embeddable;
 public class Forecast {
 	private Float wind;
 	private Float temperature;
-	private String weather;
+	private EnumWeather weather;
 
 	public Forecast() {
 	}
 
-	public Forecast(Float wind, Float temperature, String weather) {
+	public Forecast(Float wind, Float temperature, EnumWeather weather) {
 		super();
 		this.wind = wind;
 		this.temperature = temperature;
@@ -34,11 +34,11 @@ public class Forecast {
 		this.temperature = temperature;
 	}
 
-	public String getWeather() {
+	public EnumWeather getWeather() {
 		return weather;
 	}
 
-	public void setWeather(String weather) {
+	public void setWeather(EnumWeather weather) {
 		this.weather = weather;
 	}
 }

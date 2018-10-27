@@ -31,8 +31,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 * Tout le reste des accès doit être authentifié
 	 */
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().httpBasic().authenticationEntryPoint(authEntryPoint).and().authorizeRequests()
-				.antMatchers("/", "/signin", "/logout").permitAll().anyRequest().authenticated().and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable();
+		http
+			.cors()
+		.and()
+			.httpBasic()
+			.authenticationEntryPoint(authEntryPoint)
+		.and()
+			.authorizeRequests()
+			.antMatchers("/", "/swagger-ui", "/signin", "/logout")
+			.permitAll()
+			.anyRequest().authenticated()
+		.and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		.and()
+			.csrf()
+			.disable();
 	}
 }
