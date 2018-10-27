@@ -66,11 +66,10 @@ public class SportPlaceAssociationService {
         UserPlace userPlace = userPlaceDao.findById(sportPlaceAssociationDto.getIdUserPlace())
                 .orElseThrow(() -> new RuntimeException("Place: " + sportPlaceAssociationDto.getIdUserPlace() + " not found!"));
 
-        SportPlaceAssociation newSpa = new SportPlaceAssociation();
-        newSpa.setId(id);
-        newSpa.setUsersport(userSport);
-        newSpa.setUserplace(userPlace);
-        sportPlaceAssociationDao.save(newSpa);
+        spa.setId(id);
+        spa.setUsersport(userSport);
+        spa.setUserplace(userPlace);
+        sportPlaceAssociationDao.save(spa);
     }
 
     //DELETE
