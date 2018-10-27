@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import fr.istic.master.wego.dao.PlaceDao;
 import fr.istic.master.wego.dao.UserPlaceDao;
+import fr.istic.master.wego.model.EnumWeather;
 import fr.istic.master.wego.model.Forecast;
 import fr.istic.master.wego.model.Place;
 import fr.istic.master.wego.service.openweather.OpenWeatherForecast;
@@ -52,7 +53,7 @@ public class WeatherFetcher {
 		OpenWeatherForecastItem owForecastItem = owforecast.getList().get(28); // Samedi
 																				// 12h
 		forecast.setTemperature(owForecastItem.getMain().getTemperature());
-		forecast.setWeather(owForecastItem.getWeather().get(0).getMain());
+		forecast.setWeather(EnumWeather.from(owForecastItem.getWeather().get(0).getMain()));
 		forecast.setWind(owForecastItem.getWind().getSpeed());
 		return forecast;
 	}

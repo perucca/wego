@@ -23,7 +23,7 @@ public class Sport {
   	private Long id;
 	private TypeSport type;
 	private String sportName;
-	private RequiredWeather idealWeather = new RequiredWeather();
+	private IdealWeather idealWeather = new IdealWeather();
 	private Set<UserSport> userSports = new HashSet<UserSport>();
 
 	@Id
@@ -54,11 +54,11 @@ public class Sport {
 	}
 
 	@Embedded
-	public RequiredWeather getIdealWeather() {
+	public IdealWeather getIdealWeather() {
 		return idealWeather;
 	}
 
-	public void setIdealWeather(RequiredWeather idealWeather) {
+	public void setIdealWeather(IdealWeather idealWeather) {
 		this.idealWeather = idealWeather;
 	}
 

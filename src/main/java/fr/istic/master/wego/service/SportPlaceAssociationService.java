@@ -1,17 +1,24 @@
 package fr.istic.master.wego.service;
 
-import fr.istic.master.wego.dao.*;
-import fr.istic.master.wego.dto.*;
-import fr.istic.master.wego.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import fr.istic.master.wego.dao.SportPlaceAssociationDao;
+import fr.istic.master.wego.dao.UserDao;
+import fr.istic.master.wego.dao.UserPlaceDao;
+import fr.istic.master.wego.dao.UserSportDao;
+import fr.istic.master.wego.dto.SportPlaceAssociationDtoCreate;
+import fr.istic.master.wego.dto.SportPlaceAssociationDtoRead;
+import fr.istic.master.wego.dto.TransformDtoSportPlaceAssociation;
+import fr.istic.master.wego.model.SportPlaceAssociation;
+import fr.istic.master.wego.model.User;
+import fr.istic.master.wego.model.UserPlace;
+import fr.istic.master.wego.model.UserSport;
 
 @Service
 public class SportPlaceAssociationService {

@@ -1,10 +1,16 @@
 package fr.istic.master.wego.model;
 
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 
 /**
  * Represents the rules for allowing a sport practice.<br>
@@ -14,18 +20,18 @@ import javax.persistence.Enumerated;
  *
  */
 @Embeddable
-public class RequiredWeather {
+public class IdealWeather {
 
 	private Float minWind; //
 	private Float maxWind;
 	private Float minTemperature;
 	private Float maxTemperature;
-	private EnumSet<EnumWeather> allowedWeather;
+	private Set<EnumWeather> allowedWeather = new HashSet<EnumWeather>();
 
-	public RequiredWeather() {
+	public IdealWeather() {
 	}
 
-	public RequiredWeather(Float minWind, Float maxWind, Float minTemperature, Float maxTemperature,
+	public IdealWeather(Float minWind, Float maxWind, Float minTemperature, Float maxTemperature,
 			EnumSet<EnumWeather> allowedWeather) {
 		this.minWind = minWind;
 		this.maxWind = maxWind;
@@ -66,13 +72,15 @@ public class RequiredWeather {
 		this.maxTemperature = maxTemperature;
 	}
 
-	// TODO Collection of elements
+	@ElementCollection(targetClass = EnumWeather.class)
+	@CollectionTable(name = "weather", joinColumns = @JoinColumn(name = "weather_id"))
+	@Column(name = "allowedWeather", nullable = false)
 	@Enumerated(EnumType.STRING)
-	public EnumSet<EnumWeather> getAllowedWeather() {
+	public Set<EnumWeather> getAllowedWeather() {
 		return allowedWeather;
 	}
 
-	public void setAllowedWeather(EnumSet<EnumWeather> allowedWeather) {
+	public void setAllowedWeather(Set<EnumWeather> allowedWeather) {
 		this.allowedWeather = allowedWeather;
 	}
 }

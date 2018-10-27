@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import fr.istic.master.wego.dao.SportPlaceAssociationDao;
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.model.Forecast;
-import fr.istic.master.wego.model.RequiredWeather;
+import fr.istic.master.wego.model.IdealWeather;
 import fr.istic.master.wego.model.SportPlaceAssociation;
 import fr.istic.master.wego.model.User;
 
@@ -29,9 +29,9 @@ public class WeatherAdviser {
 	private void analyseWeather(User user) {
 		Optional<SportPlaceAssociation> advice = spaDao.findByUserOrderedByPlacePreferenceAndSportPreference(user)
 				.stream().filter((spa) -> {
-					RequiredWeather requiredWeather = spa.getUsersport().getSport().getIdealWeather();
+					IdealWeather idealWeatherCondition = spa.getUsersport().getSport().getIdealWeather();
 					Forecast forecast = spa.getUserplace().getPlace().getForecast();
-					return new RequiredWeatherValidator(requiredWeather).validate(forecast);
+					return new IdealWeatherValidator(idealWeatherCondition).validate(forecast);
 				}).findFirst();
 
 		// Pas de conseil si advice est null.
