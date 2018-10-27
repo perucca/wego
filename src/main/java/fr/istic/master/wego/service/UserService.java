@@ -3,6 +3,7 @@ package fr.istic.master.wego.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,32 +31,48 @@ public class UserService {
 		return listDto;
 	}
 
-	public UserDtoRead getUserById(long id) {
-		User user = userDao.findById(id).orElse(null);
-		if (user == null)
-			return null;
-		else
-			return TransformDtoUser.transformToDto(user);
+	public UserDtoRead getUserById(Long id) {
+		Objects.requireNonNull(id);
+		User user = userDao.getOne(id);
+		return TransformDtoUser.transformToDto(user);
 	}
 
 	public UserDtoRead getUserByEmail(String email) {
-		User user = userDao.findByEmail(email).orElse(null);
-		if (user == null)
-			return null;
-		else
-			return TransformDtoUser.transformToDto(user);
+		Objects.requireNonNull(email);
+		
+		User user = userDao.findByEmail(email).orElseThrow(() -> new IllegalStateException("The email :" + email+ " is not found."));
+
+		return TransformDtoUser.transformToDto(user);
 	}
 
 	public void createUser(UserDtoCreate userDto) {
+		Objects.requireNonNull(userDto);
+		Objects.requireNonNull(userDto.getFirstName());
+		Objects.requireNonNull(userDto.getLastName());
+		Objects.requireNonNull(userDto.getMail());
+		Objects.requireNonNull(userDto.getPassword());
+		
 		userDao.save(TransformDtoUser.transformFromDto(userDto));
 	}
 
 	public void updateUser(Long id, UserDtoCreate userDto) {
+		Objects.requireNonNull(id);
+		Objects.requireNonNull(userDto);
+		Objects.requireNonNull(userDto.getFirstName());
+		Objects.requireNonNull(userDto.getLastName());
+		Objects.requireNonNull(userDto.getPassword());
+
+		if(Objects.isNull(userDto.getMail())) {
+			throw new IllegalStateException("The mail must be null when updating the user!!");
+		}
+		
 		User u = userDao.getOne(id);
 		userDao.save(TransformDtoUser.transformFromDto(userDto, u));
 	}
 
-	public void deleteUser(long id) {
+	public void deleteUser(Long id) {
+		Objects.requireNonNull(id);
+		
 		userDao.deleteById(id);
 	}
 

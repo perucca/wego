@@ -3,18 +3,20 @@ package fr.istic.master.wego.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
-import fr.istic.master.wego.dao.SportDao;
-import fr.istic.master.wego.dto.SportPlaceAssociationDtoCreate;
-import fr.istic.master.wego.dto.UserSportDtoCreate;
-import fr.istic.master.wego.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.istic.master.wego.dao.SportDao;
 import fr.istic.master.wego.dao.UserDao;
 import fr.istic.master.wego.dao.UserSportDao;
 import fr.istic.master.wego.dto.TransformDtoUserSport;
+import fr.istic.master.wego.dto.UserSportDtoCreate;
 import fr.istic.master.wego.dto.UserSportDtoRead;
+import fr.istic.master.wego.model.Sport;
+import fr.istic.master.wego.model.User;
+import fr.istic.master.wego.model.UserSport;
 
 @Service
 public class UserSportService {
@@ -30,27 +32,29 @@ public class UserSportService {
 
 	//CREATE
 	public UserSport createUserSport(UserSportDtoCreate userSportDto) {
-		User user = userDao.findById(userSportDto.getIdUser())
-				.orElseThrow(() -> new RuntimeException("User: " + userSportDto.getIdUser() + " not found!"));
+		Objects.requireNonNull(userSportDto);
+		Objects.requireNonNull(userSportDto.getIdUser());
+		Objects.requireNonNull(userSportDto.getIdSport());
+		
+		User user = userDao.getOne(userSportDto.getIdUser());
 
-		Sport sport = sportDao.findById(userSportDto.getIdSport())
-				.orElseThrow(() -> new RuntimeException("Sport: " + userSportDto.getIdSport() + " not found!"));
+		Sport sport = sportDao.getOne(userSportDto.getIdSport());
 
 		if (!userSportDao.existsByUserAndSport(user, sport)) {
-			UserSport us = new UserSport();
-			us.setUser(user);
-			us.setSport(sport);
-			us.setPreferenceOrder(userSportDto.getPreferenceOrder());
-			return userSportDao.save(us);
-		} else {
-			System.err.println("this userSport already exists");
-			return null;
+			throw new IllegalStateException("this userSport already exists");
 		}
+		
+		UserSport us = new UserSport();
+		us.setUser(user);
+		us.setSport(sport);
+		us.setPreferenceOrder(userSportDto.getPreferenceOrder());
+		return userSportDao.save(us);
 	}
 
 	//READ
-	public Collection<UserSportDtoRead> getAllUserSportByUserId(long id) {
-		User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User: " + id + " not found!"));
+	public Collection<UserSportDtoRead> getAllUserSportByUserId(Long id) {
+		Objects.requireNonNull(id);
+		User user = userDao.getOne(id);
 
 		List<UserSport> userSports = userSportDao.findByUser(user);
 		List<UserSportDtoRead> userSportDtoRead = new ArrayList<>();
@@ -64,25 +68,26 @@ public class UserSportService {
 
 	//UPDATE
 	public void updateUserSport(Long id, UserSportDtoCreate userSportDto) {
-		UserSport us = userSportDao.findById(id)
-				.orElseThrow(() -> new RuntimeException("UserSport with id=" + id + " not found!"));
+		Objects.requireNonNull(id);
+		Objects.requireNonNull(userSportDto);
+		Objects.requireNonNull(userSportDto.getIdUser());
+		Objects.requireNonNull(userSportDto.getIdSport());
+		
+		
+		UserSport us = userSportDao.getOne(id);
+		User user = userDao.getOne(userSportDto.getIdUser());
+		Sport sport = sportDao.getOne(userSportDto.getIdSport());
 
-		User user = userDao.findById(userSportDto.getIdUser())
-				.orElseThrow(() -> new RuntimeException("User with id=" + userSportDto.getIdUser() + " not found!"));
-
-		Sport sport = sportDao.findById(userSportDto.getIdSport())
-				.orElseThrow(() -> new RuntimeException("Sport with id=" + userSportDto.getIdSport() + " not found!"));
-
-		UserSport newUs = new UserSport();
-		newUs.setId(id);
-		newUs.setUser(user);
-		newUs.setSport(sport);
-		newUs.setPreferenceOrder(userSportDto.getPreferenceOrder());
-		userSportDao.save(newUs);
+		us.setId(id);
+		us.setUser(user);
+		us.setSport(sport);
+		us.setPreferenceOrder(userSportDto.getPreferenceOrder());
+		userSportDao.save(us);
 	}
 
 	//DELETE
 	public void deleteUserSport(Long id) {
+		Objects.requireNonNull(id);
 		userSportDao.deleteById(id);
 	}
 

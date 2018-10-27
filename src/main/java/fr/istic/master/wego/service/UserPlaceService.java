@@ -3,6 +3,7 @@ package fr.istic.master.wego.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class UserPlaceService {
 	}
 
 	public Collection<UserPlaceDtoRead> getAllUserPlacesByUser(User user) {
+		Objects.requireNonNull(user);
 		List<UserPlace> userPlaces = userPlaceDao.findByUser(user);
 		List<UserPlaceDtoRead> userPlaceDto = new ArrayList<>();
 
@@ -49,28 +51,33 @@ public class UserPlaceService {
 	}
 
 	public void deleteUserPlace(Long id) {
+		Objects.requireNonNull(id);
 		userPlaceDao.deleteById(id);
 	}
 
 	public void createUserPlace(UserPlaceDtoCreate userplaceDto) {
-		User user = userDao.findById(userplaceDto.getIdUser())
-				.orElseThrow(() -> new RuntimeException("User: " + userplaceDto.getIdUser() + " not found!"));
+		Objects.requireNonNull(userplaceDto);
+		Objects.requireNonNull(userplaceDto.getIdUser());
+		Objects.requireNonNull(userplaceDto.getIdPlace());
+		
+		User user = userDao.getOne(userplaceDto.getIdUser());
 
-		Place place = placeDao.findById(userplaceDto.getIdPlace())
-				.orElseThrow(() -> new RuntimeException("Place: " + userplaceDto.getIdPlace() + " not found!"));
+		Place place = placeDao.getOne(userplaceDto.getIdPlace());
 
 		if (!userPlaceDao.existsByUserAndPlace(user, place)) {
-			UserPlace up = new UserPlace();
-			up.setUser(user);
-			up.setPlace(place);
-			up.setPreferenceOrder(userplaceDto.getPreferenceOrder());
-			userPlaceDao.save(up);
-		} else {
-			System.err.println("Le userPlace existe déjà");
+			throw new IllegalStateException("Le userPlace existe déjà");
 		}
+		
+		UserPlace up = new UserPlace();
+		up.setUser(user);
+		up.setPlace(place);
+		up.setPreferenceOrder(userplaceDto.getPreferenceOrder());
+		userPlaceDao.save(up);
 	}
 
 	public void updateUserPlace(Long id, UserPlaceDtoCreate userplaceDto) {
+		Objects.requireNonNull(id);
+		Objects.requireNonNull(userplaceDto);
 		UserPlace u = userPlaceDao.getOne(id);
 		userPlaceDao.save(TransformDtoUserPlace.transformFromDto(userplaceDto, u));
 	}

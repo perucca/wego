@@ -3,6 +3,7 @@ package fr.istic.master.wego.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,15 +30,17 @@ public class PlaceService {
 		return listDto;
 	}
 
-	public PlaceDto getPlacesById(long id) {
-		Place place = placeDao.findById(id).orElse(null);
-		if (place == null)
-			return null;
-		else
-			return TransformDtoPlace.transformToDto(place);
+	public PlaceDto getPlacesById(Long id) {
+		Objects.requireNonNull(id);
+		
+		Place place = placeDao.getOne(id);
+
+		return TransformDtoPlace.transformToDto(place);
 	}
 
 	public Collection<PlaceDto> getAllPlacesByName(String name) {
+		Objects.requireNonNull(name);
+		
 		List<Place> places = placeDao.findAllByName(name);
 		List<PlaceDto> placesDto = new ArrayList<>();
 
@@ -49,6 +52,7 @@ public class PlaceService {
 	}
 
 	public Collection<PlaceDto> getAllPlacesByPostCode(String postCode) {
+		Objects.requireNonNull(postCode);
 		List<Place> places = placeDao.findAllByPostCode(postCode);
 		List<PlaceDto> placesDto = new ArrayList<>();
 

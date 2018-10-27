@@ -3,6 +3,7 @@ package fr.istic.master.wego.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,12 +30,11 @@ public class SportService {
 		return listDto;
 	}
 
-	public SportDto getSportById(long id) {
-		Sport sport = sportDao.findById(id).orElse(null);
-		if (sport == null)
-			return null;
-		else
-			return TransformDtoSport.transformToDto(sport);
+	public SportDto getSportById(Long id) {
+		Objects.requireNonNull(id);
+		Sport sport = sportDao.getOne(id);
+
+		return TransformDtoSport.transformToDto(sport);
 	}
 
 }
