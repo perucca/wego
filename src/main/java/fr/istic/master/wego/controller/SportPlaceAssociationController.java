@@ -1,22 +1,26 @@
 package fr.istic.master.wego.controller;
 
-import fr.istic.master.wego.dao.UserDao;
-import fr.istic.master.wego.dto.SportPlaceAssociationDtoCreate;
-import fr.istic.master.wego.dto.SportPlaceAssociationDtoRead;
-import fr.istic.master.wego.model.User;
-import fr.istic.master.wego.service.SportPlaceAssociationService;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
+import fr.istic.master.wego.dto.SportPlaceAssociationDtoCreate;
+import fr.istic.master.wego.dto.SportPlaceAssociationDtoRead;
+import fr.istic.master.wego.service.SportPlaceAssociationService;
 
 @RestController
 @RequestMapping("/sportplaceassociations")
 public class SportPlaceAssociationController {
-
-    @Autowired
-    private UserDao userDao;
 
     @Autowired
     private SportPlaceAssociationService sportPlaceAssociationService;
@@ -31,8 +35,6 @@ public class SportPlaceAssociationController {
     //READ
     @GetMapping("/byuser/{id}")
     public Collection<SportPlaceAssociationDtoRead> getSportPlaceAssociationsByUserId(@PathVariable("id") Long id) {
-        User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User: " + id + " not found!"));
-
         return sportPlaceAssociationService.getAllSportPlaceAssociationByUserId(id);
     }
 
