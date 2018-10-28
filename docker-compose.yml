@@ -1,8 +1,49 @@
-nginx:
-  image: nginx:latest
-  container_name: wego_proxy
-  volumes:
-   - ./nginx.conf:/etc/nginx/nginx.conf
-  ports:
-   - "80:80"
+# 3 services :
+# Client: NGINX + Wego SPA Application. The image is build.
+# Server: Spring boot + wego Application. The image is build.
+# Database: MySQL server. The image is pulled from a repository.
 
+services:
+  client:
+    build: 
+      ./docker/client/DockerFile
+    image: 
+      wego_client
+    container_name: 
+      wego_client
+    ports:
+      "80:80"
+    network:
+      wego-network
+
+  server:
+    build: 
+      ./docker/server/DockerFile
+    image: 
+      wego_server
+    container_name: 
+      wego_server
+    network:
+      wego-network
+  db:
+    image:
+      mysql:5.7.24
+    container_name:
+      wego_database
+    ports:
+      "3306:3306"
+    volumes:
+      - /home/michel/mysql-data:/var/lib/mysql
+    network:
+      wego-network
+  environment:
+    MYSQL_DATABASE: "wego"
+    MYSQL_USER: "root"
+    MYSQL_PASSWORD: "password"
+    MYSQL_ROOT_PASSWORD: "root"
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+  sudo docker run -- --name database \
+        -v  \
+        -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=wego \
+        --publish=3306:3306 -d 
