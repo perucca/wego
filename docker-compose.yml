@@ -2,48 +2,48 @@
 # Client: NGINX + Wego SPA Application. The image is build.
 # Server: Spring boot + wego Application. The image is build.
 # Database: MySQL server. The image is pulled from a repository.
-
+version: '3'
 services:
-  client:
-    build: 
-      ./docker/client/DockerFile
+  front:
+    build:
+      context: .
+      dockerfile: ./docker/client/Dockerfile 
     image: 
-      wego_client
+      front
+    depends_on:
+      - server
     container_name: 
-      wego_client
+      front
     ports:
-      "80:80"
-    network:
-      wego-network
-
+      - "80:80"
+    networks:
+      - wego-network
   server:
     build: 
-      ./docker/server/DockerFile
+      context: .
+      dockerfile: ./docker/server/Dockerfile
     image: 
-      wego_server
+      server
+    depends_on:
+      - mysql
     container_name: 
-      wego_server
-    network:
-      wego-network
-  db:
+      server
+    networks:
+      - wego-network
+  mysql:
     image:
       mysql:5.7.24
     container_name:
-      wego_database
-    ports:
-      "3306:3306"
+      mysql
     volumes:
-      - /home/michel/mysql-data:/var/lib/mysql
-    network:
-      wego-network
-  environment:
-    MYSQL_DATABASE: "wego"
-    MYSQL_USER: "root"
-    MYSQL_PASSWORD: "password"
-    MYSQL_ROOT_PASSWORD: "root"
-    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-
-  sudo docker run -- --name database \
-        -v  \
-        -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=wego \
-        --publish=3306:3306 -d 
+      - /opt/mysql-data:/var/lib/mysql
+    networks:
+      - wego-network
+    environment:
+      MYSQL_DATABASE: "wego"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+networks: 
+  wego-network:

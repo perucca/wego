@@ -1,0 +1,11 @@
+reactapp/node_modules
+reactapp/build
+target
+docs
+.git
+.project
+.classpath
+docker
+.metadata
+.springBeans
+.settings

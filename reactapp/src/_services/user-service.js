@@ -7,7 +7,7 @@ export const userService = {
 
 //LOG THE USER
 function login(username, password) {
-    return Axios.post('/login', {}, {
+    return Axios.post('/api/login', {}, {
         auth: {
             username: username,
             password: password
@@ -52,7 +52,7 @@ function login(username, password) {
 
 //REGISTER THE USER
 function register(user) {
-    return Axios.post('/signin', user)
+    return Axios.post('/api/signin', user)
         .then(function (response) {
             console.log("signin succeeded");
             return response;
