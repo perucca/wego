@@ -1,7 +1,11 @@
 package fr.istic.master.wego.controller;
 
 import java.util.Collection;
+import java.util.List;
 
+import fr.istic.master.wego.dto.SportPlaceAssociationDtoBatch;
+import fr.istic.master.wego.model.UserSport;
+import fr.istic.master.wego.service.UserSportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +28,9 @@ public class SportPlaceAssociationController {
 
     @Autowired
     private SportPlaceAssociationService sportPlaceAssociationService;
+
+    @Autowired
+    private UserSportService userSportService;
 
     //CREATE
     @PostMapping("")
@@ -50,4 +57,36 @@ public class SportPlaceAssociationController {
         sportPlaceAssociationService.deleteSportPlaceAssociation(id);
     }
 
+    //CREATE USERSPORT + BATCH
+    @PostMapping("/createsportandbatch")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createMultipleSportPlaceAssociation(@RequestBody SportPlaceAssociationDtoBatch sportPlaceAssociationDtoBatch) {
+        // create the userSport
+        UserSport newUs = userSportService.createUserSport(sportPlaceAssociationDtoBatch.getUserSportDto());
+        // then create the sportPlaceAssociations
+        List<SportPlaceAssociationDtoCreate> spaList = sportPlaceAssociationDtoBatch.getSpaList();
+        for (SportPlaceAssociationDtoCreate spa: spaList) {
+            // use the id of the userSport newly created
+            spa.setIdUserSport(newUs.getId());
+            sportPlaceAssociationService.createSportPlaceAssociation(spa);
+        }
+    }
+
+    //CREATE BATCH
+    @PostMapping("/batch")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createSportPlaceAssociationBatch(@RequestBody List<SportPlaceAssociationDtoCreate> spaList) {
+
+        for (SportPlaceAssociationDtoCreate spa: spaList) {
+            sportPlaceAssociationService.createSportPlaceAssociation(spa);
+        }
+    }
+
+    //DELETE BATCH
+    @DeleteMapping("/batch")
+    public void deleteSportPlaceAssociationBatch(@RequestBody List<Long> idList) {
+        for (Long id: idList) {
+            sportPlaceAssociationService.deleteSportPlaceAssociation(id);
+        }
+    }
 }
