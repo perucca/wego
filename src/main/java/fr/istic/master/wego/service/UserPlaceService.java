@@ -59,15 +59,14 @@ public class UserPlaceService {
 		Objects.requireNonNull(userplaceDto);
 		Objects.requireNonNull(userplaceDto.getIdUser());
 		Objects.requireNonNull(userplaceDto.getIdPlace());
-		
+
 		User user = userDao.getOne(userplaceDto.getIdUser());
 
 		Place place = placeDao.getOne(userplaceDto.getIdPlace());
 
-		if (!userPlaceDao.existsByUserAndPlace(user, place)) {
+		if (userPlaceDao.existsByUserAndPlace(user, place))
 			throw new IllegalStateException("Le userPlace existe déjà");
-		}
-		
+
 		UserPlace up = new UserPlace();
 		up.setUser(user);
 		up.setPlace(place);
