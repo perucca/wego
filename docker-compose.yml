@@ -11,39 +11,37 @@ services:
     image: 
       front
     depends_on:
-      - server
+      - apiserver
     container_name: 
       front
     ports:
       - "80:80"
-    networks:
-      - wego-network
-  server:
+  apiserver:
     build: 
       context: .
       dockerfile: ./docker/server/Dockerfile
     image: 
-      server
-    depends_on:
-      - mysql
+      apiserver
     container_name: 
-      server
-    networks:
-      - wego-network
-  mysql:
+      apiserver
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
     image:
       mysql:5.7.24
-    container_name:
-      mysql
+    container_name: 
+      db  
+    expose:
+      - "3306"
     volumes:
       - /opt/mysql-data:/var/lib/mysql
-    networks:
-      - wego-network
     environment:
       MYSQL_DATABASE: "wego"
       MYSQL_USER: "admin"
       MYSQL_PASSWORD: "password"
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-networks: 
-  wego-network:

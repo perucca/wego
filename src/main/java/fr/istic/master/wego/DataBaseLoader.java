@@ -31,6 +31,9 @@ public class DataBaseLoader {
 
 	public void loadData() {
 
+		if (userdao.count() != 0)
+			return;
+
 		// Declaration de plusieurs lieux de test
 		Sport kayak = new Sport();
 		kayak.setSportName("kayak");
