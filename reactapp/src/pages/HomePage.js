@@ -14,7 +14,7 @@ class Home extends Component {
 
     render(){ 
     return(
-      <div className="dark">
+      <div className="dark homepage">
         <h3> Welcome {this.props.currentuser.firstName} !</h3>
         <div>
             <LinkedButton name="My Places" type="button" to="/myplaces"></LinkedButton>
