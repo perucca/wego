@@ -22,7 +22,7 @@ function login(username, password) {
                 //add the user to local storage
 
                 //add the user to the store
-                return Axios.get('/users/by_email/' + username, {
+                return Axios.get('/api/users/by_email/' + username, {
                     auth: {
                         username: username,
                         password: password
