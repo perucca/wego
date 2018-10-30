@@ -43,19 +43,22 @@ public class UserPlaceController {
 	}
 
 	// service de create d'un userplace pour un user
-	@PostMapping("")
-	@ResponseStatus(HttpStatus.CREATED)
-	public void createUserPlace(@RequestBody UserPlaceDtoCreate userplaceDto) {
+	@PostMapping("/byuser/{id}")
+	public Collection<UserPlaceDtoRead> createUserPlace(@PathVariable("id") Long id, @RequestBody UserPlaceDtoCreate userplaceDto) {
 		userplaceService.createUserPlace(userplaceDto);
+		User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
+		return userplaceService.getAllUserPlacesByUser(user);
 	}
 
 	// service de delete
-	@DeleteMapping("/{id}")
-	public void deleteUserPlace(@PathVariable("id") Long id) {
-		userplaceService.deleteUserPlace(id);
+	@DeleteMapping("byuser/{iduser}/{iduserplace}")
+	public Collection<UserPlaceDtoRead> deleteUserPlace(@PathVariable("iduser") Long iduser,@PathVariable("iduserplace") Long iduserplace ) {
+		userplaceService.deleteUserPlace(iduserplace);
 		System.err.println("La UserPlace a été supprimée");
+		User user = userDao.findById(iduser).orElseThrow(() -> new RuntimeException("User: not found!"));
+		return userplaceService.getAllUserPlacesByUser(user);
 	}
-
+	
 	// service de update
 	@PutMapping("/{id}")
 	public void updateUserPlace(@PathVariable("id") Long id, @RequestBody UserPlaceDtoCreate userplaceDto) {

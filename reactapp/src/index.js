@@ -17,7 +17,7 @@ import {configureStore } from './_helpers';
 
 const store = configureStore({
     users: Data.users,
-    places: Data.places,
+    places: [],
     sports: Data.sports,
     userplaces : [],
     usersports : [],

@@ -61,7 +61,6 @@ public class UserPlaceService {
 		Objects.requireNonNull(userplaceDto.getIdPlace());
 
 		User user = userDao.getOne(userplaceDto.getIdUser());
-
 		Place place = placeDao.getOne(userplaceDto.getIdPlace());
 
 		if (userPlaceDao.existsByUserAndPlace(user, place))
