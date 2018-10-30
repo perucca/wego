@@ -20,7 +20,7 @@ class Login extends React.Component {
     }
 
     handleChange = (e) => {
-        const change = this.state ;
+        const change = this.state;
         change[e.target.name] = e.target.value;
         this.setState(change);
         console.log(this.state)
@@ -31,7 +31,9 @@ class Login extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <TextField id="login-email" placeholder="Email" type="email" name="username" value={this.state.username} onChange={this.handleChange} />
                 <TextField id="login-password" placeholder="Password" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                <Checkbox id="login-rememberme" value="Remember me" />
+                <div className="form-group">
+                    <Checkbox id="login-rememberme" name="Remember me" />
+                </div>
                 <ButtonForm name="Log In" type="submit" />
                 <div className="form-group">
                     <Link to="/signin">Create an account</Link>
