@@ -78,7 +78,6 @@ public class UserSport {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((myPlacesForThisSport == null) ? 0 : myPlacesForThisSport.hashCode());
 		result = prime * result + Float.floatToIntBits(preferenceOrder);
 		result = prime * result + ((sport == null) ? 0 : sport.hashCode());
 		return result;

@@ -40,7 +40,7 @@ public class UserSportService {
 
 		Sport sport = sportDao.getOne(userSportDto.getIdSport());
 
-		if (!userSportDao.existsByUserAndSport(user, sport)) {
+		if (userSportDao.existsByUserAndSport(user, sport)) {
 			throw new IllegalStateException("this userSport already exists");
 		}
 		
