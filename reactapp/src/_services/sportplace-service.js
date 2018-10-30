@@ -3,6 +3,7 @@ import Axios from 'axios';
 export const sportPlaceService = {
     readSportPlaceAssociations,
     createSportPlaceAssociation,
+    createSportPlaceAssociationBatch
 }
 
 //READ SPORTPLACE ASSOCIATONS
@@ -46,6 +47,33 @@ function createSportPlaceAssociation(user, sportPlaceAssociation) {
             }
             else {
                 console.log("Failed to create sport-place association");
+                console.log(response.status + " " + response.statusText);
+                return Promise.reject(response);
+            }
+        })
+        .catch(function (error) {
+            console.log("create error");
+            if (error.response) {
+                console.log(error.response);
+            }
+            return Promise.reject(error);
+        });
+}
+
+//CREATE BATCH OF SPORTPLACE ASSOCIATION
+function createSportPlaceAssociationBatch(user, sportPlaceAssociationBatch) {
+    
+    return Axios.post('/sportplaceassociations/batch',sportPlaceAssociationBatch, {
+        headers : {'Authorization': '' + user.authorization}
+    })
+        .then(function (response) {
+            if (response.status === 201) {
+                console.log("Successfully created batch of sport-place associations");
+                console.log(response)
+                return response;
+            }
+            else {
+                console.log("Failed to create batch of sport-place associations");
                 console.log(response.status + " " + response.statusText);
                 return Promise.reject(response);
             }
