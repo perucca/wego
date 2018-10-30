@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HomeLayout from '../_hoc/HomeLayout';
 import { SportActions, PlaceActions, SportPlaceActions } from '../_actions';
 import { connect } from 'react-redux';
-import { ButtonForm, CustomSelectSports, CustomSelectPlaces, Modal } from '../_components';
+import { ButtonForm, CustomSelectSports, Modal, Checkbox, Accordion } from '../_components';
 
 class MySports extends Component {
 
@@ -18,6 +18,11 @@ class MySports extends Component {
                 idUserSport: null,
                 idUserPlace: null,
             },
+            newPlaces: new Map(),
+            spaBatch:[],
+            availableUserPlaces: [],
+            availableSports: [],
+            userSports: []
         };
     }
 
@@ -27,16 +32,30 @@ class MySports extends Component {
         this.props.getUserSports(this.props.currentuser);
         this.props.getUserPlaces(this.props.currentuser);
         this.props.readSportPlaceAssociations(this.props.currentuser);
+        this.setState(previousState => ({ availableUserPlaces: [...previousState.availableUserPlaces, this.props.userplaces] }));
+        this.setState(previousState => ({ availableSports: [...previousState.availableSports, this.props.sports] }));
+        console.log(this.state);
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.state.newUserSport.preferenceOrder = this.props.usersports.length + 1;
-        this.state.newUserSport.idSport = this.state.idnewUserSport;
-        this.state.newSportPlaceAssociation.idUserPlace = this.state.idUserPlace;
-        console.log(this.state.newUserSport);
-        console.log(this.state.newSportPlaceAssociation);
-        this.props.createSportPlaceAssociation(this.props.currentuser, this.state.newUserSport, this.state.newSportPlaceAssociation);
+        this.setState({
+            newUserSport: {
+                idUser: this.props.currentuser.id,
+                idSport: this.props.usersports.length + 1,
+                preferenceOrder: this.state.idnewUserSport
+            },
+            newSportPlaceAssociation: {
+                idUserSport: null,
+                idUserPlace: this.state.idUserPlace,
+            },
+        });
+
+        this.state.newPlaces.forEach(location => {
+            console.log("yolo" + location)
+        });
+
+        this.props.createUserSportWithSportPlaceAssociation(this.props.currentuser, this.state.newUserSport, this.state.newSportPlaceAssociation);
     }
 
     handleChange = (e) => {
@@ -46,26 +65,53 @@ class MySports extends Component {
         console.log(this.state)
     }
 
+    handleAddLocation = (e) => {
+        const item = e.target.value;
+        const isChecked = e.target.checked;
+        this.setState(prevState => ({ newPlaces: prevState.newPlaces.set(item, isChecked) }));
+        console.log(this.state);
+    }
+    
+    resetState = () => {
+        this.setState({
+            newPlaces: new Map(),
+            spaBatch:[],
+            newUserSport: {
+                idUser: this.props.currentuser.id,
+                idSport: null,
+                preferenceOrder: null
+            },
+        })
+        // this.props.getUserPlaces(this.props.currentuser);
+        this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("1", false) }));
+        this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("2", false) }));
+        console.log("reset");
+        console.log(this.state);
+    }
+
     render() {
 
         return (
             <div>
-                <div>MySports {this.props.currentuser.firstName}</div>
+                <h2 className ="mb-4 mt-4">Manage Your Sports</h2>
 
-                <div>{this.props.usersports.map(sport => <div>{sport.sportDto.sportName}</div>)}</div>
+                <Accordion us={this.props.usersports} spa={this.props.sportplaceassociations}/>
 
-                <button type="button" className="btn" data-toggle="modal" data-target="#modalAddSports">
-                    Add Sports
+                <button className="btn mt-4" type="button" data-toggle="modal" data-target="#modalAddSports" onClick={this.resetState}>
+                    Add Sport
                 </button>
 
                 <Modal title="Add a Sport">
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <CustomSelectSports options={this.props.sports} name="idnewUserSport" label="Sports" handleChange={this.handleChange} />
+
+                            <CustomSelectSports options={this.props.sports} name="idnewUserSport" label="Sport" handleChange={this.handleChange} />
                         </div>
-                        <div className="form-group">Add practice Locations</div>
+                        <div className="form-group">Add practice locations</div>
                         <div className="form-group">
-                            <CustomSelectPlaces options={this.props.userplaces}  name="idUserPlace" label="Location" handleChange={this.handleChange} />
+                            {this.props.userplaces.map((place) =>
+                                <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.newPlaces.get(place.idUserplace)} handleChange={this.handleAddLocation} />
+                            )}
                         </div>
                         <ButtonForm name="Add Sport" type="submit" />
 
@@ -74,7 +120,6 @@ class MySports extends Component {
             </div>
         )
     }
-
 }
 
 const mapStateToProps = state => ({
@@ -99,8 +144,8 @@ const mapDispatchToProps = dispatch => {
         createUserSport: (user, userSport) => {
             dispatch(SportActions.createUserSport(user, userSport))
         },
-        createSportPlaceAssociation: (user, userSport, sportPlaceAssociation) => {
-            dispatch(SportPlaceActions.createSportPlaceAssociation(user, userSport, sportPlaceAssociation))
+        createUserSportWithSportPlaceAssociation: (user, userSport, sportPlaceAssociation) => {
+            dispatch(SportPlaceActions.createUserSportWithSportPlaceAssociation(user, userSport, sportPlaceAssociation))
         },
         readSportPlaceAssociations: (user) => {
             dispatch(SportPlaceActions.readSportPlaceAssociations(user))

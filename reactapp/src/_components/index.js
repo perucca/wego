@@ -6,3 +6,4 @@ export * from './PrivateRoute';
 export * from './Header';
 export * from './CustomSelect';
 export * from './Modal';
+export * from './Accordion';
