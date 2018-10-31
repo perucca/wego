@@ -30,6 +30,12 @@ class HeaderBase extends React.Component {
                                 <Link className="nav-link" to="/home">Home<span className="sr-only">(current)</span></Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/mysports">Sports</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/myplaces">Places</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/profile">Profile</Link>
                             </li>
                             </ul>
