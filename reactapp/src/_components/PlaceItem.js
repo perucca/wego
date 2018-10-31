@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 
 
 class PlaceItem extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     handleOnClick = (event) => {
         event.preventDefault();

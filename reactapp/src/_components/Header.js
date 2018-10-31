@@ -35,7 +35,7 @@ class HeaderBase extends React.Component {
                             </ul>
                             <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <a className="nav-link" onClick={this.handleLogout} href="#" >Logout</a>
+                                <a className="nav-link" onClick={this.handleLogout} href="#">Logout</a>
                             </li>
                         </ul>
                     </div>

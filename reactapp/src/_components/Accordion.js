@@ -28,7 +28,7 @@ export const Accordion = (props) => (
                     <div id={collapseId} className="collapse show" aria-labelledby={headingId} data-parent="#accordion">
                         <div className="card-body">
                             {spaList
-                                .filter((spa) => spa.userSportDtoRead.idUserSport == us.idUserSport)
+                                .filter((spa) => spa.userSportDtoRead.idUserSport === us.idUserSport)
                                 .map((spa) => <p className="mb-0" key={spa.id}>{spa.userPlaceDtoRead.placeDto.name}</p>)}
                         </div>
                     </div>

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './App.css';
-import sun from '../_img/sun.png';
 import HomeLayout from '../_hoc/HomeLayout';
 import { LinkedButton } from '../_components';
 import { connect } from 'react-redux';

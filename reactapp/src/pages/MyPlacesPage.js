@@ -3,7 +3,7 @@ import './App.css';
 import HomeLayout from '../_hoc/HomeLayout';
 import { PlaceActions } from '../_actions/place-actions';
 import { PlaceList } from '../_components/PlaceList';
-import { TextField, ButtonForm, CustomSelectNewPlace, Modal } from '../_components';
+import { ButtonForm, CustomSelectNewPlace, Modal } from '../_components';
 import { connect } from 'react-redux';
 
 
@@ -47,7 +47,7 @@ class MyPlaces extends Component {
 
     handleSubmitCityName = (e) => {
         e.preventDefault();
-        if (this.state.searchedCityName!=""){
+        if (this.state.searchedCityName!==""){
             this.props.searchPlace(this.props.currentuser, this.state.searchedCityName);
             console.log("on va chercher en base : " + this.state.searchedCityName);
             this.setState({newUserPlace: this.state.newUserPlace, searchedCityName:""});
