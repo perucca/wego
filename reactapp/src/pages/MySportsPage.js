@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import HomeLayout from '../_hoc/HomeLayout';
+import {MainLayout} from '../_hoc/MainLayout';
 import { SportActions, PlaceActions, SportPlaceActions } from '../_actions';
 import { connect } from 'react-redux';
-import { ButtonForm, CustomSelectSports, Modal, Checkbox, Accordion } from '../_components';
+import { ButtonForm, CustomSelectSports, Modal, Checkbox, Accordion, Fab } from '../_components';
 
 class MySports extends Component {
 
@@ -92,14 +92,15 @@ class MySports extends Component {
     render() {
 
         return (
+            <MainLayout title="Your Favorite Sports">
             <div>
-                <h2 className ="mb-4 mt-4">Manage Your Sports</h2>
 
                 <Accordion us={this.props.usersports} spa={this.props.sportplaceassociations}/>
 
-                <button className="btn mt-4" type="button" data-toggle="modal" data-target="#modalAddSports" onClick={this.resetState}>
+                <button className="btn mt-4 float-right" type="button" data-toggle="modal" data-target="#modalAddSports" onClick={this.resetState}>
                     Add Sport
-                </button>
+                </button >
+                <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.resetState} />
 
                 <Modal title="Add a Sport">
                     <form onSubmit={this.handleSubmit}>
@@ -118,6 +119,7 @@ class MySports extends Component {
                     </form>
                 </Modal>
             </div>
+            </MainLayout>
         )
     }
 }
@@ -157,4 +159,4 @@ export const MySportsConnected = connect(
     mapStateToProps,
     mapDispatchToProps)(MySports)
 
-export const MySportsPage = HomeLayout(MySportsConnected);
+export const MySportsPage = MySportsConnected;
