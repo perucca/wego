@@ -6,16 +6,18 @@ import { ButtonForm, CustomSelectSports, Checkbox, Fab } from '../_components';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import icon from '../_img/cycling.svg';
+import editBtn from '../_img/edit-button.svg';
 
-const SortableItem = SortableElement(({ value }) =>
-    <li className="list-group-item text-left">{value}</li>
+
+const SortableItem = SortableElement(({ value, onClick }) =>
+    <li className="list-group-item text-left">{value}<span><img className="edit-btn float-right" onClick={onClick} src={editBtn} alt="edit button"/></span></li>
 );
 
-const SortableList = SortableContainer(({ items }) => {
+const SortableList = SortableContainer(({ items, onClick }) => {
     return (
         <ul className="list-group">
             {items.map((value, index) => (
-                <SortableItem key={`item-${index}`} index={index} value={value} />
+                <SortableItem key={`item-${index}`} index={index} value={value} onClick={onClick}/>
             ))}
         </ul>
     );
@@ -40,7 +42,8 @@ class MySports extends Component {
             availableUserPlaces: [],
             availableSports: [],
             userSports: [],
-            modal: false
+            modalCreation: false,
+            modalEdition: false,
         };
     }
 
@@ -71,9 +74,16 @@ class MySports extends Component {
         console.log(this.state);
     }
 
-    toggle = () => {
+    toggleModalCreation = () => {
         this.setState({
-          modal: !this.state.modal
+            modalCreation: !this.state.modalCreation
+        });
+      }
+
+    toggleModalEdition = () => {
+        console.log("EDIT")
+        this.setState({
+            modalEdition: !this.state.modalEdition
         });
       }
 
@@ -87,7 +97,7 @@ class MySports extends Component {
           }
         console.log(spa);
         this.props.createUserSportWithSportPlaceAssociationBatch(this.props.currentuser, this.state.newUserSport, spa);
-        this.toggle();
+        this.toggleModalCreation();
     }
 
     handleAddUserSport = (e) => {
@@ -141,10 +151,10 @@ class MySports extends Component {
                         if (prefA > prefB) return 1;
                         return 0;
                     })
-                        .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} />
-                    <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggle} />
-                    <Modal isOpen={this.state.modal} toggle={this.toggle} centered={true} onOpened={this.resetState} onClosed={this.resetState} className="custom-modal">
-                    <ModalHeader toggle={this.toggle}>Add a Favorite Sport</ModalHeader>
+                        .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} onClick = {this.toggleModalEdition} pressDelay={200}/>
+                    <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggleModalCreation} />
+                    <Modal isOpen={this.state.modalCreation} toggle={this.toggleModalCreation} centered={true} onOpened={this.resetState} onClosed={this.resetState} className="custom-modal">
+                    <ModalHeader toggle={this.toggleModalCreation}>Add a sport</ModalHeader>
                     <ModalBody>
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
@@ -165,6 +175,21 @@ class MySports extends Component {
                                 )}
                             </div>
                             <ButtonForm name="Add Sport" type="submit" />
+                        </form>
+                        </ModalBody>
+                    </Modal>
+
+                    <Modal isOpen={this.state.modalEdition} toggle={this.toggleModalEdition} centered={true} onOpened={this.resetState} onClosed={this.resetState} className="custom-modal">
+                    <ModalHeader toggle={this.toggleModalEdition}>Edit your sport</ModalHeader>
+                    <ModalBody>
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="form-group">Select practice locations</div>
+                            <div className="form-group">
+                                {this.props.userplaces.map((place) =>
+                                    <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.newPlaces.get(place.idUserplace)} handleChange={this.handleAddLocation} />
+                                )}
+                            </div>
+                            <ButtonForm name="Save" type="submit" />
                         </form>
                         </ModalBody>
                     </Modal>

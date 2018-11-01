@@ -45,3 +45,8 @@
     background-color: orange;
     border-color: orange;
 }
+
+.edit-btn{
+    max-width:20px;
+    height: auto;
+}
