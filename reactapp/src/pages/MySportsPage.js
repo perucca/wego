@@ -149,12 +149,20 @@ class MySports extends Component {
                     <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggle} />
 
 
-                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} centered="true" onEnter={this.resetState} onExit={this.resetState}>
                     <ModalHeader toggle={this.toggle}>Add a Favorite Sport</ModalHeader>
                     <ModalBody>
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
-                                <CustomSelectSports options={this.props.sports} name="idnewUserSport" label="Sport" handleChange={this.handleChange} />
+                                <CustomSelectSports options={this.props.sports.filter(sport => {
+                                    let toKeep = true;
+                                    this.props.usersports.forEach(element => {
+                                        if(sport.id === element.sportDto.id){
+                                            toKeep = false;
+                                        }
+                                    });
+                                    return toKeep;
+                                })} name="idnewUserSport" label="Sport" handleChange={this.handleChange} />
                             </div>
                             <div className="form-group">Add practice locations</div>
                             <div className="form-group">
