@@ -1,7 +1,6 @@
 import React from 'react';
 import './MainLayout.css';
 import { Header } from '../_components';
-import icon from '../_img/cycling.svg';
 
 export const MainLayout = (props) => (
 

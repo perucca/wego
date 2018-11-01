@@ -40,3 +40,8 @@
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%; 
 }
+
+.custom-modal .btn{
+    background-color: orange;
+    border-color: orange;
+}

@@ -143,7 +143,7 @@ class MySports extends Component {
                     })
                         .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} />
                     <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggle} />
-                    <Modal isOpen={this.state.modal} toggle={this.toggle} centered={true} onOpened={this.resetState} onClosed={this.resetState}>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} centered={true} onOpened={this.resetState} onClosed={this.resetState} className="custom-modal">
                     <ModalHeader toggle={this.toggle}>Add a Favorite Sport</ModalHeader>
                     <ModalBody>
                         <form onSubmit={this.handleSubmit}>
