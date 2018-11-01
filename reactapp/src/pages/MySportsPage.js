@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
-import {MainLayout} from '../_hoc/MainLayout';
+import { MainLayout } from '../_hoc/MainLayout';
 import { SportActions, PlaceActions, SportPlaceActions } from '../_actions';
 import { connect } from 'react-redux';
 import { ButtonForm, CustomSelectSports, Modal, Checkbox, Accordion, Fab } from '../_components';
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+
+const SortableItem = SortableElement(({ value }) =>
+    <li>{value}</li>
+);
+
+const SortableList = SortableContainer(({ items }) => {
+    return (
+        <ul>
+            {items.map((value, index) => (
+                <SortableItem key={`item-${index}`} index={index} value={value} />
+            ))}
+        </ul>
+    );
+});
 
 class MySports extends Component {
 
@@ -19,7 +34,7 @@ class MySports extends Component {
                 idUserPlace: null,
             },
             newPlaces: new Map(),
-            spaBatch:[],
+            spaBatch: [],
             availableUserPlaces: [],
             availableSports: [],
             userSports: []
@@ -71,11 +86,11 @@ class MySports extends Component {
         this.setState(prevState => ({ newPlaces: prevState.newPlaces.set(item, isChecked) }));
         console.log(this.state);
     }
-    
+
     resetState = () => {
         this.setState({
             newPlaces: new Map(),
-            spaBatch:[],
+            spaBatch: [],
             newUserSport: {
                 idUser: this.props.currentuser.id,
                 idSport: null,
@@ -89,36 +104,54 @@ class MySports extends Component {
         console.log(this.state);
     }
 
-    render() {
+    onSortEnd = ({oldIndex, newIndex}) => {
+        console.log("YOLOOOOOOOOOOOOOOOOOOOOOO");
+        const prevItems = this.props.usersports.sort(function (a, b) {
+            let prefA = a.preferenceOrder;
+            let prefB = b.preferenceOrder;
+            if (prefA < prefB) return -1;
+            if (prefA > prefB) return 1;
+            return 0;
+        })
 
+       const items = arrayMove(prevItems, oldIndex, newIndex);
+       items.map((item,index) => item.preferenceOrder = index + 1);
+       console.log("reorder");
+       console.log(items);
+       this.props.updateUserSportBatch(this.props.currentuser, items);
+        
+      };
+
+    render() {
         return (
             <MainLayout title="Your Favorite Sports">
-            <div>
+                <div>
+                    <SortableList items={this.props.usersports.sort(function (a, b) {
+                        let prefA = a.preferenceOrder;
+                        let prefB = b.preferenceOrder;
+                        if (prefA < prefB) return -1;
+                        if (prefA > prefB) return 1;
+                        return 0;
+                    })
+                        .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} />
 
-                <Accordion us={this.props.usersports} spa={this.props.sportplaceassociations}/>
 
-                <button className="btn mt-4 float-right" type="button" data-toggle="modal" data-target="#modalAddSports" onClick={this.resetState}>
-                    Add Sport
-                </button >
-                <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.resetState} />
-
-                <Modal title="Add a Sport">
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-
-                            <CustomSelectSports options={this.props.sports} name="idnewUserSport" label="Sport" handleChange={this.handleChange} />
-                        </div>
-                        <div className="form-group">Add practice locations</div>
-                        <div className="form-group">
-                            {this.props.userplaces.map((place) =>
-                                <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.newPlaces.get(place.idUserplace)} handleChange={this.handleAddLocation} />
-                            )}
-                        </div>
-                        <ButtonForm name="Add Sport" type="submit" />
-
-                    </form>
-                </Modal>
-            </div>
+                    <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.resetState} />
+                    <Modal title="Add a Sport">
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="form-group">
+                                <CustomSelectSports options={this.props.sports} name="idnewUserSport" label="Sport" handleChange={this.handleChange} />
+                            </div>
+                            <div className="form-group">Add practice locations</div>
+                            <div className="form-group">
+                                {this.props.userplaces.map((place) =>
+                                    <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.newPlaces.get(place.idUserplace)} handleChange={this.handleAddLocation} />
+                                )}
+                            </div>
+                            <ButtonForm name="Add Sport" type="submit" />
+                        </form>
+                    </Modal>
+                </div>
             </MainLayout>
         )
     }
@@ -146,12 +179,16 @@ const mapDispatchToProps = dispatch => {
         createUserSport: (user, userSport) => {
             dispatch(SportActions.createUserSport(user, userSport))
         },
+        updateUserSportBatch: (user, userSportBatch) => {
+            dispatch(SportActions.updateUserSportBatch(user, userSportBatch))
+        },
         createUserSportWithSportPlaceAssociation: (user, userSport, sportPlaceAssociation) => {
             dispatch(SportPlaceActions.createUserSportWithSportPlaceAssociation(user, userSport, sportPlaceAssociation))
         },
         readSportPlaceAssociations: (user) => {
             dispatch(SportPlaceActions.readSportPlaceAssociations(user))
         },
+        
     }
 }
 
