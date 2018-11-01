@@ -12,7 +12,7 @@ export const MainLayout = (props) => (
                 <h3 className="ml-auto mr-auto mt-4">{props.title}</h3>
             </div>
             <div className="page-icon">
-                <img src={icon} alt="page icon"/>
+                <img src={props.icon} alt="page icon"/>
             </div>
          
             <div className="row align-items-center h-50">

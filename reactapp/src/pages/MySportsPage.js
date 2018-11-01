@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { ButtonForm, CustomSelectSports, Checkbox, Fab } from '../_components';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import icon from '../_img/cycling.svg';
 
 const SortableItem = SortableElement(({ value }) =>
     <li className="list-group-item text-left">{value}</li>
@@ -131,7 +132,7 @@ class MySports extends Component {
 
     render() {
         return (
-            <MainLayout title="Your Favorite Sports">
+            <MainLayout title="Your Favorite Sports" icon={icon}>
                 <div>
                     <SortableList items={this.props.usersports.sort(function (a, b) {
                         let prefA = a.preferenceOrder;
@@ -141,11 +142,7 @@ class MySports extends Component {
                         return 0;
                     })
                         .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} />
-
-
                     <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggle} />
-
-
                     <Modal isOpen={this.state.modal} toggle={this.toggle} centered={true} onOpened={this.resetState} onClosed={this.resetState}>
                     <ModalHeader toggle={this.toggle}>Add a Favorite Sport</ModalHeader>
                     <ModalBody>
