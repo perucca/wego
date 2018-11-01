@@ -6,7 +6,7 @@ import { SportActions } from '../_actions';
 
 export const SportPlaceActions = {
     readSportPlaceAssociations,
-    createUserSportWithSportPlaceAssociation,
+    createUserSportWithSportPlaceAssociationBatch,
     createSportPlaceAssociationBatch
 }
 
@@ -29,7 +29,7 @@ function readSportPlaceAssociations(user) {
 }
 
 //CREATE USERSPORT + SPORTPLACE ASSOCIATIONS
-function createUserSportWithSportPlaceAssociation(user, userSport, sportPlaceAssociation) {
+function createUserSportWithSportPlaceAssociationBatch(user, userSport, sportPlaceAssociationBatch) {
     return dispatch => {
 
         dispatch(requestUserSport());
@@ -38,9 +38,11 @@ function createUserSportWithSportPlaceAssociation(user, userSport, sportPlaceAss
                 dispatch(successUserSport());
                 dispatch(SportActions.getUserSports(user));
                 dispatch(request());
-                sportPlaceAssociation.idUserSport = response.headers.location.substr(response.headers.location.lastIndexOf('/') + 1);
-                console.log(sportPlaceAssociation);
-                sportPlaceService.createSportPlaceAssociation(user, sportPlaceAssociation)
+                sportPlaceAssociationBatch.forEach(element => {
+                    element.idUserSport = response.headers.location.substr(response.headers.location.lastIndexOf('/') + 1);
+                });
+                console.log(sportPlaceAssociationBatch);
+                sportPlaceService.createSportPlaceAssociationBatch(user, sportPlaceAssociationBatch)
                     .then(function (response) {
                         dispatch(success());
                         dispatch(readSportPlaceAssociations(user))

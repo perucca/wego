@@ -64,10 +64,9 @@ class MySports extends Component {
                 preferenceOrder: null
             },
         })
-        // this.props.getUserPlaces(this.props.currentuser);
         this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("1", false) }));
         this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("2", false) }));
-        console.log("reset");
+        console.log("RESET");
         console.log(this.state);
     }
 
@@ -79,23 +78,25 @@ class MySports extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        const spa = [];
+        for (let [key, value] of this.state.newPlaces) {
+            if(value === true){
+                spa.push({idUserSport:1, idUserPlace:key})
+            }
+          }
+        console.log(spa);
+        this.props.createUserSportWithSportPlaceAssociationBatch(this.props.currentuser, this.state.newUserSport, spa);
+        this.toggle();
+    }
+
+    handleAddUserSport = (e) => {
         this.setState({
             newUserSport: {
                 idUser: this.props.currentuser.id,
-                idSport: this.props.usersports.length + 1,
-                preferenceOrder: this.state.idnewUserSport
-            },
-            newSportPlaceAssociation: {
-                idUserSport: null,
-                idUserPlace: this.state.idUserPlace,
-            },
+                idSport: e.target.value,
+                preferenceOrder: this.props.usersports.length + 1,
+            }
         });
-
-        this.state.newPlaces.forEach(location => {
-            console.log("yolo" + location)
-        });
-
-        this.props.createUserSportWithSportPlaceAssociation(this.props.currentuser, this.state.newUserSport, this.state.newSportPlaceAssociation);
     }
 
     handleChange = (e) => {
@@ -112,10 +113,7 @@ class MySports extends Component {
         console.log(this.state);
     }
 
-    
-
     onSortEnd = ({oldIndex, newIndex}) => {
-        console.log("YOLOOOOOOOOOOOOOOOOOOOOOO");
         const prevItems = this.props.usersports.sort(function (a, b) {
             let prefA = a.preferenceOrder;
             let prefB = b.preferenceOrder;
@@ -123,7 +121,6 @@ class MySports extends Component {
             if (prefA > prefB) return 1;
             return 0;
         })
-
        const items = arrayMove(prevItems, oldIndex, newIndex);
        items.map((item,index) => item.preferenceOrder = index + 1);
        console.log("reorder");
@@ -149,7 +146,7 @@ class MySports extends Component {
                     <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggle} />
 
 
-                    <Modal isOpen={this.state.modal} toggle={this.toggle} centered="true" onEnter={this.resetState} onExit={this.resetState}>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} centered={true} onOpened={this.resetState} onClosed={this.resetState}>
                     <ModalHeader toggle={this.toggle}>Add a Favorite Sport</ModalHeader>
                     <ModalBody>
                         <form onSubmit={this.handleSubmit}>
@@ -162,9 +159,9 @@ class MySports extends Component {
                                         }
                                     });
                                     return toKeep;
-                                })} name="idnewUserSport" label="Sport" handleChange={this.handleChange} />
+                                })} name="idnewUserSport" label="Sport" handleChange={this.handleAddUserSport} />
                             </div>
-                            <div className="form-group">Add practice locations</div>
+                            <div className="form-group">Select practice locations</div>
                             <div className="form-group">
                                 {this.props.userplaces.map((place) =>
                                     <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.newPlaces.get(place.idUserplace)} handleChange={this.handleAddLocation} />
@@ -205,8 +202,8 @@ const mapDispatchToProps = dispatch => {
         updateUserSportBatch: (user, userSportBatch) => {
             dispatch(SportActions.updateUserSportBatch(user, userSportBatch))
         },
-        createUserSportWithSportPlaceAssociation: (user, userSport, sportPlaceAssociation) => {
-            dispatch(SportPlaceActions.createUserSportWithSportPlaceAssociation(user, userSport, sportPlaceAssociation))
+        createUserSportWithSportPlaceAssociationBatch: (user, userSport, sportPlaceAssociationBatch) => {
+            dispatch(SportPlaceActions.createUserSportWithSportPlaceAssociationBatch(user, userSport, sportPlaceAssociationBatch))
         },
         readSportPlaceAssociations: (user) => {
             dispatch(SportPlaceActions.readSportPlaceAssociations(user))
