@@ -1,0 +1,42 @@
+.home-layout {
+    background-color: whitesmoke;
+    color : dimgray;
+}
+
+.main-layout .btn {
+    background-color: white;
+    color : grey;
+    border-color: lightgray;
+}
+
+.title-section{
+    background-color: #dddddd;
+    text-align: center;
+    color: #494949;
+    font-family: sans-serif;
+    height: 20%;
+    font-size: 1.5rem;
+}
+
+.icon-section{
+    background-color: red;
+}
+
+.logo {
+    max-width:300px;
+    height: auto;
+}
+
+.page-icon {
+    border: solid 4px #e8e8e8;
+    padding: 25px;
+    max-width:120px;
+    height: auto;
+    margin-top: -60px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: orange;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%; 
+}
