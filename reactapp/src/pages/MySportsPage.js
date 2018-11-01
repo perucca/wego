@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { MainLayout } from '../_hoc/MainLayout';
 import { SportActions, PlaceActions, SportPlaceActions } from '../_actions';
 import { connect } from 'react-redux';
-import { ButtonForm, CustomSelectSports, Modal, Checkbox, Accordion, Fab } from '../_components';
+import { ButtonForm, CustomSelectSports, Checkbox, Fab } from '../_components';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const SortableItem = SortableElement(({ value }) =>
-    <li class="list-group-item text-left">{value}</li>
+    <li className="list-group-item text-left">{value}</li>
 );
 
 const SortableList = SortableContainer(({ items }) => {
@@ -37,7 +38,8 @@ class MySports extends Component {
             spaBatch: [],
             availableUserPlaces: [],
             availableSports: [],
-            userSports: []
+            userSports: [],
+            modal: false
         };
     }
 
@@ -51,6 +53,29 @@ class MySports extends Component {
         this.setState(previousState => ({ availableSports: [...previousState.availableSports, this.props.sports] }));
         console.log(this.state);
     }
+
+    resetState = () => {
+        this.setState({
+            newPlaces: new Map(),
+            spaBatch: [],
+            newUserSport: {
+                idUser: this.props.currentuser.id,
+                idSport: null,
+                preferenceOrder: null
+            },
+        })
+        // this.props.getUserPlaces(this.props.currentuser);
+        this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("1", false) }));
+        this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("2", false) }));
+        console.log("reset");
+        console.log(this.state);
+    }
+
+    toggle = () => {
+        this.setState({
+          modal: !this.state.modal
+        });
+      }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -87,22 +112,7 @@ class MySports extends Component {
         console.log(this.state);
     }
 
-    resetState = () => {
-        this.setState({
-            newPlaces: new Map(),
-            spaBatch: [],
-            newUserSport: {
-                idUser: this.props.currentuser.id,
-                idSport: null,
-                preferenceOrder: null
-            },
-        })
-        // this.props.getUserPlaces(this.props.currentuser);
-        this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("1", false) }));
-        this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("2", false) }));
-        console.log("reset");
-        console.log(this.state);
-    }
+    
 
     onSortEnd = ({oldIndex, newIndex}) => {
         console.log("YOLOOOOOOOOOOOOOOOOOOOOOO");
@@ -136,8 +146,12 @@ class MySports extends Component {
                         .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} />
 
 
-                    <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.resetState} />
-                    <Modal title="Add a Sport">
+                    <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggle} />
+
+
+                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                    <ModalHeader toggle={this.toggle}>Add a Favorite Sport</ModalHeader>
+                    <ModalBody>
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
                                 <CustomSelectSports options={this.props.sports} name="idnewUserSport" label="Sport" handleChange={this.handleChange} />
@@ -150,6 +164,7 @@ class MySports extends Component {
                             </div>
                             <ButtonForm name="Add Sport" type="submit" />
                         </form>
+                        </ModalBody>
                     </Modal>
                 </div>
             </MainLayout>
