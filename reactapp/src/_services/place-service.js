@@ -5,9 +5,9 @@ export const placeService = {
     getUserPlaces,
     deleteUserPlace,
     searchPlace,
-    createUserPlace
-    // increaseUserPlacePreference,
-    // decreaseUserPlacePreference
+    createUserPlace,
+    increaseUserPlacePreference,
+    decreaseUserPlacePreference
 }
 
 function getPlaces(user) {
@@ -133,6 +133,58 @@ function createUserPlace(user, place) {
         })
         .catch(function (error) {
             console.log("Creation error");
+            if (error.response) {
+                console.log(error.response);
+            }
+            return Promise.reject(error);
+        });
+}
+
+function increaseUserPlacePreference(user, place) {
+    console.log(user.authorization)
+    return Axios.get('/userplaces/increased/'+user.id+"/"+ place, {
+        headers : {'Authorization': '' + user.authorization}
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log("Successfully updated the user place");
+                console.log(response)
+                return response.data;
+            }
+            else {
+                console.log("Failed updating the user place");
+                console.log(response.status + " " + response.statusText);
+                return Promise.reject(response);
+            }
+        })
+        .catch(function (error) {
+            console.log("Update error");
+            if (error.response) {
+                console.log(error.response);
+            }
+            return Promise.reject(error);
+        });
+}
+
+function decreaseUserPlacePreference(user, place) {
+    console.log(user.authorization)
+    return Axios.get('/userplaces/decreased/'+user.id+"/"+ place, {
+        headers : {'Authorization': '' + user.authorization}
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log("Successfully updated the user place");
+                console.log(response)
+                return response.data;
+            }
+            else {
+                console.log("Failed updating the user place");
+                console.log(response.status + " " + response.statusText);
+                return Promise.reject(response);
+            }
+        })
+        .catch(function (error) {
+            console.log("Update error");
             if (error.response) {
                 console.log(error.response);
             }

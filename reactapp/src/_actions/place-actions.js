@@ -6,7 +6,9 @@ export const PlaceActions = {
     getUserPlaces,
     deleteUserPlace,
     searchPlace,
-    createUserPlace
+    createUserPlace,
+    increaseUserPlacePreference,
+    decreaseUserPlacePreference
 }
 
 function getPlaces(user) {
@@ -92,4 +94,38 @@ function createUserPlace(user, place) {
     function request() { return { type: PlaceConstants.CREATEUSERPLACE_PROGRESS } }
     function success(places) { return { type: PlaceConstants.CREATEUSERPLACE_SUCCESS, places } }
     function failure() { return { type: PlaceConstants.CREATEUSERPLACE_ERROR } }
+}
+
+function increaseUserPlacePreference(user, place) {
+    return dispatch => {
+        dispatch(request())
+        placeService.increaseUserPlacePreference(user, place)
+            .then(function (response) {
+                dispatch(success(response))
+            })
+            .catch(function (error) {
+                dispatch(failure())
+            })
+    }
+
+    function request() { return { type: PlaceConstants.INCREASEUSERPLACEPREFERENCE_PROGRESS } }
+    function success(places) { return { type: PlaceConstants.INCREASEUSERPLACEPREFERENCE_SUCCESS, places } }
+    function failure() { return { type: PlaceConstants.INCREASEUSERPLACEPREFERENCE_ERROR } }
+}
+
+function decreaseUserPlacePreference(user, place) {
+    return dispatch => {
+        dispatch(request())
+        placeService.decreaseUserPlacePreference(user, place)
+            .then(function (response) {
+                dispatch(success(response))
+            })
+            .catch(function (error) {
+                dispatch(failure())
+            })
+    }
+
+    function request() { return { type: PlaceConstants.DECREASEUSERPLACEPREFERENCE_PROGRESS } }
+    function success(places) { return { type: PlaceConstants.DECREASEUSERPLACEPREFERENCE_SUCCESS, places } }
+    function failure() { return { type: PlaceConstants.DECREASEUSERPLACEPREFERENCE_ERROR } }
 }

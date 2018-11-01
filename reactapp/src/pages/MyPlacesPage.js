@@ -3,7 +3,7 @@ import './App.css';
 import HomeLayout from '../_hoc/HomeLayout';
 import { PlaceActions } from '../_actions/place-actions';
 import { PlaceList } from '../_components/PlaceList';
-import { ButtonForm, CustomSelectNewPlace, Modal } from '../_components';
+import { ButtonForm, Modal, CustomSelectNewPlace } from '../_components';
 import { connect } from 'react-redux';
 
 
@@ -25,6 +25,17 @@ class MyPlaces extends Component {
         this.props.getUserPlaces(this.props.currentuser);
     }
 
+    handleChangeCityName = (e) => {
+        this.setState({newUserPlace: this.state.newUserPlace, searchedCityName:e.target.value});
+    }
+
+    handleSubmitCityName = (e) => {
+        e.preventDefault();
+        if (this.state.searchedCityName!=""){
+            this.props.searchPlace(this.props.currentuser, this.state.searchedCityName);
+        }  
+    }
+
     handleChangeUserPlace = (event) => {
         this.setState({newUserPlace: {idUser: this.state.newUserPlace.idUser, idPlace: event.target.value, preferenceOrder: this.state.newUserPlace.preferenceOrder}, searchedCityName:this.state.searchedCityName});
         console.log("l'id de la place selectionnée est " + event.target.value)
@@ -34,24 +45,13 @@ class MyPlaces extends Component {
         event.preventDefault();
         if (this.state.newUserPlace.idPlace !=null){
             this.state.newUserPlace.preferenceOrder = this.props.userplaces.length + 1;
+            console.log(this.state);
             this.props.createUserPlace(this.props.currentuser, this.state.newUserPlace);
         }
         console.log(this.state);
-        this.setState({newUserPlace: {idUser: this.state.newUserPlace.idUser, idPlace:null, preferenceOrder:null}, searchedCityName:""});
-    }
-
-    handleChangeCityName = (e) => {
-        this.setState({newUserPlace: this.state.newUserPlace, searchedCityName:e.target.value});
-        console.log(this.state)
-    }
-
-    handleSubmitCityName = (e) => {
-        e.preventDefault();
-        if (this.state.searchedCityName!==""){
-            this.props.searchPlace(this.props.currentuser, this.state.searchedCityName);
-            console.log("on va chercher en base : " + this.state.searchedCityName);
-            this.setState({newUserPlace: this.state.newUserPlace, searchedCityName:""});
-        }  
+        this.setState({newUserPlace: {idUser: this.state.newUserPlace.idUser, idPlace: null, preferenceOrder: null}, searchedCityName:""});
+        console.log(this.state);
+        if (this.state.searchedCityName!=""){
     }
 
     render() {
@@ -59,9 +59,11 @@ class MyPlaces extends Component {
         <div>
         <h2>My Places: </h2>
         <PlaceList places={this.props.userplaces.sort((a,b)=>a.preferenceOrder>b.preferenceOrder)} />
+       
         <button type="button" className="btn" data-toggle="modal" data-target="#modalAddSports">
                     Add a place
         </button>
+
         <Modal title="Add a new Place">
             <form onSubmit={this.handleSubmitCityName}>
                 <div className="form-group">First, search a place name</div>
@@ -85,7 +87,8 @@ class MyPlaces extends Component {
 const mapStateToProps = state => ({
     currentuser: state.currentuser,
     places: state.places,
-    userplaces: state.userplaces
+    userplaces: state.userplaces,
+    placetodelete : state.placetodelete
 });
 
 const mapDispatchToProps = dispatch => {

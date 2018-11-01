@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import fr.istic.master.wego.dao.PlaceDao;
@@ -50,9 +52,21 @@ public class UserPlaceService {
 		return userPlaceDto;
 	}
 
-	public void deleteUserPlace(Long id) {
-		Objects.requireNonNull(id);
-		userPlaceDao.deleteById(id);
+	@Transactional
+	public void deleteUserPlaceAndUpdate(Long iduser, Long iduserplace) {
+		Objects.requireNonNull(iduser);
+		Objects.requireNonNull(iduserplace);
+		
+		User user = userDao.findById(iduser).orElseThrow(() -> new RuntimeException("User not found!"));
+		List<UserPlace> userplaces = userPlaceDao.findByUser(user);
+		
+		
+		UserPlace u = userPlaceDao.getOne(iduserplace);
+		Float pref= u.getPreferenceOrder();
+		
+		userplaces.stream().filter(up->(up.getPreferenceOrder())>pref).forEach(up->increaseUserPlacePreference(up.getId()));
+		
+		userPlaceDao.deleteById(iduserplace);
 	}
 
 	public void createUserPlace(UserPlaceDtoCreate userplaceDto) {
@@ -79,5 +93,62 @@ public class UserPlaceService {
 		UserPlace u = userPlaceDao.getOne(id);
 		userPlaceDao.save(TransformDtoUserPlace.transformFromDto(userplaceDto, u));
 	}
+	
+	public void increaseUserPlacePreference(Long id) {
+		Objects.requireNonNull(id);
+		
+		UserPlace u = userPlaceDao.getOne(id);
+		Float pref = u.getPreferenceOrder();
+		pref= pref-1.0f;
+		u.setPreferenceOrder(pref);
+		userPlaceDao.save(u);
+	}
+
+	public void decreaseUserPlacePreference(Long id) {
+		Objects.requireNonNull(id);
+		
+		UserPlace u = userPlaceDao.getOne(id);
+		Float pref = u.getPreferenceOrder();
+		pref= pref+1.0f;
+		u.setPreferenceOrder(pref);
+		userPlaceDao.save(u);
+	}
+
+	@Transactional
+	public void increaseUserPlace(Long iduserplace, Long iduser) {
+		Objects.requireNonNull(iduser);
+		Objects.requireNonNull(iduserplace);
+		
+		User user = userDao.findById(iduser).orElseThrow(() -> new RuntimeException("User not found!"));
+		List<UserPlace> userplaces = userPlaceDao.findByUser(user);
+		
+		UserPlace u = userPlaceDao.getOne(iduserplace);
+		Float pref= u.getPreferenceOrder();
+		if (pref>1) {
+			userplaces.stream().filter(up->(up.getPreferenceOrder())==(pref-1)).forEach(up->decreaseUserPlacePreference(up.getId()));
+			increaseUserPlacePreference(iduserplace);
+		}
+	}
+
+	@Transactional
+	public void decreaseUserPlace(Long iduserplace, Long iduser) {
+		Objects.requireNonNull(iduser);
+		Objects.requireNonNull(iduserplace);
+		
+		User user = userDao.findById(iduser).orElseThrow(() -> new RuntimeException("User not found!"));
+		List<UserPlace> userplaces = userPlaceDao.findByUser(user);
+		
+		UserPlace u = userPlaceDao.getOne(iduserplace);
+		Float pref= u.getPreferenceOrder();
+		
+		List<UserPlace> listToChange=userplaces.stream().filter(up->(up.getPreferenceOrder())==(pref+1)).collect(Collectors.toList());
+		
+		if (listToChange.size()>0) { 
+			listToChange.forEach(up->increaseUserPlacePreference(up.getId()));
+			decreaseUserPlacePreference(iduserplace);
+		}
+		
+	}
+
 
 }
