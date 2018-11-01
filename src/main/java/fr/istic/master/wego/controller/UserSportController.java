@@ -3,7 +3,9 @@ package fr.istic.master.wego.controller;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 
+import fr.istic.master.wego.dto.TransformDtoUserSport;
 import fr.istic.master.wego.dto.UserSportDtoCreate;
 import fr.istic.master.wego.model.UserSport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,13 @@ public class UserSportController {
     @DeleteMapping("/{id}")
     public void deleteUserSport(@PathVariable("id") Long id) {
         userSportService.deleteUserSport(id);
+    }
+
+    //UPDATE BATCH
+    @PutMapping("")
+    public void updateUserSportBatch(@RequestBody List<UserSportDtoRead> userSportDtoReads) {
+
+        userSportService.updateUserSportBatch(userSportDtoReads);
+
     }
 }
