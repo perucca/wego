@@ -51,7 +51,6 @@ class MyPlaces extends Component {
         console.log(this.state);
         this.setState({newUserPlace: {idUser: this.state.newUserPlace.idUser, idPlace: null, preferenceOrder: null}, searchedCityName:""});
         console.log(this.state);
-        if (this.state.searchedCityName!=""){
     }
 
     render() {
