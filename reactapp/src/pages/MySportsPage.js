@@ -6,12 +6,12 @@ import { ButtonForm, CustomSelectSports, Modal, Checkbox, Accordion, Fab } from 
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
 const SortableItem = SortableElement(({ value }) =>
-    <li>{value}</li>
+    <li class="list-group-item text-left">{value}</li>
 );
 
 const SortableList = SortableContainer(({ items }) => {
     return (
-        <ul>
+        <ul className="list-group">
             {items.map((value, index) => (
                 <SortableItem key={`item-${index}`} index={index} value={value} />
             ))}
