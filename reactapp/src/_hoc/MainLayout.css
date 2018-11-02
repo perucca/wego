@@ -10,7 +10,7 @@
 }
 
 .title-section{
-    background-color: #dddddd;
+    background-color: #e4e4e4;
     text-align: center;
     color: #494949;
     font-family: sans-serif;
@@ -39,4 +39,14 @@
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%; 
+}
+
+.custom-modal .btn{
+    background-color: orange;
+    border-color: orange;
+}
+
+.edit-btn{
+    max-width:20px;
+    height: auto;
 }

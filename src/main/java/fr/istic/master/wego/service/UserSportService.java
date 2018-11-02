@@ -91,4 +91,21 @@ public class UserSportService {
 		userSportDao.deleteById(id);
 	}
 
+	//UPDATE BATCH
+	public void updateUserSportBatch(List<UserSportDtoRead> userSportDtos) {
+		for (UserSportDtoRead usd : userSportDtos) {
+			Objects.requireNonNull(usd);
+			Objects.requireNonNull(usd.getIdUserSport());
+			Objects.requireNonNull(usd.getPreferenceOrder());
+			Objects.requireNonNull(usd.getSportDto());
+
+			UserSport us = userSportDao.getOne(usd.getIdUserSport());
+			Sport sport = sportDao.getOne(usd.getSportDto().getId());
+
+			us.setSport(sport);
+			us.setPreferenceOrder(usd.getPreferenceOrder());
+			userSportDao.save(us);
+		}
+	}
+
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import './MainLayout.css';
 import { Header } from '../_components';
-import icon from '../_img/cycling.svg';
 
 export const MainLayout = (props) => (
 
@@ -9,10 +8,10 @@ export const MainLayout = (props) => (
         <Header />
         <div className="container-fluid h-100">
             <div className="title-section row text-center">
-                <h2 className="ml-auto mr-auto mt-4">{props.title}</h2>
+                <h3 className="ml-auto mr-auto mt-4">{props.title}</h3>
             </div>
             <div className="page-icon">
-                <img src={icon} alt="page icon"/>
+                <img src={props.icon} alt="page icon"/>
             </div>
          
             <div className="row align-items-center h-50">
