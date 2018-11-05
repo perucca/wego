@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import {UserConstants} from '../_constants/UserConstants';
 
 function users (state=[], action){

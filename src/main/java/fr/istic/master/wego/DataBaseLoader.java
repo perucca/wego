@@ -80,24 +80,73 @@ public class DataBaseLoader {
 		p4.setPassword(User.PASSWORD_ENCODER.encode("yolo"));
 
 		// Declaration de plusieurs lieux de test
-		Place redon = new Place();
-		Place plerguer = new Place();
-		Place rennes = new Place();
-		Place brest = new Place();
-		Place dunkerque = new Place();
-		Place nantes = new Place();
-		redon.setName("Redon");
+	    Place redon = new Place();
+	    redon.setName("Redon");
 		redon.setPostCode("35600");
-		plerguer.setName("Plerguer");
-		plerguer.setPostCode("35000");
-		rennes.setName("Rennes");
-		rennes.setPostCode("35000");
-		brest.setName("Brest");
-		brest.setPostCode("29000");
-		dunkerque.setName("Dunkerque");
-		dunkerque.setPostCode("59200");
-		nantes.setName("nantes");
+		
+	    Place vannes = new Place();
+	    vannes.setName("Vannes");
+		vannes.setPostCode("56000");
+		
+	    Place nantes = new Place();
+	    nantes.setName("Nantes");
 		nantes.setPostCode("44000");
+		
+		Place nantes1 = new Place();
+		nantes1.setName("Nantes");
+		nantes1.setPostCode("44001");
+		
+		Place nantes2 = new Place();
+		nantes2.setName("Nantes");
+		nantes2.setPostCode("44002");
+		
+	    Place saintbrieuc = new Place();
+	    saintbrieuc.setName("Saint Brieuc");
+		saintbrieuc.setPostCode("22000");
+		
+	    Place caen = new Place();
+	    caen.setName("Caen");
+		caen.setPostCode("14000");
+		
+	    Place dunkerque = new Place();
+	    dunkerque.setName("Dunkerque");
+		dunkerque.setPostCode("59120");
+		
+	    Place annecy = new Place();
+	    annecy.setName("Annecy");
+		annecy.setPostCode("74000");
+		
+	    Place marseille = new Place();
+	    marseille.setName("Marseille");
+		marseille.setPostCode("13000");
+		
+	    Place marseille1 = new Place();
+	    marseille1.setName("Marseille");
+		marseille1.setPostCode("13001");
+		
+	    Place marseille2 = new Place();
+	    marseille2.setName("Marseille");
+		marseille2.setPostCode("13002");
+		
+	    Place marseille3 = new Place();
+	    marseille3.setName("Marseille");
+		marseille3.setPostCode("13003");
+		
+	    Place bainssuroust = new Place();
+	    bainssuroust.setName("Bain sur Oust");
+		bainssuroust.setPostCode("35600");
+		
+	    Place saintomer1 = new Place();
+	    saintomer1.setName("Saint Omer");
+		saintomer1.setPostCode("62500");
+		
+	    Place saintomer2 = new Place();
+	    saintomer2.setName("Saint Omer");
+		saintomer2.setPostCode("44130");
+		
+	    Place saintemarie = new Place();
+	    saintemarie.setName("Sainte Marie de Redon");
+		saintemarie.setPostCode("35600");
 
 		// Déclaration de plusieurs UserPlace
 		UserPlace up1 = new UserPlace();
@@ -115,30 +164,30 @@ public class DataBaseLoader {
 		up1.setPlace(redon);
 		up1.setUser(p1);
 		up1.setPreferenceOrder(2);
-		up2.setPlace(brest);
+		up2.setPlace(saintomer1);
 		up2.setUser(p1);
 		up2.setPreferenceOrder(1);
 
-		up3.setPlace(plerguer);
+		up3.setPlace(marseille);
 		up3.setUser(p2);
 		up3.setPreferenceOrder(1);
-		up4.setPlace(rennes);
+		up4.setPlace(annecy);
 		up4.setUser(p2);
 		up4.setPreferenceOrder(3);
-		up5.setPlace(plerguer);
+		up5.setPlace(bainssuroust);
 		up5.setUser(p2);
 		up5.setPreferenceOrder(2);
 
 		up6.setPlace(dunkerque);
 		up6.setUser(p3);
 		up6.setPreferenceOrder(1);
-		up7.setPlace(rennes);
+		up7.setPlace(saintomer2);
 		up7.setUser(p3);
 		up7.setPreferenceOrder(2);
 		up8.setPlace(redon);
 		up8.setUser(p3);
 		up8.setPreferenceOrder(4);
-		up9.setPlace(plerguer);
+		up9.setPlace(marseille3);
 		up9.setUser(p3);
 		up9.setPreferenceOrder(3);
 
@@ -185,11 +234,22 @@ public class DataBaseLoader {
 		userdao.save(p4);
 
 		placedao.save(redon);
-		placedao.save(plerguer);
-		placedao.save(rennes);
-		placedao.save(dunkerque);
+		placedao.save(vannes);
 		placedao.save(nantes);
-		placedao.save(brest);
+		placedao.save(nantes1);
+		placedao.save(nantes2);
+		placedao.save(saintbrieuc);
+		placedao.save(caen);
+		placedao.save(dunkerque);
+		placedao.save(annecy);
+		placedao.save(marseille);
+		placedao.save(marseille1);
+		placedao.save(marseille2);
+		placedao.save(marseille3);
+		placedao.save(bainssuroust);
+		placedao.save(saintomer1);
+		placedao.save(saintomer2);
+		placedao.save(saintemarie);
 
 		sportdao.save(kayak);
 		sportdao.save(foot);

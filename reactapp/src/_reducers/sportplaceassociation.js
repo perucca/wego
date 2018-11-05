@@ -1,9 +1,9 @@
+import { SportPlaceConstants } from '../_constants';
+
 function sportplaceassociation (state=[], action){
     switch(action.type){
-        // case 'ADD_USER':
-        //     return [...state, action.user]
-        // case 'ADD_USER_ERROR' :
-        //     return state
+        case SportPlaceConstants.READ_SPORTPLACE_ASSOCIATION_SUCCESS:
+            return action.sportPlaceAssociations;
         default :
             return state   
     }

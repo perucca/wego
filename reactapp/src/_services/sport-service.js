@@ -4,6 +4,7 @@ export const sportService = {
     getSports,
     getUserSports,
     createUserSport,
+    updateUserSportBatch
 }
 
 //RETRIEVE ALL SPORTS
@@ -80,6 +81,33 @@ function createUserSport(user, userSport) {
         })
         .catch(function (error) {
             console.log("Error creating userSport");
+            if (error.response) {
+                console.log(error.response);
+            }
+            return Promise.reject(error);
+        });
+}
+
+//UPDATE USERSPORT BATCH
+function updateUserSportBatch(user, userSportBatch) {
+    
+    return Axios.put('/usersports/',userSportBatch, {
+        headers : {'Authorization': '' + user.authorization}
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log("Successfully updated all the userSports");
+                console.log(response)
+                return response;
+            }
+            else {
+                console.log("Failed to update all the userSports");
+                console.log(response.status + " " + response.statusText);
+                return Promise.reject(response);
+            }
+        })
+        .catch(function (error) {
+            console.log("Error updating all the userSports");
             if (error.response) {
                 console.log(error.response);
             }

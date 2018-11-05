@@ -28,17 +28,17 @@
     color : grey;
     border-color: lightgray;
 }
-.home-layout .card {
+.home-layout .homepage .card {
   background-color: orange;
   border-color: white;
   border-width: 2px;
 }
 
-.home-layout .card-title {
+.home-layout .homepage .card-title {
   color: white;
 }
 
-.home-layout .card-text {
+.home-layout .homepage .card-text {
     color: white;
 }
 

@@ -23,3 +23,15 @@ export const CustomSelectPlaces = (props) => (
         </select>
     </div>
 )
+
+export const CustomSelectNewPlace = (props) => (
+    <div className="input-group">
+        <div className="input-group-prepend">
+            <label className="input-group-text" htmlFor="selectOptions">{props.label}</label>
+        </div>
+        <select className="custom-select" id="selectOptions" name={props.name} value={props.value} onChange={props.handleChange}>
+            <option value="">Choose in the list below</option>
+            {props.options.map(i => <option key={i.id} value={i.id}>{i.postCode} - {i.name}</option>)}
+        </select>
+    </div>
+)

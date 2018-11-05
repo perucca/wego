@@ -4,7 +4,8 @@ import { sportService } from '../_services';
 export const SportActions = {
     getSports,
     getUserSports,
-    createUserSport
+    createUserSport,
+    updateUserSportBatch
 }
 
 //RETRIEVE ALL SPORTS
@@ -60,4 +61,23 @@ function createUserSport(user, userSport) {
     function request() { return { type: SportConstants.CREATE_USERSPORT_PROGRESS } }
     function success() { return { type: SportConstants.CREATE_USERSPORT_SUCCESS } }
     function failure() { return { type: SportConstants.CREATE_USERSPORT_ERROR } }
+}
+
+//UPDATE USERSPORT BATCH
+function updateUserSportBatch(user, userSportBatch) {
+    return dispatch => {
+        dispatch(request());
+        sportService.updateUserSportBatch(user, userSportBatch)
+            .then(function (response) {
+                dispatch(success());
+                dispatch(getUserSports(user))
+            })
+            .catch(function (error) {
+                dispatch(failure());
+            })
+    }
+
+    function request() { return { type: SportConstants.UPDATE_USERSPORT_BATCH_PROGRESS } }
+    function success() { return { type: SportConstants.UPDATE_USERSPORT_BATCH_SUCCESS } }
+    function failure() { return { type: SportConstants.UPDATE_USERSPORT_BATCH_ERROR } }
 }

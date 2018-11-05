@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './App.css';
-import sun from '../_img/sun.png';
 import HomeLayout from '../_hoc/HomeLayout';
 import { LinkedButton } from '../_components';
 import { connect } from 'react-redux';
@@ -14,7 +12,7 @@ class Home extends Component {
 
     render(){ 
     return(
-      <div className="dark">
+      <div className="dark homepage">
         <h3> Welcome {this.props.currentuser.firstName} !</h3>
         <div>
             <LinkedButton name="My Places" type="button" to="/myplaces"></LinkedButton>

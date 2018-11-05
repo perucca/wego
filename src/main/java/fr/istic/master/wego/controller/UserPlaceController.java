@@ -38,28 +38,46 @@ public class UserPlaceController {
 	@GetMapping("/byuser/{id}")
 	public Collection<UserPlaceDtoRead> getAllUserPlacesForUserId(@PathVariable("id") Long id) {
 		User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User: " + id + " not found!"));
-
 		return userplaceService.getAllUserPlacesByUser(user);
 	}
 
 	// service de create d'un userplace pour un user
-	@PostMapping("")
-	@ResponseStatus(HttpStatus.CREATED)
-	public void createUserPlace(@RequestBody UserPlaceDtoCreate userplaceDto) {
+	@PostMapping("/byuser/{id}")
+	public Collection<UserPlaceDtoRead> createUserPlace(@PathVariable("id") Long id, @RequestBody UserPlaceDtoCreate userplaceDto) {
 		userplaceService.createUserPlace(userplaceDto);
+		User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
+		return userplaceService.getAllUserPlacesByUser(user);
 	}
 
 	// service de delete
-	@DeleteMapping("/{id}")
-	public void deleteUserPlace(@PathVariable("id") Long id) {
-		userplaceService.deleteUserPlace(id);
+	@DeleteMapping("byuser/{iduser}/{iduserplace}")
+	public Collection<UserPlaceDtoRead> deleteUserPlace(@PathVariable("iduser") Long iduser,@PathVariable("iduserplace") Long iduserplace ) {
+		userplaceService.deleteUserPlaceAndUpdate(iduser, iduserplace);
 		System.err.println("La UserPlace a été supprimée");
+		User user = userDao.findById(iduser).orElseThrow(() -> new RuntimeException("User: not found!"));
+		return userplaceService.getAllUserPlacesByUser(user);
 	}
-
+	
 	// service de update
 	@PutMapping("/{id}")
 	public void updateUserPlace(@PathVariable("id") Long id, @RequestBody UserPlaceDtoCreate userplaceDto) {
 		userplaceService.updateUserPlace(id, userplaceDto);
 		System.err.println("La UserPlace a été mise à jour");
+	}
+	
+	@GetMapping("/increased/{iduser}/{idplace}")
+	public Collection<UserPlaceDtoRead> increaseUserPlacePreference(@PathVariable("iduser") Long iduser, @PathVariable("idplace") Long idplace) {
+		userplaceService.increaseUserPlace(idplace, iduser);
+		System.err.println("La préférence de la UserPlace a été augmentée");
+		User user = userDao.findById(iduser).orElseThrow(() -> new RuntimeException("User not found!"));
+		return userplaceService.getAllUserPlacesByUser(user);
+	}
+	
+	@GetMapping("/decreased/{iduser}/{idplace}")
+	public Collection<UserPlaceDtoRead> decreaseUserPlacePreference(@PathVariable("iduser") Long iduser, @PathVariable("idplace") Long idplace) {
+		userplaceService.decreaseUserPlace(idplace, iduser);
+		System.err.println("La préférence de la UserPlace a été diminuée");
+		User user = userDao.findById(iduser).orElseThrow(() -> new RuntimeException("User not found!"));
+		return userplaceService.getAllUserPlacesByUser(user);
 	}
 }
