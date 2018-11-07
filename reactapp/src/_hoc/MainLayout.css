@@ -1,4 +1,4 @@
-.home-layout {
+.main-layout {
     background-color: whitesmoke;
     color : dimgray;
 }
@@ -9,25 +9,26 @@
     border-color: lightgray;
 }
 
-.title-section{
+.main-layout .title-section{
     background-color: #e4e4e4;
     text-align: center;
     color: #494949;
     font-family: sans-serif;
+    min-height: 130px;
     height: 20%;
     font-size: 1.5rem;
 }
 
-.icon-section{
+.main-layout .icon-section{
     background-color: red;
 }
 
-.logo {
-    max-width:300px;
+.main-layout .logo {
+    max-width:60px;
     height: auto;
 }
 
-.page-icon {
+.main-layout .page-icon {
     border: solid 4px #e8e8e8;
     padding: 25px;
     max-width:120px;
@@ -41,7 +42,7 @@
     -webkit-border-radius: 50%; 
 }
 
-.custom-modal .btn{
+.main-layout .custom-modal .btn{
     background-color: orange;
     border-color: orange;
 }

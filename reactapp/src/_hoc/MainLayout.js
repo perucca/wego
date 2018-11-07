@@ -4,7 +4,7 @@ import { Header } from '../_components';
 
 export const MainLayout = (props) => (
 
-    <div className="h-100 main-layout">
+    <div className="h-100 main-layout d-flex flex-column">
         <Header />
         <div className="container-fluid h-100">
             <div className="title-section row text-center">
