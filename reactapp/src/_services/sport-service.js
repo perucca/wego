@@ -91,7 +91,7 @@ function createUserSport(user, userSport) {
 //UPDATE USERSPORT BATCH
 function updateUserSportBatch(user, userSportBatch) {
     
-    return Axios.put('/usersports/',userSportBatch, {
+    return Axios.put('/api/usersports/',userSportBatch, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {

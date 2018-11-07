@@ -63,7 +63,7 @@ function createSportPlaceAssociation(user, sportPlaceAssociation) {
 //CREATE BATCH OF SPORTPLACE ASSOCIATION
 function createSportPlaceAssociationBatch(user, sportPlaceAssociationBatch) {
     
-    return Axios.post('/sportplaceassociations/batch',sportPlaceAssociationBatch, {
+    return Axios.post('/api/sportplaceassociations/batch',sportPlaceAssociationBatch, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
