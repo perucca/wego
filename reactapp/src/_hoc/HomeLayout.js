@@ -6,7 +6,7 @@ export const HomeLayout = (props) => (
 
     <div className="h-100 home-layout d-flex flex-column">
         <Header />
-        <div className="container-fluid fill-flex">
+        <div className="container-fluid h-100">
             <div className="title-section row text-center">
                 <h3 className="ml-auto mr-auto mt-4">{props.title}</h3>
             </div>
