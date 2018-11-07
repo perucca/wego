@@ -4,7 +4,7 @@ import { SportActions, PlaceActions, SportPlaceActions } from '../_actions';
 import { connect } from 'react-redux';
 import { ButtonForm, CustomSelectSports, Checkbox, Fab } from '../_components';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import icon from '../_img/cycling.svg';
 import editBtn from '../_img/edit-button.svg';
 
@@ -151,7 +151,7 @@ class MySports extends Component {
                         if (prefA > prefB) return 1;
                         return 0;
                     })
-                        .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} onClick = {this.toggleModalEdition} pressDelay={200}/>
+                        .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} onClick = {this.toggleModalEdition} distance={5}/>
                     <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggleModalCreation} />
                     <Modal isOpen={this.state.modalCreation} toggle={this.toggleModalCreation} centered={true} onOpened={this.resetState} onClosed={this.resetState} className="custom-modal">
                     <ModalHeader toggle={this.toggleModalCreation}>Add a sport</ModalHeader>
