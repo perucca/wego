@@ -1,6 +1,8 @@
 package fr.istic.master.wego.domain;
 
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,10 @@ public class WeatherAdviser {
 
 	public void analyse() {
 
-		userDao.findAll().stream().forEach((user) -> analyseWeather(user));
+		userDao.findAll().stream().forEach((user) -> {
+			Logger.getGlobal().log(Level.INFO, "Analysing User:" + user);
+			analyseWeather(user);
+		});
 	}
 
 	private void analyseWeather(User user) {

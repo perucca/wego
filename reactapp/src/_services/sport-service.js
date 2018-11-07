@@ -10,7 +10,7 @@ export const sportService = {
 //RETRIEVE ALL SPORTS
 function getSports(user) {
     console.log(user.authorization)
-    return Axios.get('/sports', {
+    return Axios.get('/api/sports', {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
@@ -37,7 +37,7 @@ function getSports(user) {
 //RETRIEVE USERSPORTS
 function getUserSports(user) {
     console.log(user.authorization)
-    return Axios.get('/usersports/byuser/' + user.id, {
+    return Axios.get('/api/usersports/byuser/' + user.id, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
@@ -64,7 +64,7 @@ function getUserSports(user) {
 //CREATE USERSPORT
 function createUserSport(user, userSport) {
     
-    return Axios.post('/usersports/',userSport, {
+    return Axios.post('/api/usersports/',userSport, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {

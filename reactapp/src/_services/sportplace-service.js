@@ -9,7 +9,7 @@ export const sportPlaceService = {
 //READ SPORTPLACE ASSOCIATONS
 function readSportPlaceAssociations(user) {
     console.log(user.authorization)
-    return Axios.get('/sportplaceassociations/byuser/' + user.id, {
+    return Axios.get('/api/sportplaceassociations/byuser/' + user.id, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
@@ -36,7 +36,7 @@ function readSportPlaceAssociations(user) {
 //CREATE SPORTPLACE ASSOCIATION
 function createSportPlaceAssociation(user, sportPlaceAssociation) {
     
-    return Axios.post('/sportplaceassociations/',sportPlaceAssociation, {
+    return Axios.post('/api/sportplaceassociations/',sportPlaceAssociation, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {

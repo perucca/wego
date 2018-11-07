@@ -12,7 +12,7 @@ export const placeService = {
 
 function getPlaces(user) {
     console.log(user.authorization)
-    return Axios.get('/places', {
+    return Axios.get('/api/places', {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
@@ -38,7 +38,7 @@ function getPlaces(user) {
 
 function getUserPlaces(user) {
     console.log(user.authorization)
-    return Axios.get('/userplaces/byuser/' + user.id, {
+    return Axios.get('/api/userplaces/byuser/' + user.id, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
