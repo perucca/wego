@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import HomeLayout from '../_hoc/HomeLayout';
+import {HomeLayout} from '../_hoc/HomeLayout';
 import { LinkedButton } from '../_components';
 import { connect } from 'react-redux';
+import icon from '../_img/profile.svg';
 
 class Home extends Component {
 
@@ -12,6 +13,7 @@ class Home extends Component {
 
     render(){ 
     return(
+    <HomeLayout title={"Welcome " + this.props.currentuser.firstName} icon={icon}>
       <div className="dark homepage">
         <h3> Welcome {this.props.currentuser.firstName} !</h3>
         <div>
@@ -28,6 +30,7 @@ class Home extends Component {
         </div>
 
     </div>
+    </HomeLayout>
     );
     }
 }
@@ -42,4 +45,4 @@ export const HomeConnected = connect(
     mapStateToProps,
     mapDispatchToProps)(Home)
 
-export const HomePage = HomeLayout(HomeConnected);
+export const HomePage = HomeConnected;

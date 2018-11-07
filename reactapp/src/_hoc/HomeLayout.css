@@ -3,46 +3,50 @@
   color : dimgray;
 }
 
-/* unvisited link */
-/* .home-layout a:link {
-  color: orange;
-} */
-
-/* visited link */
-/* .home-layout a:visited {
-  color: orange;
-} */
-
-/* mouse over link */
-/* .home-layout a:hover {
-  color: orange;
-} */
-
-/* selected link */
-/* .home-layout a:active {
-  color: orange;
-} */
-
 .home-layout .btn {
-    background-color: white;
-    color : grey;
-    border-color: lightgray;
+  background-color: white;
+  color : grey;
+  border-color: lightgray;
 }
-.home-layout .homepage .card {
+
+.home-layout .title-section{
+  background-color: #e4e4e4;
+  text-align: center;
+  color: #494949;
+  font-family: sans-serif;
+  height: 20%;
+  font-size: 1.5rem;
+}
+
+.home-layout .icon-section{
+  background-color: red;
+}
+
+.home-layout .logo {
+  max-width:60px;
+  height: auto;
+}
+
+.home-layout .page-icon {
+  border: solid 4px #e8e8e8;
+  padding: 0px;
+  max-width:120px;
+  height: auto;
+  margin-top: -60px;
+  margin-right: auto;
+  margin-left: auto;
   background-color: orange;
-  border-color: white;
-  border-width: 2px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%; 
 }
 
-.home-layout .homepage .card-title {
-  color: white;
+.home-layout .custom-modal .btn{
+  background-color: orange;
+  border-color: orange;
 }
 
-.home-layout .homepage .card-text {
-    color: white;
-}
-
-.logo {
-    max-width:300px;
-    height: auto;
+.home-layout .edit-btn{
+  max-width:20px;
+  height: auto;
 }
