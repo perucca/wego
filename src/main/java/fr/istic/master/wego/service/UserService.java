@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.istic.master.wego.dao.UserDao;
-import fr.istic.master.wego.dto.TransformDtoUser;
 import fr.istic.master.wego.dto.UserDtoCreate;
 import fr.istic.master.wego.dto.UserDtoRead;
+import fr.istic.master.wego.dto.transform.TransformDtoUser;
 import fr.istic.master.wego.model.User;
 
 @Service

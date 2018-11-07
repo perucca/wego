@@ -1,4 +1,4 @@
-package fr.istic.master.wego.service.openweather;
+package fr.istic.master.wego.service.openweather.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

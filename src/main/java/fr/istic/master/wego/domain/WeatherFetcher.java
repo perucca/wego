@@ -11,9 +11,9 @@ import fr.istic.master.wego.dao.UserPlaceDao;
 import fr.istic.master.wego.model.EnumWeather;
 import fr.istic.master.wego.model.Forecast;
 import fr.istic.master.wego.model.Place;
-import fr.istic.master.wego.service.openweather.OpenWeatherForecast;
-import fr.istic.master.wego.service.openweather.OpenWeatherForecastItem;
 import fr.istic.master.wego.service.openweather.OpenWeatherService;
+import fr.istic.master.wego.service.openweather.data.OpenWeatherForecast;
+import fr.istic.master.wego.service.openweather.data.OpenWeatherForecastItem;
 
 @Service
 public class WeatherFetcher {

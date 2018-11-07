@@ -1,4 +1,4 @@
-package fr.istic.master.wego.service.openweather;
+package fr.istic.master.wego.service.openweather.data;
 
 public class OWWindForecast {
 
