@@ -3,7 +3,7 @@ import './App.css';
 import { MainLayout } from '../_hoc/MainLayout';
 import { PlaceActions } from '../_actions/place-actions';
 import { PlaceList } from '../_components/PlaceList';
-import icon from '../_img/placeholder-map.svg';
+import icon from '../_img/place.svg';
 import { ButtonForm, Modal, CustomSelectNewPlace} from '../_components';
 import { Fab } from '../_components';
 import { connect } from 'react-redux';
