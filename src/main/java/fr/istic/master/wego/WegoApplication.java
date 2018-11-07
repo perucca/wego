@@ -7,12 +7,16 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import fr.istic.master.wego.service.geoapi.FetchPlaces;
+
 @SpringBootApplication
 @EnableScheduling
 public class WegoApplication {
 
 	@Autowired
 	DataBaseLoader dbl;
+	@Autowired
+	FetchPlaces fp;
 
 	public static void main(String[] args) {
 		SpringApplication.run(WegoApplication.class, args);
@@ -23,5 +27,6 @@ public class WegoApplication {
 	@EventListener(ApplicationReadyEvent.class)
 	final void doSomethingAfterStartup() {
 		dbl.loadData();
+		fp.fetchPlaces();
 	}
 }
