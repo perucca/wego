@@ -10,18 +10,16 @@ To do
 
 ### Prerequisites
 
-To do
 
 ```
-Give examples
+In order to start the Wego Application, you have to install Docker and Docker-compose on your server.
 ```
 
 ### Installing
 
-To do 
 
 ```
-Give the example
+sudo docker-compose up
 ```
 
 ## Running the tests
