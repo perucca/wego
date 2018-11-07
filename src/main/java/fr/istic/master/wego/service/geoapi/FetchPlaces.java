@@ -27,9 +27,6 @@ public class FetchPlaces {
 				new ParameterizedTypeReference<List<Departement>>() {
 				});
 
-		if (response.getBody() == null)
-			return;
-
 		List<Ville> villes = response.getBody().stream()
 				.map(d -> restTemplate.exchange(
 						"https://geo.api.gouv.fr/departements/" + d.getCode() + "/communes?fields=nom,codesPostaux",
