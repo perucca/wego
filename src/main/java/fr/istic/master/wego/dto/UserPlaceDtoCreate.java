@@ -3,13 +3,13 @@ package fr.istic.master.wego.dto;
 public class UserPlaceDtoCreate {
 
 	private Long idUser;
-    private Long idPlace;
-    private float preferenceOrder;
+	private Long idPlace;
+	private int preferenceOrder;
 
-    public UserPlaceDtoCreate() {
-    }
+	public UserPlaceDtoCreate() {
+	}
 
-    public Long getIdUser() {
+	public Long getIdUser() {
 		return idUser;
 	}
 
@@ -25,11 +25,11 @@ public class UserPlaceDtoCreate {
 		this.idPlace = idPlace;
 	}
 
-	public float getPreferenceOrder() {
-        return preferenceOrder;
-    }
+	public int getPreferenceOrder() {
+		return preferenceOrder;
+	}
 
-    public void setPreferenceOrder(float preferenceOrder) {
-        this.preferenceOrder = preferenceOrder;
-    }
+	public void setPreferenceOrder(int preferenceOrder) {
+		this.preferenceOrder = preferenceOrder;
+	}
 }
