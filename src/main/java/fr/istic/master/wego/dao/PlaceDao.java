@@ -16,8 +16,8 @@ import fr.istic.master.wego.model.Place;
 @Transactional
 public interface PlaceDao extends JpaRepository<Place, Long> {
 
-	@Query("select p from Place p where p.postCode =:postCode")
-	public List<Place> findAllByPostCode(@Param("postCode") String postCode);
+//	@Query("select p from Place p where p.postCode =:postCode")
+//	public List<Place> findAllByPostCode(@Param("postCode") String postCode);
 
 	@Query("select p from Place p where p.name =:name")
 	public List<Place> findAllByName(@Param("name") String name);

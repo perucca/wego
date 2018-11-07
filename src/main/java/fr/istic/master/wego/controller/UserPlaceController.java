@@ -30,10 +30,10 @@ public class UserPlaceController {
 	@Autowired
 	private UserDao userDao;
 
-	@GetMapping("")
-	public Collection<UserPlaceDtoRead> getAllUserPlacesinBase() {
-		return userplaceService.getAllUserPlace();
-	}
+//	@GetMapping("")
+//	public Collection<UserPlaceDtoRead> getAllUserPlacesinBase() {
+//		return userplaceService.getAllUserPlace();
+//	}
 	
 	@GetMapping("/byuser/{id}")
 	public Collection<UserPlaceDtoRead> getAllUserPlacesForUserId(@PathVariable("id") Long id) {
@@ -59,11 +59,11 @@ public class UserPlaceController {
 	}
 	
 	// service de update
-	@PutMapping("/{id}")
-	public void updateUserPlace(@PathVariable("id") Long id, @RequestBody UserPlaceDtoCreate userplaceDto) {
-		userplaceService.updateUserPlace(id, userplaceDto);
-		System.err.println("La UserPlace a été mise à jour");
-	}
+//	@PutMapping("/{id}")
+//	public void updateUserPlace(@PathVariable("id") Long id, @RequestBody UserPlaceDtoCreate userplaceDto) {
+//		userplaceService.updateUserPlace(id, userplaceDto);
+//		System.err.println("La UserPlace a été mise à jour");
+//	}
 	
 	@GetMapping("/increased/{iduser}/{idplace}")
 	public Collection<UserPlaceDtoRead> increaseUserPlacePreference(@PathVariable("iduser") Long iduser, @PathVariable("idplace") Long idplace) {
