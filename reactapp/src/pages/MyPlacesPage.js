@@ -44,24 +44,22 @@ class MyPlaces extends Component {
 
     handleSubmitUserPlace = (event) => {
         event.preventDefault();
-        if (this.state.newUserPlace.idPlace !=null){
+        if (this.state.newUserPlace.idPlace !=null && this.props.userplaces.length<5){
             this.state.newUserPlace.preferenceOrder = this.props.userplaces.length + 1;
             this.props.createUserPlace(this.props.currentuser, this.state.newUserPlace);
-        }
+        } 
         this.setState({newUserPlace: {idUser: this.state.newUserPlace.idUser, idPlace: null, preferenceOrder: null}, searchedCityName:""});
     }
 
     render() {
+        if (this.props.userplaces.length<5){
         return (
         <MainLayout title="Your Favorite Places" icon={icon}>
        
             <div>
+            <h3> You can choose up to 5 places! </h3>
             <PlaceList places={this.props.userplaces.sort((a,b)=>a.preferenceOrder>b.preferenceOrder)} />
-       
-            {/* <button type="button" className="btn" data-toggle="modal" data-target="#modalAddSports">
-                    Add a place
-            </button> */}
-
+            
             <Fab dataToggle="modal" dataTarget="#modalAddSports"/> 
 
             <Modal title="Add a new Place">
@@ -82,7 +80,23 @@ class MyPlaces extends Component {
             </Modal>
             </div> 
         </MainLayout>
-        );        
+        ); 
+        }
+        else {
+            return (
+            <MainLayout title="Your Favorite Places" icon={icon}>
+            <div>
+            <h3> You can choose up to 5 places! </h3>
+            <PlaceList places={this.props.userplaces.sort((a,b)=>a.preferenceOrder>b.preferenceOrder)} />
+            
+            <Fab dataToggle="modal" dataTarget="#modalAddSports"/> 
+
+            <Modal>
+                Please delete a place before trying adding a new one.
+            </Modal>
+            </div> 
+        </MainLayout>
+         );}   
     }
 }
 
