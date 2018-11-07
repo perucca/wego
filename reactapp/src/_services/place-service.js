@@ -64,7 +64,7 @@ function getUserPlaces(user) {
 
 function deleteUserPlace(user, id) {
     console.log(user.authorization)
-    return Axios.delete('/userplaces/byuser/' + user.id +'/'+ id, {
+    return Axios.delete('/api/userplaces/byuser/' + user.id +'/'+ id, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
@@ -90,7 +90,7 @@ function deleteUserPlace(user, id) {
 
 function searchPlace(user, name) {
     console.log(user.authorization)
-    return Axios.get('/places/byname/' + name, {
+    return Axios.get('/api/places/byname/' + name, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
@@ -116,7 +116,7 @@ function searchPlace(user, name) {
 
 function createUserPlace(user, place) {
     console.log(user.authorization)
-    return Axios.post('/userplaces/byuser/' + user.id, place, {
+    return Axios.post('/api/userplaces/byuser/' + user.id, place, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
@@ -142,7 +142,7 @@ function createUserPlace(user, place) {
 
 function increaseUserPlacePreference(user, place) {
     console.log(user.authorization)
-    return Axios.get('/userplaces/increased/'+user.id+"/"+ place, {
+    return Axios.get('/api/userplaces/increased/'+user.id+"/"+ place, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
@@ -168,7 +168,7 @@ function increaseUserPlacePreference(user, place) {
 
 function decreaseUserPlacePreference(user, place) {
     console.log(user.authorization)
-    return Axios.get('/userplaces/decreased/'+user.id+"/"+ place, {
+    return Axios.get('/api/userplaces/decreased/'+user.id+"/"+ place, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {
