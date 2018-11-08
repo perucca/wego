@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {HomeLayout} from '../_hoc/HomeLayout';
 import { TextField, ButtonForm } from '../_components';
 import './App.css';
 import { connect } from 'react-redux';
 import { UserActions } from '../_actions/user-actions';
+import icon from '../_img/profile.svg';
 
-class Profile extends React.Component {
+class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,12 +15,8 @@ class Profile extends React.Component {
                 lastName : this.props.currentuser.lastName,
                 mail: null,
                 password: null
-            },
+            }
         };
-    }
-
-    componentDidMount=()=>{
-        console.log(this.state);
     }
 
     handleChangeFirstName=(event)=>{
@@ -41,21 +38,21 @@ class Profile extends React.Component {
 
     render() {
         return(
+            <HomeLayout title={"Edit my profile"} icon={icon}>
             <form onSubmit={this.submitChange}>
                 <div className="form-group">
-                <h3>Update my profile</h3>
                 </div>
                 <TextField id="signin-firstname" value={this.state.updateUser.firstName} type="text" onChange={this.handleChangeFirstName}/>
                 <TextField id="signin-lastname" value={this.state.updateUser.lastName} type="text" onChange={this.handleChangeLastName} />
                 {/* <TextField id="signin-password" placeholder="Password" type="password" /> */}
                 <ButtonForm name="Update" type="submit" />
-                
-            </form>)}
+            </form>
+            </HomeLayout>);}
 }
 
 const mapStateToProps = state => ({
     currentuser: state.currentuser
-});
+})
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -67,6 +64,6 @@ const mapDispatchToProps = dispatch => {
 
 export const MyProfileConnected = connect(
     mapStateToProps,
-    mapDispatchToProps)(Profile);
+    mapDispatchToProps)(Profile)
 
-export const ProfilePage = HomeLayout(MyProfileConnected);
+export const ProfilePage = MyProfileConnected;
