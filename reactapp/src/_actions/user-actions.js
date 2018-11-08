@@ -5,7 +5,8 @@ import { userService } from '../_services';
 export const UserActions = {
     login,
     logout,
-    register
+    register,
+    updateUserProfile
 }
 
 function register(user) {
@@ -52,4 +53,21 @@ function logout() {
     //userService.logout();
     history.push('/');
     return { type: UserConstants.LOGOUT, isAuthenticated: false};
+}
+
+function updateUserProfile(user, dto) {
+    return dispatch => {
+        dispatch(request());
+        userService.updateUserProfile(user, dto)
+            .then(function (response) {
+                dispatch(success(response));
+            })
+            .catch(function (error) {
+                dispatch(failure());
+            })
+    }
+
+    function request() { return { type: UserConstants.UPDATE_PROGRESS } }
+    function success(user) { return { type: UserConstants.UPDATE_SUCCESS, isAuthenticated: true, user: user } }
+    function failure() { return { type: UserConstants.UPDATE_ERROR,  isAuthenticated: false } }
 }
