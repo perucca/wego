@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {HomeLayout} from '../_hoc/HomeLayout';
-import { TextField, ButtonForm } from '../_components';
+import { TextField, ButtonForm, Modal } from '../_components';
 import './App.css';
 import { connect } from 'react-redux';
 import { UserActions } from '../_actions/user-actions';
@@ -45,7 +45,10 @@ class Profile extends Component {
                 <TextField id="signin-firstname" value={this.state.updateUser.firstName} type="text" onChange={this.handleChangeFirstName}/>
                 <TextField id="signin-lastname" value={this.state.updateUser.lastName} type="text" onChange={this.handleChangeLastName} />
                 {/* <TextField id="signin-password" placeholder="Password" type="password" /> */}
-                <ButtonForm name="Update" type="submit" />
+                <ButtonForm name="Update" type="submit" dataToggle="modal" dataTarget="#modalAddSports" />
+                <Modal>
+                Profile was successfully updated !
+                </Modal>
             </form>
             </HomeLayout>);}
 }
