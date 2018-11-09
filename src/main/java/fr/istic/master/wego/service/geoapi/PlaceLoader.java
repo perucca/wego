@@ -14,12 +14,12 @@ import fr.istic.master.wego.dao.PlaceDao;
 import fr.istic.master.wego.model.Place;
 
 @Component
-public class FetchPlaces {
+public class PlaceLoader {
 
 	@Autowired
 	PlaceDao placedao;
 
-	public void fetchPlaces() {
+	public void load() {
 		RestTemplate restTemplate = new RestTemplate();
 
 		ResponseEntity<List<Departement>> response = restTemplate.exchange(

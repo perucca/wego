@@ -11,7 +11,7 @@ import fr.istic.master.wego.model.User;
 /**
  * @author Michel Perucca 
  *
- *	Handle the csv file with sports defined
+ *	Handle the csv file with users defined
  *
  */
 @Component

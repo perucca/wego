@@ -1,5 +1,12 @@
 package fr.istic.master.wego.csv;
 
+
+/**
+ * @author michel perucca
+ *
+ *	represents the class to read from CSV file
+ *
+ */
 public class UserCsvDto {
 
 	private String firstname;

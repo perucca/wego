@@ -1,10 +1,11 @@
-package fr.istic.master.wego;
+package fr.istic.master.wego.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.istic.master.wego.csv.SportLoader;
 import fr.istic.master.wego.csv.UserLoader;
+import fr.istic.master.wego.service.geoapi.PlaceLoader;
 
 /**
  * Loading default configuration if no data in the database
@@ -12,7 +13,7 @@ import fr.istic.master.wego.csv.UserLoader;
  *
  */
 @Component
-public class DataBaseLoader {
+public class DefaultConfigurationLoader {
 
 	@Autowired
 	private SportLoader sportLoader;
@@ -20,9 +21,12 @@ public class DataBaseLoader {
 	@Autowired
 	private UserLoader userLoader;
 	
+	@Autowired
+	PlaceLoader placeLoader;
 
-	public void loadData() {
+	public void load() {
 
+		placeLoader.load();
 		sportLoader.load();
 		userLoader.load();
 	}
