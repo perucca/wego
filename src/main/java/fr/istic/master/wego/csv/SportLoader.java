@@ -68,7 +68,7 @@ public class SportLoader {
 		idealWeather.setMinWind(sportCsv.getWindmin());
 		idealWeather.setMaxWind(sportCsv.getWindmax());
 		
-		return null;
+		return idealWeather;
 	}
 	
 	

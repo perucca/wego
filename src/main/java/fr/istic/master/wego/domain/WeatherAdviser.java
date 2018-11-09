@@ -43,13 +43,11 @@ public class WeatherAdviser {
 					return new IdealWeatherValidator(idealWeatherCondition).validate(forecast);
 				}).findFirst();
 
+		weekendAdviceService.deleteByUser(user);
 		if (advice.isPresent()) {
 			SportPlaceAssociation spa = advice.get();
 			weekendAdviceService.create(user, spa.getUserplace().getPlace(), spa.getUsersport().getSport());
-		} else {
-			// Pas de conseil si advice est null.
-			weekendAdviceService.deleteByUser(user);
-		}
+		} 
 
 	}
 

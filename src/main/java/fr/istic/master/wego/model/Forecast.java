@@ -41,4 +41,9 @@ public class Forecast {
 	public void setWeather(EnumWeather weather) {
 		this.weather = weather;
 	}
+	
+	@Override
+	public String toString() {
+		return "Forecast: "+ weather+ " Wind: "+ wind + " Temp: "+ temperature;
+	}
 }
