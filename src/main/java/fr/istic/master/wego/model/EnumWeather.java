@@ -7,7 +7,8 @@ public enum EnumWeather {
 	CLEAR("Clear"),
 	RAIN("Rain"),
 	MIST("Mist"),
-	CLOUDS("Clouds");
+	CLOUDS("Clouds"),
+	SNOW("Snow");
 	
 	
 	private String weather;

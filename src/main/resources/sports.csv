@@ -1,0 +1,34 @@
+﻿sport,type,allowedweather,tempmin,tempmax,windmin,windmax
+Trekking,Terre,CLEAR&CLOUDS,10,35,0,12
+Planeur,Air,CLEAR,10,35,3,12
+Escalade,Terre,CLEAR&CLOUDS,10,35,0,12
+VTT,Mecanique,CLEAR&CLOUDS,10,35,0,12
+Aviation,Air,CLEAR,10,35,0,9
+Pêche,Eau,CLEAR&CLOUDS,10,35,0,12
+Ski,Neige,CLEAR&CLOUDS&SNOW,-20,10,0,12
+Planche à voile,Eau,CLEAR&CLOUDS,10,35,3,12
+Canoe-Kayak,Eau,CLEAR&CLOUDS,10,35,0,12
+Parachute,Air,CLEAR,10,35,0,3
+Parapente,Air,CLEAR,10,35,3,6
+Ski nautique,Eau,CLEAR&CLOUDS,20,35,0,9
+Course à pied,Terre,CLEAR&CLOUDS,10,35,0,12
+Quad,Mecanique,CLEAR&CLOUDS,10,35,0,12
+Baignade,Eau,CLEAR,20,35,0,6
+Paintball,Terre,CLEAR&CLOUDS,10,35,0,9
+Vélo,Mecanique,CLEAR&CLOUDS&RAIN,10,35,0,9
+Golf,Terre,CLEAR&CLOUDS,10,35,0,6
+Equitation,Terre,CLEAR&CLOUDS,10,35,0,12
+Kite Surf,Eau,CLEAR&CLOUDS,20,35,6,12
+Moto,Mecanique,CLEAR&CLOUDS,10,35,0,9
+Jet Ski,Eau,CLEAR&CLOUDS,20,35,0,12
+Plongée,Eau,CLEAR,10,35,0,9
+Tir à l’arc,Terre,CLEAR&CLOUDS&RAIN&SNOW,10,35,0,6
+Snow Board,Neige,CLEAR&CLOUDS&SNOW,-20,10,0,12
+Surf,Eau,CLEAR,10,35,6,12
+Randonnée,Terre,CLEAR&CLOUDS,10,35,0,12
+Chasse,Terre,CLEAR&CLOUDS,10,35,0,12
+Bain de soleil,Eau,CLEAR,20,35,0,6
+Tir à la carabine,Terre,CLEAR&CLOUDS,10,35,0,12
+Ornithologie,Terre,CLEAR,10,35,0,9
+Rafting,Eau,CLEAR&CLOUDS,10,35,0,12
+Raquette,Neige,CLEAR&CLOUDS&SNOW,-20,10,0,12
