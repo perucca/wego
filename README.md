@@ -56,10 +56,6 @@ password: pss
 * Layout customization: choice of profile picture, accessibility for visualy impaired people
 * Smart app: more control of the user's input (ex: should we really accept that the user choose Saint Brieuc as a place for skying?) 
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
 * Thanks to Stack Overflow!

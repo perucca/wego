@@ -24,6 +24,6 @@ We also managed to organize and share our work within the team. We met on a regu
 ## Work organization
 
 * **Michel Perucca**: the guy who loves Spring and Docker. Spent his evenings in the lovely company of Spring Security! 
-* **Dorian Screm**: the front designer and boss of React. As become an expert in SportPlaceAssociation!
+* **Dorian Screm**: the front designer and boss of React. Has become an expert in SportPlaceAssociation!
 * **Angélique Montuwy**: the girl who draws diagramms and loves the places management. The one who try to write jokes in this file on the behalf of her two colleagues! 
 
