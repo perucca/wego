@@ -30,8 +30,8 @@ sudo docker-compose up
 ## Trying it out
 Please use the following account to get an example of the app filled up by a user :
 ```
-username : toto@toto.fr
-password: pss
+username: foo@bar.baz
+password: password
 ```
 
 ## Built With
