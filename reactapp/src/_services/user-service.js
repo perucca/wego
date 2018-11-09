@@ -2,7 +2,8 @@ import Axios from 'axios';
 
 export const userService = {
     login,
-    register
+    register,
+    updateUserProfile
 }
 
 //LOG THE USER
@@ -61,4 +62,27 @@ function register(user) {
             console.log("signin failed");
             return Promise.reject(error);
         })
+}
+
+function updateUserProfile(user, dto) {
+    return Axios.put('/api/users/'+user.id, dto, {
+        headers : {'Authorization': '' + user.authorization}
+    })
+    .then(function (response) {
+        if (response.status === 200) {
+            console.log("Successfully updated the user");
+            return response.data;
+        }
+        else {
+            console.log("Failed updating the user");
+            return Promise.reject(response);
+        }
+    })
+    .catch(function (error) {
+        console.log("Update error");
+        if (error.response) {
+            console.log(error.response);
+        }
+        return Promise.reject(error);
+    });
 }
