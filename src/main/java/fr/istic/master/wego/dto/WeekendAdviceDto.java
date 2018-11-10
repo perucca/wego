@@ -3,9 +3,12 @@ package fr.istic.master.wego.dto;
 public class WeekendAdviceDto {
 
 	private Long id;
-	private Long idSport;
-	private Long idPlace;
-	private Long idUser;
+	private String sport;
+	private String place;
+	private String weather;
+	private float temperature;
+	private float wind;
+	
 
 	public WeekendAdviceDto() {
 	}
@@ -18,27 +21,44 @@ public class WeekendAdviceDto {
 		this.id = id;
 	}
 
-	public Long getIdSport() {
-		return idSport;
+	public String getSport() {
+		return sport;
 	}
 
-	public void setIdSport(Long idSport) {
-		this.idSport = idSport;
+	public void setSport(String sport) {
+		this.sport = sport;
 	}
 
-	public Long getIdPlace() {
-		return idPlace;
+	public String getPlace() {
+		return place;
 	}
 
-	public void setIdPlace(Long idPlace) {
-		this.idPlace = idPlace;
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
-	public Long getIdUser() {
-		return idUser;
+	public String getWeather() {
+		return weather;
 	}
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public void setWeather(String weather) {
+		this.weather = weather;
 	}
+
+	public float getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(float temperature) {
+		this.temperature = temperature;
+	}
+
+	public float getWind() {
+		return wind;
+	}
+
+	public void setWind(float wind) {
+		this.wind = wind;
+	}
+
 }

@@ -12,13 +12,13 @@ import fr.istic.master.wego.model.WeekendAdvice;
 import fr.istic.master.wego.service.WeekEndAdviceService;
 
 @RestController
-@RequestMapping("/weekendAdvice")
+@RequestMapping("/weekendadvice")
 public class WeekendAdviceController {
 
 	@Autowired
 	private WeekEndAdviceService weaService;
-
-	@GetMapping("/byUser/{id}")
+	
+	@GetMapping("/byuser/{id}")
 	public WeekendAdviceDto getWeekEndAdviceByUser(@PathVariable("id") Long id) {
 		WeekendAdvice wea = weaService.findByUser(id);
 		if (wea != null)
@@ -26,5 +26,6 @@ public class WeekendAdviceController {
 		else
 			return null;
 	}
+	
 
 }
