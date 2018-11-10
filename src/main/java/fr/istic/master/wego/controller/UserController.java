@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.istic.master.wego.dto.UserDtoCreate;
 import fr.istic.master.wego.dto.UserDtoRead;
-import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.service.UserService;
 
 /**

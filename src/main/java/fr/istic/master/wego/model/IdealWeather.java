@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
 /**
@@ -72,7 +73,7 @@ public class IdealWeather {
 		this.maxTemperature = maxTemperature;
 	}
 
-	@ElementCollection(targetClass = EnumWeather.class)
+	@ElementCollection(targetClass = EnumWeather.class, fetch=FetchType.EAGER)
 	@CollectionTable(name = "weather", joinColumns = @JoinColumn(name = "weather_id"))
 	@Column(name = "allowedWeather", nullable = false)
 	@Enumerated(EnumType.STRING)

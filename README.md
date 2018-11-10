@@ -55,8 +55,14 @@ password: password
 * Communication: by pushing the user a notification to his/her smartphone 
 * Layout customization: choice of profile picture, accessibility for visualy impaired people
 * Smart app: more control of the user's input (ex: should we really accept that the user choose Saint Brieuc as a place for skying?) 
+* A more stable application with more Unit Testing.
+* An improved scalabillty application with an Orchestrator such as Kubernetes.
+* Reducing java boilerplate with Lombok library.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Thanks to Stack Overflow!
+* Thanks to Stack Overflow, Docker.com documentation and Spring Boot In action Book !
 

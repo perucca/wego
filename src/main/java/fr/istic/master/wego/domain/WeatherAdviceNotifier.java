@@ -26,6 +26,7 @@ public class WeatherAdviceNotifier {
 		User user = wea.getUser();
 
 		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("michel.perucca@etudiant.univ-rennes1.fr");
 		message.setTo(user.getMail());
 		message.setSubject("Wego Advice");
 		message.setText("Greetings " + user.getFirstName() + " " + user.getLastName() + ",\n"

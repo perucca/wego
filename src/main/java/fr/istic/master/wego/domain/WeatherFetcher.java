@@ -42,6 +42,8 @@ public class WeatherFetcher {
 			Forecast forecast = transformOWForecastToWegoForecast(owforecast);
 			place.setForecast(forecast);
 			placeDao.save(place);
+			
+			Logger.getGlobal().log(Level.INFO, "Place: "+ place.getName() + " Forecast:" + forecast);
 		} catch (Exception e) {
 			Logger.getGlobal().log(Level.SEVERE, "Encountered an error for the place: " + place.getName() + " zipcode: "
 					+ place.getPostCode() + "Error: " + e);
