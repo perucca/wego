@@ -15,7 +15,6 @@ class Home extends Component {
     return(
     <HomeLayout title={"Welcome " + this.props.currentuser.firstName} icon={icon}>
       <div className="dark homepage">
-        <h3> Welcome {this.props.currentuser.firstName} !</h3>
         <div>
             <LinkedButton name="My Places" type="button" to="/myplaces"></LinkedButton>
         </div>    
