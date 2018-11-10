@@ -8,3 +8,4 @@ export * from './CustomSelect';
 export * from './Modal';
 export * from './Accordion';
 export * from './Fab';
+export * from './WeekendAdviceFrame';

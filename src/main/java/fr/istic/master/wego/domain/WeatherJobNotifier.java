@@ -8,14 +8,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WeatherJobScheduler {
+public class WeatherJobNotifier {
 
 	@Autowired
-	private WeatherFetcher fetcher;
-
-	@Autowired
-	private WeatherAdviser adviser;
-
+	private WeatherAdviceNotifier notifier;
 
 	/**
 	 *
@@ -36,11 +32,10 @@ public class WeatherJobScheduler {
 	 *
 	 * ? means no specific value
 	 **/
-	@Scheduled(cron = "0 0/1 * * * *")
+	@Scheduled(cron = "0 0 8 * * TUE")
 	public void launcheWeatherAnalysis() {
 		try {
-			fetcher.launchWeatherAnalysis();
-			adviser.analyse();
+			notifier.sendMails();
 		} catch (Exception e) {
 			Logger.getGlobal().log(Level.SEVERE, "Error when analysing weather", e);
 		}

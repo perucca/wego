@@ -6,7 +6,7 @@ export const weekendAdviceService = {
 
 //LOG THE USER
 function load(user) {
-    return Axios.get('/api/weekendadvice/', {
+    return Axios.get('/api/weekendadvice/byuser/'+ user.id, {
         headers : {'Authorization': '' + user.authorization}
     })
         .then(function (response) {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import {HomeLayout} from '../_hoc/HomeLayout';
-import { LinkedButton } from '../_components';
+import { LinkedButton, WeekendAdviceFrame } from '../_components';
 import { connect } from 'react-redux';
 import icon from '../_img/profile.svg';
+
 
 class Home extends Component {
 
@@ -21,12 +22,7 @@ class Home extends Component {
         <div>
             <LinkedButton name="My Sports" type="button" to="/mysports"></LinkedButton>
         </div>
-        <div className="card">
-            <div className="card-body">
-                <h4 className="card-title">Tips for the week-end</h4>
-                <p className="card-text">The weather will be perfect to go to PLACE and practice SPORT</p>
-            </div>
-        </div>
+        <WeekendAdviceFrame/>
 
     </div>
     </HomeLayout>
