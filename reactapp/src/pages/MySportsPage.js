@@ -16,7 +16,6 @@ const SortableItem = SortableElement(({ value, onClick, items2 }) => {
         <div>
             {items2.map(element => {
                 if (element.userSportDtoRead.idUserSport === value.idUserSport) {
-                    console.log(element.userPlaceDtoRead.placeDto.name)
                     return (
                         <span className="secondary-text" key={`${element.userSportDtoRead.idUserSport}-${element.userPlaceDtoRead.idUserplace}`}>{`${element.userPlaceDtoRead.placeDto.name} `}</span>
                     )
@@ -61,6 +60,10 @@ class MySports extends Component {
             currentlySelectedPlaces: [],
             previouslySelectedPlaces: []
         };
+    }
+
+    componentDidUpdate(){
+        console.log("SPA: ", this.props.sportplaceassociations)
     }
 
     componentDidMount() {

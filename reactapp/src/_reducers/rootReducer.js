@@ -16,7 +16,7 @@ function rootReducer(state={}, action){
         sports : sports(state.sports, action),
         userplaces : userplaces(state.userplaces, action),
         usersports : usersports(state.usersports, action),
-        sportplaceassociations : sportplaceassociation(state.sportplaceassociation, action),
+        sportplaceassociations : sportplaceassociation(state.sportplaceassociations, action),
         currentuser : currentuser(state.currentuser, action),
         isAuthenticated: AuthenticationReducer(state.isAuthenticated, action),
         weekendAdvice: weekendAdvice(state.weekendadvice,action)
