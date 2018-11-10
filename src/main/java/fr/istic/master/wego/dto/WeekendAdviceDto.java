@@ -6,8 +6,8 @@ public class WeekendAdviceDto {
 	private String sport;
 	private String place;
 	private String weather;
-	private float temperature;
-	private float wind;
+	private int temperature;
+	private int wind;
 	
 
 	public WeekendAdviceDto() {
@@ -45,19 +45,19 @@ public class WeekendAdviceDto {
 		this.weather = weather;
 	}
 
-	public float getTemperature() {
+	public int getTemperature() {
 		return temperature;
 	}
 
-	public void setTemperature(float temperature) {
+	public void setTemperature(int temperature) {
 		this.temperature = temperature;
 	}
 
-	public float getWind() {
+	public int getWind() {
 		return wind;
 	}
 
-	public void setWind(float wind) {
+	public void setWind(int wind) {
 		this.wind = wind;
 	}
 
