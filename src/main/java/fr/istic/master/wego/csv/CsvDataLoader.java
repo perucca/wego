@@ -1,6 +1,5 @@
 package fr.istic.master.wego.csv;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,25 +15,25 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 /**
  * @author Michel Perucca
  *
- *	Load CsvFile Data
+ *         Load CsvFile Data
  *
  */
 @Component
 public class CsvDataLoader {
 
-	public <T> List<T> loadObjectList(Class<T> type, String fileName) {
-	    try {
-	        CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
-	        
-	        File file = new ClassPathResource(fileName).getFile();
-	        CsvMapper mapper = new CsvMapper();
-	        MappingIterator<T> readValues = 
-	          mapper.readerFor(type).with(bootstrapSchema).readValues(file);
-	        return readValues.readAll();
-	    } catch (Exception e) {
-	        Logger.getGlobal().log(Level.SEVERE,"Error occurred while loading object list from file " + fileName, e);
-	        return Collections.emptyList();
-	    }
+	public <T> List<T> loadObjectList(Class<T> type, ClassPathResource classPathRessource) {
+		try {
+			CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
+
+			CsvMapper mapper = new CsvMapper();
+			MappingIterator<T> readValues = mapper.readerFor(type).with(bootstrapSchema)
+					.readValues(classPathRessource.getInputStream());
+			return readValues.readAll();
+		} catch (Exception e) {
+			Logger.getGlobal().log(Level.SEVERE,
+					"Error occurred while loading object list from file " + classPathRessource.getFilename(), e);
+			return Collections.emptyList();
+		}
 	}
 
 }
