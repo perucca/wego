@@ -8,7 +8,8 @@ export const PlaceActions = {
     searchPlace,
     createUserPlace,
     increaseUserPlacePreference,
-    decreaseUserPlacePreference
+    decreaseUserPlacePreference,
+    updateUserPlaceBatch
 }
 
 function getPlaces(user) {
@@ -128,4 +129,23 @@ function decreaseUserPlacePreference(user, place) {
     function request() { return { type: PlaceConstants.DECREASEUSERPLACEPREFERENCE_PROGRESS } }
     function success(places) { return { type: PlaceConstants.DECREASEUSERPLACEPREFERENCE_SUCCESS, places } }
     function failure() { return { type: PlaceConstants.DECREASEUSERPLACEPREFERENCE_ERROR } }
+}
+
+//UPDATE USERSPORT BATCH
+function updateUserPlaceBatch(user, userPlaceBatch) {
+    return dispatch => {
+        dispatch(request());
+        placeService.updateUserPlaceBatch(user, userPlaceBatch)
+            .then(function (response) {
+                dispatch(success());
+                dispatch(getUserPlaces(user))
+            })
+            .catch(function (error) {
+                dispatch(failure());
+            })
+    }
+
+    function request() { return { type: PlaceConstants.UPDATE_USERPLACE_BATCH_PROGRESS } }
+    function success() { return { type: PlaceConstants.UPDATE_USERPLACE_BATCH_SUCCESS } }
+    function failure() { return { type: PlaceConstants.UPDATE_USERPLACE_BATCH_ERROR } }
 }

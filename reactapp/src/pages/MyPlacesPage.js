@@ -5,8 +5,27 @@ import { PlaceActions } from '../_actions/place-actions';
 import { PlaceList } from '../_components/PlaceList';
 import icon from '../_img/place.svg';
 import { ButtonForm, Modal, CustomSelectNewPlace} from '../_components';
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import { Fab } from '../_components';
 import { connect } from 'react-redux';
+import deleteBtn from '../_img/trash.svg';
+
+const SortableItem = SortableElement(({ value, onClick}) => {
+    return(
+    <li className="list-group-item text-left">{value.placeDto.name}
+        <span><img className="edit-btn float-right" onClick={(e) => onClick(e, value.idUserplace)} src={deleteBtn} alt="delete button" /></span>
+    </li>
+)});
+
+const SortableList = SortableContainer(({items, onClick}) => {
+    return (
+        <ul className="list-group">
+            {items.map((value, index) => (
+                <SortableItem key={`item-${index}`} index={index} value={value} onClick={onClick} />
+            ))}
+        </ul>
+    );
+});
 
 
 class MyPlaces extends Component {
@@ -29,6 +48,12 @@ class MyPlaces extends Component {
 
     handleChangeCityName = (e) => {
         this.setState({newUserPlace: this.state.newUserPlace, searchedCityName:e.target.value});
+    }
+
+    onClickDelete = (e, idUserPlace) => {
+        console.log(idUserPlace)
+        e.preventDefault();
+        this.props.deleteUserPlace(this.props.currentuser,idUserPlace);
     }
 
     handleSubmitCityName = (e) => {
@@ -55,14 +80,33 @@ class MyPlaces extends Component {
         this.setState({newUserPlace: {idUser: this.state.newUserPlace.idUser, idPlace: null, preferenceOrder: null}, searchedCityName:""});
     }
 
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        const prevItems = this.props.userplaces.sort(function (a, b) {
+            let prefA = a.preferenceOrder;
+            let prefB = b.preferenceOrder;
+            if (prefA < prefB) return -1;
+            if (prefA > prefB) return 1;
+            return 0;
+        })
+        const items = arrayMove(prevItems, oldIndex, newIndex);
+        items.map((item, index) => item.preferenceOrder = index + 1);
+        console.log("reorder");
+        console.log(items);
+        this.props.updateUserPlaceBatch(this.props.currentuser, items);
+    };
+
     render() {
         if (this.props.userplaces.length<5){
         return (
         <MainLayout title="Your Favorite Places" icon={icon}>
-       
             <div>
-            <h3> You can choose up to 5 places! </h3>
-            <PlaceList places={this.props.userplaces.sort((a,b)=>a.preferenceOrder>b.preferenceOrder)} />
+            <SortableList items={this.props.userplaces.sort((a, b) => {
+                        let prefA = a.preferenceOrder;
+                        let prefB = b.preferenceOrder;
+                        if (prefA < prefB) return -1;
+                        if (prefA > prefB) return 1;
+                        return 0;
+                    })} onSortEnd={this.onSortEnd} onClick={this.onClickDelete} distance={5} />
             
             <Fab dataToggle="modal" dataTarget="#modalAddSports"/> 
 
@@ -123,7 +167,13 @@ const mapDispatchToProps = dispatch => {
         },
         createUserPlace: (user, place) => {
             dispatch(PlaceActions.createUserPlace(user, place))
-        }
+        },
+        updateUserPlaceBatch: (user, userPlaceBatch) => {
+            dispatch(PlaceActions.updateUserPlaceBatch(user, userPlaceBatch))
+        },
+        deleteUserPlace: (user, id)=>{
+            dispatch(PlaceActions.deleteUserPlace(user, id))
+        },
     }
 }
 

@@ -148,4 +148,21 @@ public class UserPlaceService {
 
 	}
 
+	//UPDATE BATCH
+	public void updateUserPlaceBatch(List<UserPlaceDtoRead> userPlaceDtoReads) {
+		for (UserPlaceDtoRead upd : userPlaceDtoReads) {
+			Objects.requireNonNull(upd);
+			Objects.requireNonNull(upd.getIdUserplace());
+			Objects.requireNonNull(upd.getPreferenceOrder());
+			Objects.requireNonNull(upd.getPlaceDto());
+
+			UserPlace up = userPlaceDao.getOne(upd.getIdUserplace());
+			Place place = placeDao.getOne(upd.getPlaceDto().getId());
+
+			up.setPlace(place);
+			up.setPreferenceOrder((int)upd.getPreferenceOrder());
+			userPlaceDao.save(up);
+		}
+	}
+
 }

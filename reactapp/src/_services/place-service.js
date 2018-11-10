@@ -7,7 +7,8 @@ export const placeService = {
     searchPlace,
     createUserPlace,
     increaseUserPlacePreference,
-    decreaseUserPlacePreference
+    decreaseUserPlacePreference,
+    updateUserPlaceBatch
 }
 
 function getPlaces(user) {
@@ -185,6 +186,33 @@ function decreaseUserPlacePreference(user, place) {
         })
         .catch(function (error) {
             console.log("Update error");
+            if (error.response) {
+                console.log(error.response);
+            }
+            return Promise.reject(error);
+        });
+}
+
+//UPDATE USERPLACE BATCH
+function updateUserPlaceBatch(user, userPlaceBatch) {
+    
+    return Axios.put('/api/userplaces/',userPlaceBatch, {
+        headers : {'Authorization': '' + user.authorization}
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log("Successfully updated all the userPlaces");
+                console.log(response)
+                return response;
+            }
+            else {
+                console.log("Failed to update all the userPlaces");
+                console.log(response.status + " " + response.statusText);
+                return Promise.reject(response);
+            }
+        })
+        .catch(function (error) {
+            console.log("Error updating all the userPlaces");
             if (error.response) {
                 console.log(error.response);
             }
