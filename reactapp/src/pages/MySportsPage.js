@@ -9,15 +9,28 @@ import icon from '../_img/cycling.svg';
 import editBtn from '../_img/edit-button.svg';
 
 
-const SortableItem = SortableElement(({ value, onClick }) =>
-    <li className="list-group-item text-left">{value}<span><img className="edit-btn float-right" onClick={onClick} src={editBtn} alt="edit button"/></span></li>
-);
+const SortableItem = SortableElement(({ value, onClick, items2 }) => {
+    return(
+    <li className="list-group-item text-left">{value.sportDto.sportName}
+        <span><img className="edit-btn float-right" onClick={(e) => onClick(e, value.idUserSport)} src={editBtn} alt="edit button" /></span>
+        <div>
+            {items2.map(element => {
+                if (element.userSportDtoRead.idUserSport === value.idUserSport) {
+                    console.log(element.userPlaceDtoRead.placeDto.name)
+                    return (
+                        <span className="secondary-text" key={`${element.userSportDtoRead.idUserSport}-${element.userPlaceDtoRead.idUserplace}`}>{`${element.userPlaceDtoRead.placeDto.name} `}</span>
+                    )
+                }
+            })}
+        </div>
+    </li>
+)});
 
-const SortableList = SortableContainer(({ items, onClick }) => {
+const SortableList = SortableContainer(({ items, onClick, items2 }) => {
     return (
         <ul className="list-group">
             {items.map((value, index) => (
-                <SortableItem key={`item-${index}`} index={index} value={value} onClick={onClick}/>
+                <SortableItem key={`item-${index}`} index={index} value={value} onClick={onClick} items2={items2} />
             ))}
         </ul>
     );
@@ -44,15 +57,18 @@ class MySports extends Component {
             userSports: [],
             modalCreation: false,
             modalEdition: false,
+            selectedItem: 0,
+            currentlySelectedPlaces: [],
+            previouslySelectedPlaces: []
         };
     }
 
     componentDidMount() {
         console.log('my sport page');
         this.props.getSports(this.props.currentuser);
+        this.props.readSportPlaceAssociations(this.props.currentuser);
         this.props.getUserSports(this.props.currentuser);
         this.props.getUserPlaces(this.props.currentuser);
-        this.props.readSportPlaceAssociations(this.props.currentuser);
         this.setState(previousState => ({ availableUserPlaces: [...previousState.availableUserPlaces, this.props.userplaces] }));
         this.setState(previousState => ({ availableSports: [...previousState.availableSports, this.props.sports] }));
         console.log(this.state);
@@ -65,7 +81,11 @@ class MySports extends Component {
             newUserSport: {
                 idUser: this.props.currentuser.id,
                 idSport: null,
-                preferenceOrder: null
+                preferenceOrder: null,
+                selectedItem: 0,
+                currentlySelectedPlaces: [],
+                previouslySelectedPlaces: []
+
             },
         })
         this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("1", false) }));
@@ -78,26 +98,78 @@ class MySports extends Component {
         this.setState({
             modalCreation: !this.state.modalCreation
         });
-      }
+    }
 
-    toggleModalEdition = () => {
+    toggleModalEdition = (e, us) => {
         console.log("EDIT")
+        console.log(this.props.sportplaceassociations)
+        const selectedPlaces = this.props.sportplaceassociations
+            .filter(spa => spa.userSportDtoRead.idUserSport === us)
+            .map(spa => spa.userPlaceDtoRead.idUserplace)
         this.setState({
-            modalEdition: !this.state.modalEdition
+            modalEdition: !this.state.modalEdition,
+            selectedItem: us,
+            currentlySelectedPlaces : Object.assign([], selectedPlaces),
+            previouslySelectedPlaces : Object.assign([], selectedPlaces)
         });
-      }
+        console.log("SELECTED PLACES", selectedPlaces)
+    }
+
+    changeLocation = (e) => {
+        let cSelectedPlaces = this.state.currentlySelectedPlaces;
+        const value = parseInt(e.target.value, 10);
+        if(cSelectedPlaces.includes(value)){
+            cSelectedPlaces = cSelectedPlaces.filter(element => element !== value)
+        }else{
+            cSelectedPlaces.push(value)
+        }
+        this.setState({currentlySelectedPlaces: cSelectedPlaces});
+        console.log("CHANGE PREVIOUSLY SELECTED PLACES", this.state.previouslySelectedPlaces)
+        console.log("CHANGE CURRENTLY SELECTED PLACES", cSelectedPlaces)
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
         const spa = [];
         for (let [key, value] of this.state.newPlaces) {
-            if(value === true){
-                spa.push({idUserSport:1, idUserPlace:key})
+            if (value === true) {
+                spa.push({ idUserSport: 1, idUserPlace: key })
             }
-          }
+        }
         console.log(spa);
         this.props.createUserSportWithSportPlaceAssociationBatch(this.props.currentuser, this.state.newUserSport, spa);
         this.toggleModalCreation();
+    }
+
+    handleEdit = (event) => {
+        event.preventDefault();
+        const spaToCreate = [];
+        const spaToDelete = [];
+        this.state.currentlySelectedPlaces.forEach(element => {
+            if(this.state.previouslySelectedPlaces.includes(element)){
+                //the spa already exists for the usersport, nothing changes
+            }else if(!this.state.previouslySelectedPlaces.includes(element)){
+                //the spa does not exist and needs to be created
+                spaToCreate.push({ idUserSport: this.state.selectedItem, idUserPlace: element });
+            }
+        })
+        this.state.previouslySelectedPlaces.forEach(element => {
+            if(this.state.currentlySelectedPlaces.includes(element)){
+                //the spa already exists for the usersport, nothing changes
+            }else if(!this.state.currentlySelectedPlaces.includes(element)){
+                //the spa does not exist anymore and needs to be removed
+                spaToDelete.push(this.props.sportplaceassociations
+                                        .filter(item => item.userSportDtoRead.idUserSport===this.state.selectedItem
+                                            &&item.userPlaceDtoRead.idUserplace === element)[0].id);
+            }
+        })
+        console.log("SPA TO CREATE: ", spaToCreate);
+        console.log("SPA TO DELETE: ",spaToDelete);
+        // create a batch of spa
+        this.props.createSportPlaceAssociationBatch(this.props.currentuser, spaToCreate);
+        // delete a batch of spa
+        this.props.deleteSportPlaceAssociationBatch(this.props.currentuser, spaToDelete)
+        this.toggleModalEdition();
     }
 
     handleAddUserSport = (e) => {
@@ -124,7 +196,7 @@ class MySports extends Component {
         console.log(this.state);
     }
 
-    onSortEnd = ({oldIndex, newIndex}) => {
+    onSortEnd = ({ oldIndex, newIndex }) => {
         const prevItems = this.props.usersports.sort(function (a, b) {
             let prefA = a.preferenceOrder;
             let prefB = b.preferenceOrder;
@@ -132,13 +204,13 @@ class MySports extends Component {
             if (prefA > prefB) return 1;
             return 0;
         })
-       const items = arrayMove(prevItems, oldIndex, newIndex);
-       items.map((item,index) => item.preferenceOrder = index + 1);
-       console.log("reorder");
-       console.log(items);
-       this.props.updateUserSportBatch(this.props.currentuser, items);
-        
-      };
+        const items = arrayMove(prevItems, oldIndex, newIndex);
+        items.map((item, index) => item.preferenceOrder = index + 1);
+        console.log("reorder");
+        console.log(items);
+        this.props.updateUserSportBatch(this.props.currentuser, items);
+
+    };
 
     render() {
         return (
@@ -150,47 +222,46 @@ class MySports extends Component {
                         if (prefA < prefB) return -1;
                         if (prefA > prefB) return 1;
                         return 0;
-                    })
-                        .map((item) => item.sportDto.sportName)} onSortEnd={this.onSortEnd} onClick = {this.toggleModalEdition} distance={5}/>
+                    })} onSortEnd={this.onSortEnd} onClick={this.toggleModalEdition} distance={5} items2={this.props.sportplaceassociations} />
                     <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggleModalCreation} />
                     <Modal isOpen={this.state.modalCreation} toggle={this.toggleModalCreation} centered={true} onOpened={this.resetState} onClosed={this.resetState} className="custom-modal">
-                    <ModalHeader toggle={this.toggleModalCreation}>Add a sport</ModalHeader>
-                    <ModalBody>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <CustomSelectSports options={this.props.sports.filter(sport => {
-                                    let toKeep = true;
-                                    this.props.usersports.forEach(element => {
-                                        if(sport.id === element.sportDto.id){
-                                            toKeep = false;
-                                        }
-                                    });
-                                    return toKeep;
-                                })} name="idnewUserSport" label="Sport" handleChange={this.handleAddUserSport} />
-                            </div>
-                            <div className="form-group">Select practice locations</div>
-                            <div className="form-group">
-                                {this.props.userplaces.map((place) =>
-                                    <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.newPlaces.get(place.idUserplace)} handleChange={this.handleAddLocation} />
-                                )}
-                            </div>
-                            <ButtonForm name="Add Sport" type="submit" />
-                        </form>
+                        <ModalHeader toggle={this.toggleModalCreation}>Add a sport</ModalHeader>
+                        <ModalBody>
+                            <form onSubmit={this.handleSubmit}>
+                                <div className="form-group">
+                                    <CustomSelectSports options={this.props.sports.filter(sport => {
+                                        let toKeep = true;
+                                        this.props.usersports.forEach(element => {
+                                            if (sport.id === element.sportDto.id) {
+                                                toKeep = false;
+                                            }
+                                        });
+                                        return toKeep;
+                                    })} name="idnewUserSport" label="Sport" handleChange={this.handleAddUserSport} />
+                                </div>
+                                <div className="form-group">Select practice locations</div>
+                                <div className="form-group">
+                                    {this.props.userplaces.map((place) =>
+                                        <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.newPlaces.get(place.idUserplace)} handleChange={this.handleAddLocation} />
+                                    )}
+                                </div>
+                                <ButtonForm name="Add Sport" type="submit" />
+                            </form>
                         </ModalBody>
                     </Modal>
 
                     <Modal isOpen={this.state.modalEdition} toggle={this.toggleModalEdition} centered={true} onOpened={this.resetState} onClosed={this.resetState} className="custom-modal">
-                    <ModalHeader toggle={this.toggleModalEdition}>Edit your sport</ModalHeader>
-                    <ModalBody>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">Select practice locations</div>
-                            <div className="form-group">
-                                {this.props.userplaces.map((place) =>
-                                    <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.newPlaces.get(place.idUserplace)} handleChange={this.handleAddLocation} />
-                                )}
-                            </div>
-                            <ButtonForm name="Save" type="submit" />
-                        </form>
+                        <ModalHeader toggle={this.toggleModalEdition}>Edit your sport</ModalHeader>
+                        <ModalBody>
+                            <form onSubmit={this.handleEdit}>
+                                <div className="form-group">Select practice locations</div>
+                                <div className="form-group">
+                                    {this.props.userplaces.map((place) =>
+                                        <Checkbox key={place.idUserplace} id={place.idUserplace} value={place.idUserplace} name={place.placeDto.name} checked={this.state.currentlySelectedPlaces.includes(place.idUserplace)} handleChange={this.changeLocation} />
+                                    )}
+                                </div>
+                                <ButtonForm name="Save" type="submit" />
+                            </form>
                         </ModalBody>
                     </Modal>
                 </div>
@@ -204,7 +275,7 @@ const mapStateToProps = state => ({
     sports: state.sports,
     usersports: state.usersports,
     userplaces: state.userplaces,
-    sportplaceassociations: state.sportplaceassociations
+    sportplaceassociations: Object.assign([], state.sportplaceassociations)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -227,10 +298,16 @@ const mapDispatchToProps = dispatch => {
         createUserSportWithSportPlaceAssociationBatch: (user, userSport, sportPlaceAssociationBatch) => {
             dispatch(SportPlaceActions.createUserSportWithSportPlaceAssociationBatch(user, userSport, sportPlaceAssociationBatch))
         },
+        createSportPlaceAssociationBatch: (user, sportPlaceAssociationBatch) => {
+            dispatch(SportPlaceActions.createSportPlaceAssociationBatch(user, sportPlaceAssociationBatch))
+        },
+        deleteSportPlaceAssociationBatch: (user, sportPlaceAssociationBatch) => {
+            dispatch(SportPlaceActions.deleteSportPlaceAssociationBatch(user, sportPlaceAssociationBatch))
+        },
         readSportPlaceAssociations: (user) => {
             dispatch(SportPlaceActions.readSportPlaceAssociations(user))
         },
-        
+
     }
 }
 

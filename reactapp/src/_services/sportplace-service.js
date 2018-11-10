@@ -3,7 +3,8 @@ import Axios from 'axios';
 export const sportPlaceService = {
     readSportPlaceAssociations,
     createSportPlaceAssociation,
-    createSportPlaceAssociationBatch
+    createSportPlaceAssociationBatch,
+    deleteSportPlaceAssociationBatch
 }
 
 //READ SPORTPLACE ASSOCIATONS
@@ -80,6 +81,34 @@ function createSportPlaceAssociationBatch(user, sportPlaceAssociationBatch) {
         })
         .catch(function (error) {
             console.log("create error");
+            if (error.response) {
+                console.log(error.response);
+            }
+            return Promise.reject(error);
+        });
+}
+
+//DELETE BATCH OF SPORTPLACE ASSOCIATION
+function deleteSportPlaceAssociationBatch(user, sportPlaceAssociationBatch) {
+    
+    return Axios.delete('/api/sportplaceassociations/batch', {
+        headers : {'Authorization': '' + user.authorization,
+        data: sportPlaceAssociationBatch}
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log("Successfully deleted batch of sport-place associations");
+                console.log(response)
+                return response;
+            }
+            else {
+                console.log("Failed to delete batch of sport-place associations");
+                console.log(response.status + " " + response.statusText);
+                return Promise.reject(response);
+            }
+        })
+        .catch(function (error) {
+            console.log("deletion error");
             if (error.response) {
                 console.log(error.response);
             }

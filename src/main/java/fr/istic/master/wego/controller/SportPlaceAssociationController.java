@@ -8,15 +8,7 @@ import fr.istic.master.wego.model.UserSport;
 import fr.istic.master.wego.service.UserSportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import fr.istic.master.wego.dto.SportPlaceAssociationDtoCreate;
 import fr.istic.master.wego.dto.SportPlaceAssociationDtoRead;
@@ -84,7 +76,7 @@ public class SportPlaceAssociationController {
 
     //DELETE BATCH
     @DeleteMapping("/batch")
-    public void deleteSportPlaceAssociationBatch(@RequestBody List<Long> idList) {
+    public void deleteSportPlaceAssociationBatch(@RequestHeader("data") List<Long> idList) {
         for (Long id: idList) {
             sportPlaceAssociationService.deleteSportPlaceAssociation(id);
         }

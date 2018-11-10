@@ -7,7 +7,8 @@ import { SportActions } from '../_actions';
 export const SportPlaceActions = {
     readSportPlaceAssociations,
     createUserSportWithSportPlaceAssociationBatch,
-    createSportPlaceAssociationBatch
+    createSportPlaceAssociationBatch,
+    deleteSportPlaceAssociationBatch
 }
 
 //READ SPORTPLACE ASSOCIATIONS
@@ -65,7 +66,7 @@ function createUserSportWithSportPlaceAssociationBatch(user, userSport, sportPla
     function failure() { return { type: SportPlaceConstants.CREATE_SPORTPLACE_ASSOCIATION_FAIL } }
 }
 
-////CREATE BATCH OF SPORTPLACE ASSOCIATIONS
+//CREATE BATCH OF SPORTPLACE ASSOCIATIONS
 function createSportPlaceAssociationBatch(user, sportPlaceAssociationBatch) {
     return dispatch => {
 
@@ -84,4 +85,23 @@ function createSportPlaceAssociationBatch(user, sportPlaceAssociationBatch) {
     function request() { return { type: SportPlaceConstants.CREATE_SPORTPLACE_ASSOCIATION_PROGRESS } }
     function success() { return { type: SportPlaceConstants.CREATE_SPORTPLACE_ASSOCIATION_SUCCESS } }
     function failure() { return { type: SportPlaceConstants.CREATE_SPORTPLACE_ASSOCIATION_FAIL } }
+}
+
+//DELETE BATCH OF SPORTPLACE ASSOCIATIONS
+function deleteSportPlaceAssociationBatch(user, sportPlaceAssociationBatch) {
+    return dispatch => {
+        dispatch(request());
+        sportPlaceService.deleteSportPlaceAssociationBatch(user, sportPlaceAssociationBatch)
+            .then(function (response) {
+                dispatch(success());
+                dispatch(readSportPlaceAssociations(user))
+            })
+            .catch(function (error) {
+                dispatch(failure());
+            })
+    }
+
+    function request() { return { type: SportPlaceConstants.DELETE_SPORTPLACE_ASSOCIATION_PROGRESS } }
+    function success() { return { type: SportPlaceConstants.DELETE_SPORTPLACE_ASSOCIATION_SUCCESS } }
+    function failure() { return { type: SportPlaceConstants.DELETE_SPORTPLACE_ASSOCIATION_FAIL } }
 }
