@@ -39,6 +39,7 @@ class Login extends React.Component {
                     <Link to="/signin">Create an account</Link>
                 </div>
                 <div className="form-group">
+                {/* eslint-disable-next-line */}
                     <a href="#">Forgot your password?</a>
                 </div>
             </form>

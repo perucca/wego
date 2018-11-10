@@ -1,5 +1,4 @@
 import { PlaceConstants } from '../_constants';
-import { AlertActions } from '../_actions';
 
 function userplaces (state=[], action){
     switch(action.type){

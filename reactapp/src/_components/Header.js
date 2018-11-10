@@ -41,6 +41,7 @@ class HeaderBase extends React.Component {
                             </ul>
                             <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
+                                {/* eslint-disable-next-line */}
                                 <a className="nav-link" onClick={this.handleLogout} href="#">Logout</a>
                             </li>
                         </ul>

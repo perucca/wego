@@ -33,7 +33,7 @@ class MyPlaces extends Component {
 
     handleSubmitCityName = (e) => {
         e.preventDefault();
-        if (this.state.searchedCityName!=""){
+        if (this.state.searchedCityName!==""){
             this.props.searchPlace(this.props.currentuser, this.state.searchedCityName);
         }  
     }
@@ -45,9 +45,13 @@ class MyPlaces extends Component {
     handleSubmitUserPlace = (event) => {
         event.preventDefault();
         if (this.state.newUserPlace.idPlace !=null && this.props.userplaces.length<5){
-            this.state.newUserPlace.preferenceOrder = this.props.userplaces.length + 1;
+            this.setState({newUserPlace: {
+                idUser: this.state.newUserPlace.idUser,
+                idPlace: this.state.newUserPlace.idPlace,
+                preferenceOrder: this.props.userplaces.length + 1}});
             this.props.createUserPlace(this.props.currentuser, this.state.newUserPlace);
-        } 
+        }
+
         this.setState({newUserPlace: {idUser: this.state.newUserPlace.idUser, idPlace: null, preferenceOrder: null}, searchedCityName:""});
     }
 
@@ -68,7 +72,7 @@ class MyPlaces extends Component {
                     <div className="form-group row w-100">
                         <div className="d-inline col-1"></div>
                         <input className="d-inline float-center text-left col-8 input-group" placeholder="Place Name" type="text" value={this.state.searchedCityName} onChange={this.handleChangeCityName}/>  
-                        <button className="d-inline float-right text-center col-3" type="submit" className="btn">Search</button>
+                        <button className="d-inline float-right text-center col-3 btn" type="submit">Search</button>
                     </div>
                 </form>    
 

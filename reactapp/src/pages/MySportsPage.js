@@ -19,6 +19,8 @@ const SortableItem = SortableElement(({ value, onClick, items2 }) => {
                     return (
                         <span className="secondary-text" key={`${element.userSportDtoRead.idUserSport}-${element.userPlaceDtoRead.idUserplace}`}>{`${element.userPlaceDtoRead.placeDto.name} `}</span>
                     )
+                }else{
+                    return null
                 }
             })}
         </div>
