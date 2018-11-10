@@ -61,7 +61,7 @@ public class WeatherFetcher {
 		int shift = computeForecastShift();
 		
 		if(shift > MAX_OPENWEATHER_FORECAST) {
-			return null;
+			shift = MAX_OPENWEATHER_FORECAST-4; //Hack on prend la prévision de la dernière journée à 12h
 		}
 		
 		OpenWeatherForecastItem owForecastItem = owforecast.getList().get(shift-1); 

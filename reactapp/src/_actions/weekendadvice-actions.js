@@ -1,5 +1,5 @@
-import WeekendAdviceConstants from '../_constants'
-import weekendAdviceService from '../_services/weekendadvice-service'
+import {WeekendAdviceConstants} from '../_constants'
+import {weekendAdviceService} from '../_services/weekendadvice-service'
 
 export const WeekendAdviceActions = {
     load
@@ -17,7 +17,7 @@ function load(user) {
             })
     }
 
-    function request() { return { type: WeekendAdviceConstants.REGISTER_PROGRESS } }
-    function success(weekendadvice) { return { type: WeekendAdviceConstants.REGISTER_SUCCESS, weekendadvice } }
-    function failure() { return { type: WeekendAdviceConstants.REGISTER_ERROR } }
+    function request() { return { type: WeekendAdviceConstants.WEEKENDADVICE_GET_PROGRESS } }
+    function success(weekendAdvice) { return { type: WeekendAdviceConstants.WEEKENDADVICE_GET_SUCCESS, weekendAdvice } }
+    function failure() { return { type: WeekendAdviceConstants.WEEKENDADVICE_GET_ERROR } }
 }
