@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.istic.master.wego.dto.UserDtoCreate;
 import fr.istic.master.wego.dto.UserDtoRead;
+import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.service.UserService;
 
 /**
@@ -43,8 +44,9 @@ public class UserController {
 
 	// Service to update a User
 	@PutMapping("/{id}")
-	public void updateUser(@PathVariable("id") Long id, @RequestBody UserDtoCreate userDto) {
+	public UserDtoRead updateUser(@PathVariable("id") Long id, @RequestBody UserDtoCreate userDto) {
 		userService.updateUser(id, userDto);
+		return userService.getUserById(id);
 	}
 
 	// Service to delete a User

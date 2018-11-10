@@ -11,10 +11,13 @@ import org.springframework.stereotype.Service;
 public class WeatherJobScheduler {
 
 	@Autowired
-	private WeatherFetcher weatherFetcher;
+	private WeatherFetcher fetcher;
 
 	@Autowired
-	private WeatherAdviser weatherAnalyser;
+	private WeatherAdviser adviser;
+
+	@Autowired
+	private WeatherAdviceNotifier notifier;
 
 	/**
 	 *
@@ -38,8 +41,9 @@ public class WeatherJobScheduler {
 	@Scheduled(cron = "0 0 8 * * TUE")
 	public void launcheWeatherAnalysis() {
 		try {
-			weatherFetcher.launchWeatherAnalysis();
-			weatherAnalyser.analyse();
+			fetcher.launchWeatherAnalysis();
+			adviser.analyse();
+			notifier.sendMails();
 		} catch (Exception e) {
 			Logger.getGlobal().log(Level.SEVERE, "Error when analysing weather", e);
 		}

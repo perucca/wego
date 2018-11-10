@@ -1,7 +1,8 @@
-package fr.istic.master.wego.dto;
+package fr.istic.master.wego.dto.transform;
 
 import java.util.HashSet;
 
+import fr.istic.master.wego.dto.PlaceDto;
 import fr.istic.master.wego.model.Forecast;
 import fr.istic.master.wego.model.Place;
 import fr.istic.master.wego.model.UserPlace;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import fr.istic.master.wego.dao.SportDao;
 import fr.istic.master.wego.dto.SportDto;
-import fr.istic.master.wego.dto.TransformDtoSport;
+import fr.istic.master.wego.dto.transform.TransformDtoSport;
 import fr.istic.master.wego.model.Sport;
 
 @Service

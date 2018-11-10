@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import fr.istic.master.wego.service.openweather.data.OpenWeatherForecast;
+
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringJUnitConfig(classes = WegoApplication.class)
 //@WebAppConfiguration

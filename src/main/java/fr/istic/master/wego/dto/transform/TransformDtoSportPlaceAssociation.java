@@ -1,5 +1,6 @@
-package fr.istic.master.wego.dto;
+package fr.istic.master.wego.dto.transform;
 
+import fr.istic.master.wego.dto.SportPlaceAssociationDtoRead;
 import fr.istic.master.wego.model.SportPlaceAssociation;
 
 public class TransformDtoSportPlaceAssociation {

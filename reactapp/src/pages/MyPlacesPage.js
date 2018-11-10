@@ -103,8 +103,7 @@ class MyPlaces extends Component {
 const mapStateToProps = state => ({
     currentuser: state.currentuser,
     places: state.places,
-    userplaces: state.userplaces,
-    placetodelete : state.placetodelete
+    userplaces: state.userplaces
 });
 
 const mapDispatchToProps = dispatch => {

@@ -20,7 +20,7 @@ public class UserSport {
 	private Long id;
 	private User user;
 	private Sport sport;
-	private float preferenceOrder;
+	private int preferenceOrder;
 
 	private Set<SportPlaceAssociation> myPlacesForThisSport = new HashSet<SportPlaceAssociation>();
 
@@ -29,7 +29,7 @@ public class UserSport {
 	}
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -56,11 +56,11 @@ public class UserSport {
 		this.sport = sport;
 	}
 
-	public float getPreferenceOrder() {
+	public int getPreferenceOrder() {
 		return preferenceOrder;
 	}
 
-	public void setPreferenceOrder(float preferenceOrder) {
+	public void setPreferenceOrder(int preferenceOrder) {
 		this.preferenceOrder = preferenceOrder;
 	}
 

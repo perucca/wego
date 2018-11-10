@@ -13,6 +13,7 @@ import fr.istic.master.wego.model.Forecast;
 import fr.istic.master.wego.model.IdealWeather;
 import fr.istic.master.wego.model.SportPlaceAssociation;
 import fr.istic.master.wego.model.User;
+import fr.istic.master.wego.service.WeekEndAdviceService;
 
 @Service
 public class WeatherAdviser {
@@ -22,6 +23,9 @@ public class WeatherAdviser {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private WeekEndAdviceService weekendAdviceService;
 
 	public void analyse() {
 
@@ -39,9 +43,14 @@ public class WeatherAdviser {
 					return new IdealWeatherValidator(idealWeatherCondition).validate(forecast);
 				}).findFirst();
 
-		// Pas de conseil si advice est null.
-		user.setWeekendAdvice(advice.orElse(null));
-		userDao.save(user);
+		if (advice.isPresent()) {
+			SportPlaceAssociation spa = advice.get();
+			weekendAdviceService.create(user, spa.getUserplace().getPlace(), spa.getUsersport().getSport());
+		} else {
+			// Pas de conseil si advice est null.
+			weekendAdviceService.deleteByUser(user);
+		}
+
 	}
 
 }

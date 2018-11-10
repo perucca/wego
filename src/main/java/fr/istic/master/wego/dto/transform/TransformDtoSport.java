@@ -1,7 +1,8 @@
-package fr.istic.master.wego.dto;
+package fr.istic.master.wego.dto.transform;
 
 import java.util.HashSet;
 
+import fr.istic.master.wego.dto.SportDto;
 import fr.istic.master.wego.model.Sport;
 import fr.istic.master.wego.model.UserSport;
 

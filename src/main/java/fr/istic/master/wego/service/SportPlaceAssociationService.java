@@ -14,7 +14,7 @@ import fr.istic.master.wego.dao.UserPlaceDao;
 import fr.istic.master.wego.dao.UserSportDao;
 import fr.istic.master.wego.dto.SportPlaceAssociationDtoCreate;
 import fr.istic.master.wego.dto.SportPlaceAssociationDtoRead;
-import fr.istic.master.wego.dto.TransformDtoSportPlaceAssociation;
+import fr.istic.master.wego.dto.transform.TransformDtoSportPlaceAssociation;
 import fr.istic.master.wego.model.SportPlaceAssociation;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.model.UserPlace;

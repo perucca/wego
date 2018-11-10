@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import fr.istic.master.wego.dao.PlaceDao;
 import fr.istic.master.wego.dto.PlaceDto;
-import fr.istic.master.wego.dto.TransformDtoPlace;
+import fr.istic.master.wego.dto.transform.TransformDtoPlace;
 import fr.istic.master.wego.model.Place;
 
 @Service

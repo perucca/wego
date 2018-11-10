@@ -20,7 +20,7 @@ public class UserPlace {
 	private Long id;
 	private User user;
 	private Place place;
-	private float preferenceOrder;
+	private int preferenceOrder;
 
 	private Set<SportPlaceAssociation> mySportsAtThisPlace = new HashSet<SportPlaceAssociation>();
 
@@ -29,7 +29,7 @@ public class UserPlace {
 	}
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -56,11 +56,11 @@ public class UserPlace {
 		this.place = place;
 	}
 
-	public float getPreferenceOrder() {
+	public int getPreferenceOrder() {
 		return preferenceOrder;
 	}
 
-	public void setPreferenceOrder(float preferenceOrder) {
+	public void setPreferenceOrder(int preferenceOrder) {
 		this.preferenceOrder = preferenceOrder;
 	}
 
@@ -78,8 +78,9 @@ public class UserPlace {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((place  == null) ? 0 : place.hashCode());
-		result = prime * result + Float.floatToIntBits(preferenceOrder);
+		result = prime * result + ((place == null) ? 0 : place.hashCode());
+		result = prime * result + preferenceOrder;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -107,7 +108,7 @@ public class UserPlace {
 				return false;
 		} else if (!place.equals(other.place))
 			return false;
-		if (Float.floatToIntBits(preferenceOrder) != Float.floatToIntBits(other.preferenceOrder))
+		if (preferenceOrder != other.preferenceOrder)
 			return false;
 		return true;
 	}

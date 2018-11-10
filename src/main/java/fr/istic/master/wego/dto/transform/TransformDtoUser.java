@@ -1,9 +1,11 @@
-package fr.istic.master.wego.dto;
+package fr.istic.master.wego.dto.transform;
 
 import java.util.HashSet;
 
 import org.springframework.util.CollectionUtils;
 
+import fr.istic.master.wego.dto.UserDtoCreate;
+import fr.istic.master.wego.dto.UserDtoRead;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.model.UserPlace;
 import fr.istic.master.wego.model.UserSport;

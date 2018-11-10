@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.istic.master.wego.dao.UserDao;
-import fr.istic.master.wego.dto.TransformDtoUser;
 import fr.istic.master.wego.dto.UserDtoCreate;
 import fr.istic.master.wego.dto.UserDtoRead;
+import fr.istic.master.wego.dto.transform.TransformDtoUser;
 import fr.istic.master.wego.model.User;
 
 @Service
@@ -60,14 +60,19 @@ public class UserService {
 		Objects.requireNonNull(userDto);
 		Objects.requireNonNull(userDto.getFirstName());
 		Objects.requireNonNull(userDto.getLastName());
-		Objects.requireNonNull(userDto.getPassword());
 
-		if(Objects.isNull(userDto.getMail())) {
-			throw new IllegalStateException("The mail must be null when updating the user!!");
+		if(!Objects.isNull(userDto.getMail())) {
+			throw new IllegalStateException("The mail cannot be changed when updating the user!!");
+		}
+		
+		if(!Objects.isNull(userDto.getPassword())) {
+			throw new IllegalStateException("The password cannot be changed when updating the user!!");
 		}
 		
 		User u = userDao.getOne(id);
-		userDao.save(TransformDtoUser.transformFromDto(userDto, u));
+		u.setFirstName(userDto.getFirstName());
+		u.setLastName(userDto.getLastName());
+		userDao.save(u);
 	}
 
 	public void deleteUser(Long id) {

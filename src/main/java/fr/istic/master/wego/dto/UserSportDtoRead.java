@@ -1,34 +1,34 @@
 package fr.istic.master.wego.dto;
 
 public class UserSportDtoRead {
-    private Long idUserSport;
-    private SportDto sportDto;
-    private float preferenceOrder;
+	private Long idUserSport;
+	private SportDto sportDto;
+	private int preferenceOrder;
 
-    public UserSportDtoRead() {
-    }
+	public UserSportDtoRead() {
+	}
 
-    public Long getIdUserSport() {
-        return idUserSport;
-    }
+	public Long getIdUserSport() {
+		return idUserSport;
+	}
 
-    public void setIdUserSport(Long idUserSport) {
-        this.idUserSport = idUserSport;
-    }
+	public void setIdUserSport(Long idUserSport) {
+		this.idUserSport = idUserSport;
+	}
 
-    public SportDto getSportDto() {
-        return sportDto;
-    }
+	public SportDto getSportDto() {
+		return sportDto;
+	}
 
-    public void setSportDto(SportDto sportDto) {
-        this.sportDto = sportDto;
-    }
+	public void setSportDto(SportDto sportDto) {
+		this.sportDto = sportDto;
+	}
 
-    public float getPreferenceOrder() {
-        return preferenceOrder;
-    }
+	public int getPreferenceOrder() {
+		return preferenceOrder;
+	}
 
-    public void setPreferenceOrder(float preferenceOrder) {
-        this.preferenceOrder = preferenceOrder;
-    }
+	public void setPreferenceOrder(int preferenceOrder) {
+		this.preferenceOrder = preferenceOrder;
+	}
 }

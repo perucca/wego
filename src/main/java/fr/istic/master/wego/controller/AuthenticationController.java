@@ -12,7 +12,7 @@ public class AuthenticationController {
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void createUser() {
+	public void authenticate() {
 
 	}
 
