@@ -40,6 +40,7 @@ public class WeatherAdviser {
 				.stream().filter((spa) -> {
 					IdealWeather idealWeatherCondition = spa.getUsersport().getSport().getIdealWeather();
 					Forecast forecast = spa.getUserplace().getPlace().getForecast();
+					if(forecast == null) return false;
 					return new IdealWeatherValidator(idealWeatherCondition).validate(forecast);
 				}).findFirst();
 

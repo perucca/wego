@@ -3,3 +3,4 @@ export * from './user-actions';
 export * from './sport-actions';
 export * from './place-actions';
 export * from './sportplace-actions';
+export * from './weekendadvice-actions';

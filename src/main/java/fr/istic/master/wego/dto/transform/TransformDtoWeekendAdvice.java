@@ -12,10 +12,12 @@ public class TransformDtoWeekendAdvice {
 
 		WeekendAdviceDto weaDto = new WeekendAdviceDto();
 		weaDto.setId(wea.getId());
-		weaDto.setIdPlace(wea.getPlace().getId());
-		weaDto.setIdSport(wea.getSport().getId());
-		weaDto.setIdUser(wea.getUser().getId());
-
+		weaDto.setSport(wea.getSport().getSportName());
+		weaDto.setPlace(wea.getPlace().getName());
+		weaDto.setWeather(wea.getPlace().getForecast().getWeather().toString());
+		weaDto.setTemperature(Math.round(wea.getPlace().getForecast().getTemperature()));
+		weaDto.setWind(Math.round(wea.getPlace().getForecast().getWind()));
+		
 		return weaDto;
 	}
 
