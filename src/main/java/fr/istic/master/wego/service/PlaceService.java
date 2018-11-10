@@ -42,11 +42,11 @@ public class PlaceService {
 		Objects.requireNonNull(name);
 		
 		// Format the searched city name
-        char[] arr = name.toLowerCase().toCharArray();
-        arr[0] = Character.toUpperCase(arr[0]);
-        String str = new String(arr);
+//        char[] arr = name.toLowerCase().toCharArray();
+//        arr[0] = Character.toUpperCase(arr[0]);
+//        String str = new String(arr);
 		
-		List<Place> places = placeDao.findAllByName(str);
+		List<Place> places = placeDao.findAllByName(name.toLowerCase());
 		List<PlaceDto> placesDto = new ArrayList<>();
 
 		for (Place place : places) {
