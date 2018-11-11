@@ -22,4 +22,7 @@ public interface PlaceDao extends JpaRepository<Place, Long> {
 	@Query("select p from Place p where lower(p.name) =:name")
 	public List<Place> findAllByName(@Param("name") String name);
 
+	@Query("select p from Place p where lower(p.name) LIKE :name%")
+	public List<Place> findAllByPartialName(@Param("name") String name);
+
 }

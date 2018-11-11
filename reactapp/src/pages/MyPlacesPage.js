@@ -9,6 +9,8 @@ import { Fab } from '../_components';
 import { connect } from 'react-redux';
 import deleteBtn from '../_img/trash.svg';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import Select from 'react-select';
+import AsyncSelect from 'react-select/lib/Async';
 
 const SortableItem = SortableElement(({ value, onClick }) => {
     return (
@@ -107,10 +109,60 @@ class MyPlaces extends Component {
         this.props.updateUserPlaceBatch(this.props.currentuser, items);
     };
 
+    handleInputChange = (input) => {
+        this.setState({searchedCityName: input});
+        console.log("INPUT", input);
+        if (input.length > 2) {
+            console.log("SEARCH");
+            this.props.searchPlace(this.props.currentuser, input);
+        }
+        
+    }
+
+    searchCity = (input) => {
+        console.log("UPDATE");
+        return this.props.places.map(place => {
+            const labelPlace = "" + place.name + " - " + place.postCode;
+            console.log(labelPlace);
+            return {value: place.id, label: labelPlace};
+        });
+    }
+
+    loadOptions = (input, callback)=>{
+        if (input.length > 2) {
+        setTimeout(() => {callback(this.searchCity(input));},1000);
+        }else{
+            callback(this.searchCity(input));
+        }
+        
+    }
+
+    submitUserPlace = (object, type) => {
+
+        console.log("CHANGE",object.value,type)
+        if (type.action === "select-option" && object.value !== 0 && this.props.userplaces.length < 5) {
+            const newUserPlace = {
+                idUser: this.props.currentuser.id,
+                idPlace: object.value,
+                preferenceOrder: this.props.userplaces.length + 1
+            };
+            console.log("SUBMIT");
+            this.props.createUserPlace(this.props.currentuser, newUserPlace);
+        }
+
+        this.setState({ newUserPlace: { idUser: this.state.newUserPlace.idUser, idPlace: null, preferenceOrder: null}});
+    }
+
     render() {
 
         return (
             <MainLayout title="Your Favorite Places" icon={icon}>
+            <Select options={this.props.places.map(place => {
+            const labelPlace = "" + place.name + " - " + place.postCode;
+            console.log(labelPlace);
+            return {value: place.id, label: labelPlace};
+        })} onInputChange={this.handleInputChange} onChange = {this.submitUserPlace}/>
+            {/* <AsyncSelect isMulti cacheOptions loadOptions={this.loadOptions} defaultOptions onInputChange={this.handleInputChange}/> */}
                 <div>
                     <SortableList items={this.props.userplaces.sort((a, b) => {
                         let prefA = a.preferenceOrder;

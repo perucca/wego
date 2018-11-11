@@ -46,7 +46,7 @@ public class PlaceService {
 //        arr[0] = Character.toUpperCase(arr[0]);
 //        String str = new String(arr);
 		
-		List<Place> places = placeDao.findAllByName(name.toLowerCase());
+		List<Place> places = placeDao.findAllByPartialName(name.toLowerCase());
 		List<PlaceDto> placesDto = new ArrayList<>();
 
 		for (Place place : places) {
