@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {WeekendAdviceActions} from '../_actions';
+import { WeekendAdviceActions } from '../_actions';
 import clear from '../_img/weather/animated/day.svg';
 import rain from '../_img/weather/animated/rainy-6.svg';
 import cloudy from '../_img/weather/animated/cloudy.svg';
@@ -13,7 +13,7 @@ class WeekendAdvice extends React.Component {
     }
 
     getImage = () => {
-        switch(this.props.weekendAdvice.weather) {
+        switch (this.props.weekendAdvice.weather) {
             case 'CLEAR':
                 return clear;
             case 'RAIN':
@@ -27,30 +27,29 @@ class WeekendAdvice extends React.Component {
         }
     }
 
-    render(){
+    componentDidUpdate() {
+        console.log("WEATHER", this.props.weekendAdvice)
+    }
+
+    render() {
         let advice;
-        if(this.props.weekendAdvice == null || this.props.weekendAdvice === "") {
-            advice =(<div className="card-body"> <p className="card-text">No advice for this week end </p> </div>)
+        if (this.props.weekendAdvice == null || this.props.weekendAdvice === "" || Object.keys(this.props.weekendAdvice).length === 0) {
+            advice = (
+                <div className="p-3 d-flex align-items-center mb-5 mt-4">
+                    <div><em>We do not have any suggestions for this weekend</em></div>
+                </div>)
         } else {
             advice = (
-                <div className="card-body"> 
-                <p className="car-text">Place: {this.props.weekendAdvice.place}</p>
-                <p className="car-text ">Practice : {this.props.weekendAdvice.sport}</p> 
-                <img src={this.getImage()} className=".img-fluid" alt=""/>
-                <p className="card-text">T°: {this.props.weekendAdvice.temperature} °C</p>
-                <p className="card-text">Wind: {this.props.weekendAdvice.wind} km/h</p>
-            </div>
-            
+                <div className="p-3 d-flex align-items-center mb-5 mt-4">
+                    <div><img src={this.getImage()} className=".img-fluid icon-weather" alt="" /></div>
+                    <div className="text-left">This weekend, we suggest you to practice <strong>{this.props.weekendAdvice.sport}</strong> in <strong>{this.props.weekendAdvice.place}</strong>
+                        <br /><span className="secondary-text">({this.props.weekendAdvice.temperature} °C - wind: {this.props.weekendAdvice.wind} km/h)</span>
+                    </div>
+                </div>
             )
         }
-
-        return (
-            <div className="card">
-                <h6 className="card-header">Tip for the Week-End</h6>
-                {advice}
-            </div>
-        );
-        }
+        return advice;
+    }
 }
 
 

@@ -4,6 +4,8 @@ import {HomeLayout} from '../_hoc/HomeLayout';
 import { LinkedButton, WeekendAdviceFrame } from '../_components';
 import { connect } from 'react-redux';
 import icon from '../_img/profile.svg';
+import iconSports from '../_img/cycling-orange.svg';
+import iconPlaces from '../_img/place-orange.svg';
 
 
 class Home extends Component {
@@ -16,14 +18,14 @@ class Home extends Component {
     return(
     <HomeLayout title={"Welcome " + this.props.currentuser.firstName} icon={icon}>
       <div className="dark homepage">
+      <WeekendAdviceFrame/>
         <div>
-            <LinkedButton name="My Places" type="button" to="/myplaces"></LinkedButton>
+            <LinkedButton name="My Places" type="button" to="/myplaces" icon={iconPlaces} info={"Manage the list of your favorite places"}></LinkedButton>
         </div>    
         <div>
-            <LinkedButton name="My Sports" type="button" to="/mysports"></LinkedButton>
+            <LinkedButton name="My Sports" type="button" to="/mysports" icon={iconSports} info={"Manage the list of your favorite sports"}></LinkedButton>
         </div>
-        <WeekendAdviceFrame/>
-
+        
     </div>
     </HomeLayout>
     );
