@@ -8,7 +8,7 @@ export const MainLayout = (props) => (
         <Header />
         <div className="container-fluid h-100">
             <div className="title-section row text-center">
-                <h3 className="ml-auto mr-auto mt-4">{props.title}</h3>
+                <h4 className="ml-auto mr-auto mt-4">{props.title}</h4>
             </div>
             <div className="page-icon">
                 <img src={props.icon} alt="page icon"/>
