@@ -1,8 +1,7 @@
 package fr.istic.master.wego.domain;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,8 +20,6 @@ import fr.istic.master.wego.service.openweather.data.OpenWeatherForecastItem;
 @Service
 public class WeatherFetcher {
 
-	private final static int MAX_OPENWEATHER_FORECAST = 5*8; //5 days/3 hours of forecast
-	
 	@Autowired
 	private PlaceDao placeDao;
 
@@ -58,13 +55,10 @@ public class WeatherFetcher {
 	private Forecast transformOWForecastToWegoForecast(OpenWeatherForecast owforecast) {
 		Forecast forecast = new Forecast();
 		
-		int shift = computeForecastShift();
-		
-		if(shift > MAX_OPENWEATHER_FORECAST) {
-			shift = MAX_OPENWEATHER_FORECAST-4; //Hack on prend la prévision de la dernière journée à 12h
+		OpenWeatherForecastItem owForecastItem = resolveForecastItem(owforecast);
+		if(owforecast == null) {
+			return null;
 		}
-		
-		OpenWeatherForecastItem owForecastItem = owforecast.getList().get(shift-1); 
 
 		forecast.setTemperature(owForecastItem.getMain().getTemperature());
 		forecast.setWeather(EnumWeather.from(owForecastItem.getWeather().get(0).getMain()));
@@ -72,21 +66,17 @@ public class WeatherFetcher {
 		return forecast;
 	}
 
-	private int computeForecastShift() {
-		LocalDate today = LocalDate.now();
-		LocalDate nextSaturday = today.with(TemporalAdjusters.next(DayOfWeek.SATURDAY)); 
+	private OpenWeatherForecastItem resolveForecastItem(OpenWeatherForecast owforecast) {
 		
-		int nbOfDays = 0;
-		if(nextSaturday.getDayOfMonth() >= today.getDayOfMonth())
-		{
-			nbOfDays = nextSaturday.getDayOfMonth() - today.getDayOfMonth();
-		} else {
-			nbOfDays = today.getDayOfMonth()%today.with(TemporalAdjusters.lastDayOfMonth()).getDayOfMonth() + nextSaturday.getDayOfMonth();
+		for(int i = 39; i>=0; i--) {
+			OpenWeatherForecastItem openWeatherForecastItem = owforecast.getList().get(i);
+			if(LocalDateTime.ofEpochSecond(openWeatherForecastItem.getDt(), 0, ZoneOffset.UTC).getHour() == 12) 
+				return openWeatherForecastItem;
 		}
 		
-		int decalage = (nbOfDays-1)*8+4;
-		return decalage;
+		return null;
 	}
+
 
 
 }
