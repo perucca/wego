@@ -14,7 +14,7 @@ export const MainLayout = (props) => (
                 <img src={props.icon} alt="page icon"/>
             </div>
          
-            <div className="row align-items-center h-50">
+            <div className="row align-items-top">
                 <div className="col-sm-1 col-md-2 col-lg-3"></div>
                 <div className="col-xs-12 col-sm-10 col-md-8 col-lg-6">
                     {props.children}

@@ -3,14 +3,10 @@ import './App.css';
 import { MainLayout } from '../_hoc/MainLayout';
 import { PlaceActions } from '../_actions/place-actions';
 import icon from '../_img/place.svg';
-import { ButtonForm, CustomSelectNewPlace } from '../_components';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
-import { Fab } from '../_components';
 import { connect } from 'react-redux';
 import deleteBtn from '../_img/trash.svg';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Select from 'react-select';
-import AsyncSelect from 'react-select/lib/Async';
 
 const SortableItem = SortableElement(({ value, onClick }) => {
     return (
@@ -30,7 +26,6 @@ const SortableList = SortableContainer(({ items, onClick }) => {
     );
 });
 
-
 class MyPlaces extends Component {
     constructor(props) {
         super(props);
@@ -45,53 +40,15 @@ class MyPlaces extends Component {
         };
     }
 
-    toggleModalCreation = () => {
-        this.setState({
-            modalCreation: !this.state.modalCreation
-        });
-    }
-
     componentDidMount() {
         console.log('my places page');
         this.props.getUserPlaces(this.props.currentuser);
-    }
-
-    handleChangeCityName = (e) => {
-        this.setState({ newUserPlace: this.state.newUserPlace, searchedCityName: e.target.value });
     }
 
     onClickDelete = (e, idUserPlace) => {
         console.log(idUserPlace)
         e.preventDefault();
         this.props.deleteUserPlace(this.props.currentuser, idUserPlace);
-    }
-
-    handleSubmitCityName = (e) => {
-        e.preventDefault();
-        if (this.state.searchedCityName !== "") {
-            this.props.searchPlace(this.props.currentuser, this.state.searchedCityName);
-        }
-    }
-
-    handleChangeUserPlace = (event) => {
-        this.setState({ newUserPlace: { idUser: this.state.newUserPlace.idUser, idPlace: event.target.value, preferenceOrder: this.state.newUserPlace.preferenceOrder }, searchedCityName: this.state.searchedCityName });
-    }
-
-    handleSubmitUserPlace = (event) => {
-        event.preventDefault();
-        if (this.state.newUserPlace.idPlace != null && this.props.userplaces.length < 5) {
-            this.setState({
-                newUserPlace: {
-                    idUser: this.state.newUserPlace.idUser,
-                    idPlace: this.state.newUserPlace.idPlace,
-                    preferenceOrder: this.props.userplaces.length + 1
-                }
-            });
-            this.props.createUserPlace(this.props.currentuser, this.state.newUserPlace);
-            this.toggleModalCreation();
-        }
-
-        this.setState({ newUserPlace: { idUser: this.state.newUserPlace.idUser, idPlace: null, preferenceOrder: null }, searchedCityName: "" });
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
@@ -119,37 +76,15 @@ class MyPlaces extends Component {
         
     }
 
-    searchCity = (input) => {
-        console.log("UPDATE");
-        return this.props.places.map(place => {
-            const labelPlace = "" + place.name + " - " + place.postCode;
-            console.log(labelPlace);
-            return {value: place.id, label: labelPlace};
-        });
-    }
-
-    loadOptions = (input, callback)=>{
-        if (input.length > 2) {
-        setTimeout(() => {callback(this.searchCity(input));},1000);
-        }else{
-            callback(this.searchCity(input));
-        }
-        
-    }
-
     submitUserPlace = (object, type) => {
-
-        console.log("CHANGE",object.value,type)
         if (type.action === "select-option" && object.value !== 0 && this.props.userplaces.length < 5) {
             const newUserPlace = {
                 idUser: this.props.currentuser.id,
                 idPlace: object.value,
                 preferenceOrder: this.props.userplaces.length + 1
             };
-            console.log("SUBMIT");
             this.props.createUserPlace(this.props.currentuser, newUserPlace);
         }
-
         this.setState({ newUserPlace: { idUser: this.state.newUserPlace.idUser, idPlace: null, preferenceOrder: null}});
     }
 
@@ -157,12 +92,10 @@ class MyPlaces extends Component {
 
         return (
             <MainLayout title="Your Favorite Places" icon={icon}>
-            <Select options={this.props.places.map(place => {
+            <Select  isClearable options={this.props.places.map(place => {
             const labelPlace = "" + place.name + " - " + place.postCode;
-            console.log(labelPlace);
             return {value: place.id, label: labelPlace};
-        })} onInputChange={this.handleInputChange} onChange = {this.submitUserPlace}/>
-            {/* <AsyncSelect isMulti cacheOptions loadOptions={this.loadOptions} defaultOptions onInputChange={this.handleInputChange}/> */}
+        })} onInputChange={this.handleInputChange} onChange = {this.submitUserPlace} className= "mb-4 mt-5" isDisabled={(this.props.userplaces.length >= 5)}/>
                 <div>
                     <SortableList items={this.props.userplaces.sort((a, b) => {
                         let prefA = a.preferenceOrder;
@@ -171,26 +104,6 @@ class MyPlaces extends Component {
                         if (prefA > prefB) return 1;
                         return 0;
                     })} onSortEnd={this.onSortEnd} onClick={this.onClickDelete} distance={5} />
-
-                    <Fab onClick={this.toggleModalCreation} />
-                    <Modal isOpen={this.state.modalCreation} toggle={this.toggleModalCreation} centered={true} className="custom-modal">
-                        <ModalHeader toggle={this.toggleModalCreation}>Add a place</ModalHeader>
-                        <ModalBody>
-                            <form onSubmit={this.handleSubmitCityName}>
-                                <div className="form-group">First, search a place name</div>
-                                <div className="form-group row w-100">
-                                    <div className="d-inline col-1"></div>
-                                    <input className="d-inline float-center text-left col-8 input-group" placeholder="Place Name" type="text" value={this.state.searchedCityName} onChange={this.handleChangeCityName} />
-                                    <button className="d-inline float-right text-center col-3 btn" type="submit">Search</button>
-                                </div>
-                            </form>
-                            <form onSubmit={this.handleSubmitUserPlace}>
-                                <div className="form-group">Then, select the right place in the list</div>
-                                <CustomSelectNewPlace options={this.props.places} name="idPlace" label="Location" handleChange={this.handleChangeUserPlace} />
-                                <ButtonForm name="Add Place" type="submit" />
-                            </form>
-                        </ModalBody>
-                    </Modal>
                 </div>
             </MainLayout>
         );
