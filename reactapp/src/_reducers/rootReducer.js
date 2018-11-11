@@ -7,7 +7,7 @@ import sportplaceassociation from './sportplaceassociation'
 import currentuser from './currentuser'
 import AuthenticationReducer from './AuthenticationReducer'
 import weekendAdvice from './weekendAdviceReducer'
-
+import loadingPlaces from './loadingPlaces'
 
 function rootReducer(state={}, action){
     return {
@@ -19,7 +19,8 @@ function rootReducer(state={}, action){
         sportplaceassociations : sportplaceassociation(state.sportplaceassociations, action),
         currentuser : currentuser(state.currentuser, action),
         isAuthenticated: AuthenticationReducer(state.isAuthenticated, action),
-        weekendAdvice: weekendAdvice(state.weekendadvice,action)
+        weekendAdvice: weekendAdvice(state.weekendadvice,action),
+        arePlacesLoading: loadingPlaces(state.arePlacesLoading, action)
     };
 }
 

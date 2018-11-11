@@ -92,7 +92,7 @@ class MyPlaces extends Component {
 
         return (
             <MainLayout title="Your Favorite Places" icon={icon}>
-            <Select  isClearable options={this.props.places.map(place => {
+            <Select  isClearable isLoading={this.props.arePlacesLoading} options={this.props.places.map(place => {
             const labelPlace = "" + place.name + " - " + place.postCode;
             return {value: place.id, label: labelPlace};
         })} onInputChange={this.handleInputChange} onChange = {this.submitUserPlace} className= "mb-4 mt-5" isDisabled={(this.props.userplaces.length >= 5)}/>
@@ -113,7 +113,8 @@ class MyPlaces extends Component {
 const mapStateToProps = state => ({
     currentuser: state.currentuser,
     places: state.places,
-    userplaces: state.userplaces
+    userplaces: state.userplaces,
+    arePlacesLoading: state.arePlacesLoading
 });
 
 const mapDispatchToProps = dispatch => {
