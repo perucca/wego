@@ -53,10 +53,10 @@
 }
 
 .icon-weather{
-  width: 120px;
-  margin: -20px;
+  width: 140px;
+  margin: -30px -20px -30px -30px;
 }
 
 .icon-menu{
-  width: 70px;
+  width: 60px;
 }

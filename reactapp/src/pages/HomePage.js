@@ -20,10 +20,10 @@ class Home extends Component {
       <div className="dark homepage">
       <WeekendAdviceFrame/>
         <div>
-            <LinkedButton name="My Places" type="button" to="/myplaces" icon={iconPlaces} info={"Manage the list of your favorite places"}></LinkedButton>
+            <LinkedButton name="Places" type="button" to="/myplaces" icon={iconPlaces} info={"Manage the list of your favorite places"}></LinkedButton>
         </div>    
         <div>
-            <LinkedButton name="My Sports" type="button" to="/mysports" icon={iconSports} info={"Manage the list of your favorite sports"}></LinkedButton>
+            <LinkedButton name="Sports" type="button" to="/mysports" icon={iconSports} info={"Manage the list of your favorite sports"}></LinkedButton>
         </div>
         
     </div>
