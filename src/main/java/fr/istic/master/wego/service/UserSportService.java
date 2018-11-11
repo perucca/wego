@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import fr.istic.master.wego.dao.SportPlaceAssociationDao;
+import fr.istic.master.wego.model.SportPlaceAssociation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,9 @@ public class UserSportService {
 
 	@Autowired
 	private SportDao sportDao;
+
+	@Autowired
+	private SportPlaceAssociationDao spaDao;
 
 	//CREATE
 	public UserSport createUserSport(UserSportDtoCreate userSportDto) {
@@ -85,9 +90,16 @@ public class UserSportService {
 		userSportDao.save(us);
 	}
 
-	//DELETE
+	//DELETE UserSport and all the associated spa
 	public void deleteUserSport(Long id) {
 		Objects.requireNonNull(id);
+
+		List<SportPlaceAssociation> spasToDelete = spaDao.findAllByUserSportId(id);
+
+		for (SportPlaceAssociation spa: spasToDelete) {
+			spaDao.delete(spa);
+		}
+
 		userSportDao.deleteById(id);
 	}
 

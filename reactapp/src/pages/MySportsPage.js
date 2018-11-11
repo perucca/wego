@@ -87,12 +87,11 @@ class MySports extends Component {
             newUserSport: {
                 idUser: this.props.currentuser.id,
                 idSport: null,
-                preferenceOrder: null,
-                selectedItem: 0,
-                currentlySelectedPlaces: [],
-                previouslySelectedPlaces: []
-
+                preferenceOrder: null
             },
+            selectedItem: 0,
+            currentlySelectedPlaces: [],
+            previouslySelectedPlaces: []
         })
         this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("1", false) }));
         this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("2", false) }));
@@ -148,7 +147,7 @@ class MySports extends Component {
                 spa.push({ idUserSport: 1, idUserPlace: key })
             }
         }
-        console.log(spa);
+        console.log("EVENT", event);
         this.props.createUserSportWithSportPlaceAssociationBatch(this.props.currentuser, this.state.newUserSport, spa);
         this.toggleModalCreation();
     }
@@ -227,7 +226,7 @@ class MySports extends Component {
     render() {
         return (
             <MainLayout title="Your Favorite Sports" icon={icon}>
-                <div className="mb-4 mt-5">
+                <div className="mb-5 mt-5">
                     <SortableList items={this.props.usersports.sort(function (a, b) {
                         let prefA = a.preferenceOrder;
                         let prefB = b.preferenceOrder;

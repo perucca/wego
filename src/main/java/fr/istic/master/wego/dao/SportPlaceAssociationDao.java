@@ -24,4 +24,9 @@ public interface SportPlaceAssociationDao extends JpaRepository<SportPlaceAssoci
 
 	public boolean existsByUsersportAndUserplace(UserSport usersport, UserPlace superplace);
 
+	@Query("SELECT spa FROM SportPlaceAssociation spa WHERE spa.usersport.id=:idUserSport")
+	List<SportPlaceAssociation> findAllByUserSportId(@Param("idUserSport") Long id);
+
+	@Query("SELECT spa FROM SportPlaceAssociation spa WHERE spa.userplace.id=:idUserPlace")
+	List<SportPlaceAssociation> findAllByUserPlaceId(@Param("idUserPlace") Long id);
 }

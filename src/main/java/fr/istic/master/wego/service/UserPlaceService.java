@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import fr.istic.master.wego.dao.SportPlaceAssociationDao;
+import fr.istic.master.wego.model.SportPlaceAssociation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,8 @@ public class UserPlaceService {
 	UserDao userDao;
 	@Autowired
 	PlaceDao placeDao;
+	@Autowired
+	private SportPlaceAssociationDao spaDao;
 
 	public Collection<UserPlaceDtoRead> getAllUserPlace() {
 		List<UserPlaceDtoRead> listDto = new ArrayList<>();
@@ -65,6 +69,12 @@ public class UserPlaceService {
 
 		userplaces.stream().filter(up -> (up.getPreferenceOrder()) > pref)
 				.forEach(up -> increaseUserPlacePreference(up.getId()));
+
+		List<SportPlaceAssociation> spasToDelete = spaDao.findAllByUserPlaceId(iduserplace);
+
+		for (SportPlaceAssociation spa: spasToDelete) {
+			spaDao.delete(spa);
+		}
 
 		userPlaceDao.deleteById(iduserplace);
 	}
