@@ -10,6 +10,7 @@ public class OpenWeatherForecastItem {
 	private OWMainForecast main;
 	private List<OWWeatherForecast> weather;
 	private OWWindForecast wind;
+	private long dt;
 
 	@JsonProperty(value = "weather")
 	public List<OWWeatherForecast> getWeather() {
@@ -36,5 +37,14 @@ public class OpenWeatherForecastItem {
 
 	public void setMain(OWMainForecast main) {
 		this.main = main;
+	}
+
+	@JsonProperty(value = "dt")
+	public long getDt() {
+		return dt;
+	}
+
+	public void setDt(long dt) {
+		this.dt = dt;
 	}
 }
