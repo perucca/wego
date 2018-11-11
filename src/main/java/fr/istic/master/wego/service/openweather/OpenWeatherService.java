@@ -6,6 +6,11 @@ import org.springframework.web.client.RestTemplate;
 
 import fr.istic.master.wego.service.openweather.data.OpenWeatherForecast;
 
+/**
+ * @author michel
+ *
+ *         Service in charge of requesting OpenWeatherService
+ */
 @Service
 public class OpenWeatherService {
 

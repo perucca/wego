@@ -11,20 +11,26 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.istic.master.wego.dto.SportDto;
 import fr.istic.master.wego.service.SportService;
 
+/**
+ * @author michel
+ *
+ *         REST controller for the sport Entity
+ *
+ */
 @RestController
 @RequestMapping("/sports")
 public class SportController {
 
-    @Autowired
-    private SportService sportService;
+	@Autowired
+	private SportService sportService;
 
-    @GetMapping("")
-    public Collection<SportDto> getAllSports() {
-        return sportService.getAllSports();
-    }
+	@GetMapping("")
+	public Collection<SportDto> getAllSports() {
+		return sportService.getAllSports();
+	}
 
-    @GetMapping("/{id}")
-    public SportDto getSportById(@PathVariable("id") Long id) {
-        return sportService.getSportById(id);
-    }
+	@GetMapping("/{id}")
+	public SportDto getSportById(@PathVariable("id") Long id) {
+		return sportService.getSportById(id);
+	}
 }

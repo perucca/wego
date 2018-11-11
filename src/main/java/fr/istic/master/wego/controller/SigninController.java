@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.istic.master.wego.dto.UserDtoCreate;
 import fr.istic.master.wego.service.UserService;
 
+/**
+ * @author michel
+ *
+ *         REST controller used for the signin of the user to the wego
+ *         application
+ */
 @RestController
 @RequestMapping("/signin")
 public class SigninController {

@@ -12,6 +12,13 @@ import fr.istic.master.wego.model.Sport;
 import fr.istic.master.wego.model.User;
 import fr.istic.master.wego.model.WeekendAdvice;
 
+/**
+ * @author michel
+ *
+ *         Service for the WeekendAdvice object. Used by a controller and the
+ *         domain objects.
+ *
+ */
 @Service
 public class WeekEndAdviceService {
 
@@ -21,6 +28,14 @@ public class WeekEndAdviceService {
 	@Autowired
 	private WeekendAdviceDao weekendAdviceDao;
 
+	/**
+	 * Create a weekendAdvice from a User, Place, Sport
+	 *
+	 * @param user  - User Object (not null)
+	 * @param place - Place Object (not null)
+	 * @param sport - Sport Object (not null)
+	 * @return a weekendAdvice object
+	 */
 	public WeekendAdvice create(User user, Place place, Sport sport) {
 		Objects.requireNonNull(user);
 		Objects.requireNonNull(place);
@@ -37,6 +52,11 @@ public class WeekEndAdviceService {
 
 	}
 
+	/**
+	 * delete the weekendAdvice for the user
+	 *
+	 * @param user - the User Object
+	 */
 	public void deleteByUser(User user) {
 		Objects.requireNonNull(user);
 
@@ -46,6 +66,10 @@ public class WeekEndAdviceService {
 		}
 	}
 
+	/**
+	 * @param id - the user's identifier (not null)
+	 * @return the weekendAdvice corresponding to the user's identifier
+	 */
 	public WeekendAdvice findByUser(Long id) {
 		Objects.requireNonNull(id);
 

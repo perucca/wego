@@ -23,6 +23,12 @@ import fr.istic.master.wego.dto.UserSportDtoRead;
 import fr.istic.master.wego.model.UserSport;
 import fr.istic.master.wego.service.UserSportService;
 
+/**
+ * @author dorian
+ * 
+ *         REST controller for the UserSport Entity
+ *
+ */
 @RestController
 @RequestMapping("/usersports")
 public class UserSportController {
