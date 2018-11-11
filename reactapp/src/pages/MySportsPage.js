@@ -7,12 +7,13 @@ import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-ho
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import icon from '../_img/cycling.svg';
 import editBtn from '../_img/edit-button.svg';
+import deleteBtn from '../_img/trash.svg';
 
-
-const SortableItem = SortableElement(({ value, onClick, items2 }) => {
+const SortableItem = SortableElement(({ value, items2, onClick, onClickDelete }) => {
     return(
     <li className="list-group-item text-left">{value.sportDto.sportName}
-        <span><img className="edit-btn float-right" onClick={(e) => onClick(e, value.idUserSport)} src={editBtn} alt="edit button" /></span>
+        <span><img className="edit-btn float-right" onClick={(e) => onClickDelete(e, value.idUserSport)} src={deleteBtn} alt="edit button" /></span>
+        <span><img className="edit-btn float-right mr-3" onClick={(e) => onClick(e, value.idUserSport)} src={editBtn} alt="edit button" /></span>
         <div>
             {items2.map(element => {
                 if (element.userSportDtoRead.idUserSport === value.idUserSport) {
@@ -27,11 +28,11 @@ const SortableItem = SortableElement(({ value, onClick, items2 }) => {
     </li>
 )});
 
-const SortableList = SortableContainer(({ items, onClick, items2 }) => {
+const SortableList = SortableContainer(({ items, items2, onClick, onClickDelete}) => {
     return (
         <ul className="list-group">
             {items.map((value, index) => (
-                <SortableItem key={`item-${index}`} index={index} value={value} onClick={onClick} items2={items2} />
+                <SortableItem key={`item-${index}`} index={index} value={value} onClick={onClick} items2={items2} onClickDelete={onClickDelete}/>
             ))}
         </ul>
     );
@@ -118,6 +119,12 @@ class MySports extends Component {
             previouslySelectedPlaces : Object.assign([], selectedPlaces)
         });
         console.log("SELECTED PLACES", selectedPlaces)
+    }
+
+    onClickDelete = (e, idUserSport) => {
+        console.log(idUserSport)
+        e.preventDefault();
+        this.props.deleteUserSport(this.props.currentuser, idUserSport);
     }
 
     changeLocation = (e) => {
@@ -227,7 +234,7 @@ class MySports extends Component {
                         if (prefA < prefB) return -1;
                         if (prefA > prefB) return 1;
                         return 0;
-                    })} onSortEnd={this.onSortEnd} onClick={this.toggleModalEdition} distance={5} items2={this.props.sportplaceassociations} />
+                    })} onSortEnd={this.onSortEnd} onClick={this.toggleModalEdition} onClickDelete={this.onClickDelete} distance={5} items2={this.props.sportplaceassociations} />
                     <Fab dataToggle="modal" dataTarget="#modalAddSports" onClick={this.toggleModalCreation} />
                     <Modal isOpen={this.state.modalCreation} toggle={this.toggleModalCreation} centered={true} onOpened={this.resetState} onClosed={this.resetState} className="custom-modal">
                         <ModalHeader toggle={this.toggleModalCreation}>Add a sport</ModalHeader>
@@ -296,6 +303,9 @@ const mapDispatchToProps = dispatch => {
         },
         createUserSport: (user, userSport) => {
             dispatch(SportActions.createUserSport(user, userSport))
+        },
+        deleteUserSport: (user, idUserSport) => {
+            dispatch(SportActions.deleteUserSport(user, idUserSport))
         },
         updateUserSportBatch: (user, userSportBatch) => {
             dispatch(SportActions.updateUserSportBatch(user, userSportBatch))

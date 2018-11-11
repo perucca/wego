@@ -4,10 +4,11 @@ export const sportService = {
     getSports,
     getUserSports,
     createUserSport,
+    deleteUserSport,
     updateUserSportBatch
 }
 
-//RETRIEVE ALL SPORTS
+//READ ALL SPORTS
 function getSports(user) {
     console.log(user.authorization)
     return Axios.get('/api/sports', {
@@ -34,7 +35,7 @@ function getSports(user) {
         });
 }
 
-//RETRIEVE USERSPORTS
+//READ USERSPORTS
 function getUserSports(user) {
     console.log(user.authorization)
     return Axios.get('/api/usersports/byuser/' + user.id, {
@@ -81,6 +82,33 @@ function createUserSport(user, userSport) {
         })
         .catch(function (error) {
             console.log("Error creating userSport");
+            if (error.response) {
+                console.log(error.response);
+            }
+            return Promise.reject(error);
+        });
+}
+
+//DELETE USERSPORT
+function deleteUserSport(user, id) {
+    console.log(user.authorization)
+    return Axios.delete('/api/usersports/'+ id, {
+        headers : {'Authorization': '' + user.authorization}
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log("Successfully deleted the user sport");
+                console.log(response)
+                return response.data;
+            }
+            else {
+                console.log("Failed deleting the user sport");
+                console.log(response.status + " " + response.statusText);
+                return Promise.reject(response);
+            }
+        })
+        .catch(function (error) {
+            console.log("Delete error");
             if (error.response) {
                 console.log(error.response);
             }

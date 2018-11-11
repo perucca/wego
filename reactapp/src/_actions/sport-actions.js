@@ -5,6 +5,7 @@ export const SportActions = {
     getSports,
     getUserSports,
     createUserSport,
+    deleteUserSport,
     updateUserSportBatch
 }
 
@@ -61,6 +62,25 @@ function createUserSport(user, userSport) {
     function request() { return { type: SportConstants.CREATE_USERSPORT_PROGRESS } }
     function success() { return { type: SportConstants.CREATE_USERSPORT_SUCCESS } }
     function failure() { return { type: SportConstants.CREATE_USERSPORT_ERROR } }
+}
+
+//DELETE USERSPORT
+function deleteUserSport(user, id) {
+    return dispatch => {
+        dispatch(request())
+        sportService.deleteUserSport(user, id)
+            .then(function (response) {
+                dispatch(success(response))
+                dispatch(getUserSports(user))
+            })
+            .catch(function (error) {
+                dispatch(failure())
+            })
+    }
+
+    function request() { return { type: SportConstants.DELETE_USERSPORT_PROGRESS } }
+    function success(sports) { return { type: SportConstants.DELETE_USERSPORT_SUCCESS, sports } }
+    function failure() { return { type: SportConstants.DELETE_USERSPORT_ERROR } }
 }
 
 //UPDATE USERSPORT BATCH
