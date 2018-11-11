@@ -220,7 +220,7 @@ class MySports extends Component {
     render() {
         return (
             <MainLayout title="Your Favorite Sports" icon={icon}>
-                <div>
+                <div className="mb-4 mt-5">
                     <SortableList items={this.props.usersports.sort(function (a, b) {
                         let prefA = a.preferenceOrder;
                         let prefB = b.preferenceOrder;
