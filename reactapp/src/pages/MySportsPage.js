@@ -10,29 +10,30 @@ import editBtn from '../_img/edit-button.svg';
 import deleteBtn from '../_img/trash.svg';
 
 const SortableItem = SortableElement(({ value, items2, onClick, onClickDelete }) => {
-    return(
-    <li className="list-group-item text-left">{value.sportDto.sportName}
-        <span><img className="edit-btn float-right" onClick={(e) => onClickDelete(e, value.idUserSport)} src={deleteBtn} alt="edit button" /></span>
-        <span><img className="edit-btn float-right mr-3" onClick={(e) => onClick(e, value.idUserSport)} src={editBtn} alt="edit button" /></span>
-        <div>
-            {items2.map(element => {
-                if (element.userSportDtoRead.idUserSport === value.idUserSport) {
-                    return (
-                        <span className="secondary-text" key={`${element.userSportDtoRead.idUserSport}-${element.userPlaceDtoRead.idUserplace}`}>{`${element.userPlaceDtoRead.placeDto.name} `}</span>
-                    )
-                }else{
-                    return null
-                }
-            })}
-        </div>
-    </li>
-)});
+    return (
+        <li className="list-group-item text-left">{value.sportDto.sportName}
+            <span><img className="edit-btn float-right" onClick={(e) => onClickDelete(e, value.idUserSport)} src={deleteBtn} alt="edit button" /></span>
+            <span><img className="edit-btn float-right mr-3" onClick={(e) => onClick(e, value.idUserSport)} src={editBtn} alt="edit button" /></span>
+            <div>
+                {items2.map(element => {
+                    if (element.userSportDtoRead.idUserSport === value.idUserSport) {
+                        return (
+                            <span className="secondary-text" key={`${element.userSportDtoRead.idUserSport}-${element.userPlaceDtoRead.idUserplace}`}>{`${element.userPlaceDtoRead.placeDto.name} `}</span>
+                        )
+                    } else {
+                        return null
+                    }
+                })}
+            </div>
+        </li>
+    )
+});
 
-const SortableList = SortableContainer(({ items, items2, onClick, onClickDelete}) => {
+const SortableList = SortableContainer(({ items, items2, onClick, onClickDelete }) => {
     return (
         <ul className="list-group">
             {items.map((value, index) => (
-                <SortableItem key={`item-${index}`} index={index} value={value} onClick={onClick} items2={items2} onClickDelete={onClickDelete}/>
+                <SortableItem key={`item-${index}`} index={index} value={value} onClick={onClick} items2={items2} onClickDelete={onClickDelete} />
             ))}
         </ul>
     );
@@ -65,8 +66,9 @@ class MySports extends Component {
         };
     }
 
-    componentDidUpdate(){
-        console.log("SPA: ", this.props.sportplaceassociations)
+    componentDidUpdate() {
+        console.log("DID UPDATE: ", this.state.currentlySelectedPlaces)
+        console.log("DID UPDATE: ", this.state.previouslySelectedPlaces)
     }
 
     componentDidMount() {
@@ -89,9 +91,6 @@ class MySports extends Component {
                 idSport: null,
                 preferenceOrder: null
             },
-            selectedItem: 0,
-            currentlySelectedPlaces: [],
-            previouslySelectedPlaces: []
         })
         this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("1", false) }));
         this.setState(prevState => ({ newPlaces: prevState.newPlaces.set("2", false) }));
@@ -106,18 +105,18 @@ class MySports extends Component {
     }
 
     toggleModalEdition = (e, us) => {
-        console.log("EDIT")
-        console.log(this.props.sportplaceassociations)
+        console.log("EDIT MODAL - OPENED")
+        console.log("EDIT MODAL - SPA",this.props.sportplaceassociations)
         const selectedPlaces = this.props.sportplaceassociations
             .filter(spa => spa.userSportDtoRead.idUserSport === us)
-            .map(spa => spa.userPlaceDtoRead.idUserplace)
+            .map(spa => spa.userPlaceDtoRead.idUserplace);
         this.setState({
             modalEdition: !this.state.modalEdition,
             selectedItem: us,
-            currentlySelectedPlaces : Object.assign([], selectedPlaces),
-            previouslySelectedPlaces : Object.assign([], selectedPlaces)
+            currentlySelectedPlaces: Object.assign([], selectedPlaces),
+            previouslySelectedPlaces: Object.assign([], selectedPlaces)
         });
-        console.log("SELECTED PLACES", selectedPlaces)
+        console.log("EDIT MODAL - SELECTED PLACES", selectedPlaces)
     }
 
     onClickDelete = (e, idUserSport) => {
@@ -129,12 +128,12 @@ class MySports extends Component {
     changeLocation = (e) => {
         let cSelectedPlaces = this.state.currentlySelectedPlaces;
         const value = parseInt(e.target.value, 10);
-        if(cSelectedPlaces.includes(value)){
+        if (cSelectedPlaces.includes(value)) {
             cSelectedPlaces = cSelectedPlaces.filter(element => element !== value)
-        }else{
+        } else {
             cSelectedPlaces.push(value)
         }
-        this.setState({currentlySelectedPlaces: cSelectedPlaces});
+        this.setState({ currentlySelectedPlaces: cSelectedPlaces });
         console.log("CHANGE PREVIOUSLY SELECTED PLACES", this.state.previouslySelectedPlaces)
         console.log("CHANGE CURRENTLY SELECTED PLACES", cSelectedPlaces)
     }
@@ -157,25 +156,25 @@ class MySports extends Component {
         const spaToCreate = [];
         const spaToDelete = [];
         this.state.currentlySelectedPlaces.forEach(element => {
-            if(this.state.previouslySelectedPlaces.includes(element)){
+            if (this.state.previouslySelectedPlaces.includes(element)) {
                 //the spa already exists for the usersport, nothing changes
-            }else if(!this.state.previouslySelectedPlaces.includes(element)){
+            } else if (!this.state.previouslySelectedPlaces.includes(element)) {
                 //the spa does not exist and needs to be created
                 spaToCreate.push({ idUserSport: this.state.selectedItem, idUserPlace: element });
             }
         })
         this.state.previouslySelectedPlaces.forEach(element => {
-            if(this.state.currentlySelectedPlaces.includes(element)){
+            if (this.state.currentlySelectedPlaces.includes(element)) {
                 //the spa already exists for the usersport, nothing changes
-            }else if(!this.state.currentlySelectedPlaces.includes(element)){
+            } else if (!this.state.currentlySelectedPlaces.includes(element)) {
                 //the spa does not exist anymore and needs to be removed
                 spaToDelete.push(this.props.sportplaceassociations
-                                        .filter(item => item.userSportDtoRead.idUserSport===this.state.selectedItem
-                                            &&item.userPlaceDtoRead.idUserplace === element)[0].id);
+                    .filter(item => item.userSportDtoRead.idUserSport === this.state.selectedItem
+                        && item.userPlaceDtoRead.idUserplace === element)[0].id);
             }
         })
         console.log("SPA TO CREATE: ", spaToCreate);
-        console.log("SPA TO DELETE: ",spaToDelete);
+        console.log("SPA TO DELETE: ", spaToDelete);
         // create a batch of spa
         this.props.createSportPlaceAssociationBatch(this.props.currentuser, spaToCreate);
         // delete a batch of spa
